@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ozare/consts.dart';
@@ -80,14 +81,25 @@ class UpperSection extends StatelessWidget {
         right: 0,
         child: SizedBox(
           height: size.height * 0.36 - size.height * 0.14,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.only(left: 24, bottom: 12),
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              return const MatchTile();
-            },
+          child: CarouselSlider(
+            options: CarouselOptions(
+              enableInfiniteScroll: false,
+              enlargeCenterPage: true,
+              enlargeFactor: 0.15,
+              viewportFraction: 0.8,
+              // enlargeStrategy: CenterPageEnlargeStrategy.height,
+            ),
+            items: List.generate(4, (index) => const MatchTile()),
           ),
+
+          // ListView.builder(
+          //   scrollDirection: Axis.horizontal,
+          //   padding: const EdgeInsets.only(left: 24, bottom: 12),
+          //   itemCount: 3,
+          //   itemBuilder: (context, index) {
+          //     return const MatchTile();
+          //   },
+          // ),
         ),
       ),
     ]);

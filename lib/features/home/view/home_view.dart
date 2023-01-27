@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ozare/consts.dart';
@@ -50,9 +51,9 @@ class HomeView extends StatelessWidget {
               iconPath: 'assets/icons/bell.svg',
               isActive: selectedTab == 2,
             ),
-            BottomNavItem(
+            BottomNavItem.profile(
               label: 'Profile',
-              iconPath: 'assets/icons/home.svg',
+              iconPath: 'assets/images/user.png',
               isActive: selectedTab == 3,
             ),
           ]),
@@ -83,37 +84,76 @@ class BottomNavItem extends StatelessWidget {
     required this.label,
     required this.iconPath,
     required this.isActive,
+    this.isProfile = false,
   });
 
   final String label;
   final String iconPath;
   final bool isActive;
+  final bool isProfile;
+
+  const BottomNavItem.profile({
+    super.key,
+    required this.label,
+    required this.iconPath,
+    required this.isActive,
+    this.isProfile = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
         onTap: () {},
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              iconPath,
-              color: isActive ? primary1Color : Colors.grey,
-              height: 28,
-            ),
-            const SizedBox(height: 2),
-            Text(
-              label,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 11,
-                color: isActive ? primary1Color : Colors.grey,
-                letterSpacing: 0.2,
+        child: isProfile
+            ?
+            // Profile Nav Item
+            Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  DottedBorder(
+                    borderType: BorderType.Circle,
+                    color: isActive ? primary1Color : Colors.grey,
+                    child: CircleAvatar(
+                      radius: 13,
+                      backgroundImage: AssetImage(iconPath),
+                    ),
+                  ),
+                  Text(
+                    label,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 11,
+                      color: isActive ? primary1Color : Colors.grey,
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                ],
+              )
+            :
+            // Default Nav Item
+            Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    iconPath,
+                    color: isActive ? primary1Color : Colors.grey,
+                    height: 28,
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    label,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 11,
+                      color: isActive ? primary1Color : Colors.grey,
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }

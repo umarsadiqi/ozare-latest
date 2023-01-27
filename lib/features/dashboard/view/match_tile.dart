@@ -11,7 +11,7 @@ class MatchTile extends StatelessWidget {
     return Container(
       height: 110,
       width: size.width * 0.8,
-      margin: const EdgeInsets.only(right: 16),
+      margin: const EdgeInsets.only(right: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         image: DecorationImage(
