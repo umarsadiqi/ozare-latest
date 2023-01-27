@@ -23,7 +23,7 @@ class UpperSection extends StatelessWidget {
       Positioned(
         top: 0,
         child: SizedBox(
-          height: size.height * 0.25,
+          height: size.height * 0.22,
           width: size.width,
           child: ClipPath(
             clipper: OvalBottomClipper(),
@@ -46,14 +46,14 @@ class UpperSection extends StatelessWidget {
         ),
       ),
       Positioned(
-          top: 52,
+          top: 46,
           right: 24,
           left: 24,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               CircleAvatar(
-                radius: 24,
+                radius: 20,
                 backgroundColor: Colors.white30,
                 child: Icon(Icons.arrow_back, color: Colors.white),
               ),
@@ -61,12 +61,12 @@ class UpperSection extends StatelessWidget {
                 'Match',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               CircleAvatar(
-                radius: 24,
+                radius: 20,
                 backgroundColor: Colors.white30,
                 child: Icon(Icons.more_vert, color: Colors.white),
               ),
@@ -76,11 +76,11 @@ class UpperSection extends StatelessWidget {
       // Match List Section
       // height: size.height * 0.15,
       Positioned(
-        top: size.height * 0.14,
+        top: size.height * 0.12,
         left: 0,
         right: 0,
         child: SizedBox(
-          height: size.height * 0.36 - size.height * 0.14,
+          height: size.height * 0.33 - size.height * 0.125,
           child: CarouselSlider(
             options: CarouselOptions(
               enableInfiniteScroll: false,

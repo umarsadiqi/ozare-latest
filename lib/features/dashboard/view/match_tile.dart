@@ -7,10 +7,7 @@ class MatchTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Container(
-      height: 110,
-      width: size.width * 0.8,
       margin: const EdgeInsets.only(right: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(

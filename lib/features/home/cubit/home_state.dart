@@ -1,11 +1,8 @@
 part of 'home_cubit.dart';
 
-enum HomeState {
-  home(0),
-  payments(1),
-  notifications(2),
-  profile(3);
-
-  const HomeState(this.tabIndex);
+class HomeState {
   final int tabIndex;
+  final bool hide;
+
+  const HomeState(this.tabIndex, {this.hide = false});
 }

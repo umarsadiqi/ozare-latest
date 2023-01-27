@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../features/home/home.dart';
 
 class App extends StatelessWidget {
@@ -12,7 +12,10 @@ class App extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
-      home: const HomePage(),
+      home: BlocProvider(
+        create: (context) => HomeCubit(),
+        child: const HomePage(),
+      ),
     );
   }
 }

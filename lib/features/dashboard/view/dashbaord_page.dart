@@ -2,7 +2,8 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/chat/chat.dart';
-
+import 'package:ozare/features/home/home.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'upper_section.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   final List<Widget> _tabs = [
     const Center(child: Text('Info')),
-    ChatView(),
+    const ChatView(),
     const Center(child: Text('Bet')),
     const Center(child: Text('Line-Up')),
   ];
@@ -28,7 +29,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return Column(
       children: [
         SizedBox(
-          height: size.height * 0.36,
+          height: size.height * 0.33,
           width: size.width,
           child: const UpperSection(),
         ),
@@ -44,6 +45,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 isActive: selectedTab == 0,
                 label: 'Info',
                 onTap: () {
+                  context.read<HomeCubit>().disableHide();
                   setState(() {
                     selectedTab = 0;
                   });
@@ -53,6 +55,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 isActive: selectedTab == 1,
                 label: 'Chat',
                 onTap: () {
+                  context.read<HomeCubit>().disableHide();
+
                   setState(() {
                     selectedTab = 1;
                   });
@@ -62,6 +66,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 isActive: selectedTab == 2,
                 label: 'Place a Bet',
                 onTap: () {
+                  context.read<HomeCubit>().disableHide();
+
                   setState(() {
                     selectedTab = 2;
                   });
@@ -71,6 +77,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 isActive: selectedTab == 3,
                 label: 'Line-Up',
                 onTap: () {
+                  context.read<HomeCubit>().disableHide();
+
                   setState(() {
                     selectedTab = 3;
                   });
@@ -105,21 +113,23 @@ class TabItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        height: 34,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: isActive
-            ? BoxDecoration(
-                borderRadius: BorderRadius.circular(32),
-                gradient: gradient,
-              )
-            : null,
-        child: Center(
-          child: Text(
-            label,
-            style: TextStyle(
-              color: isActive ? Colors.white : Colors.grey[600],
-              fontWeight: FontWeight.w500,
+      child: Expanded(
+        child: Container(
+          height: 34,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: isActive
+              ? BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  gradient: gradient,
+                )
+              : null,
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(
+                color: isActive ? Colors.white : Colors.grey[600],
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ),
