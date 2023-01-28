@@ -70,7 +70,7 @@ class _ChatViewState extends State<ChatView> {
                   ),
                 ),
 
-          // if (showChatBox) const ChatInput(),
+          if (showChatBox) const ChatInput(),
         ],
       ),
     );

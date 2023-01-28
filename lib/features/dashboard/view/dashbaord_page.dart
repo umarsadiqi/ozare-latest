@@ -1,10 +1,10 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:ozare/consts.dart';
 import 'package:ozare/features/chat/chat.dart';
 import 'package:ozare/features/home/home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../widgets/upper_section.dart';
+
+import '../widgets/widgets.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -93,48 +93,6 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
         Expanded(child: _tabs[selectedTab]),
       ],
-    );
-  }
-}
-
-class TabItem extends StatelessWidget {
-  const TabItem({
-    super.key,
-    required this.isActive,
-    required this.label,
-    required this.onTap,
-  });
-
-  final bool isActive;
-  final String label;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Expanded(
-        child: Container(
-          height: 34,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: isActive
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  gradient: gradient,
-                )
-              : null,
-          color: isActive ? null : Colors.transparent,
-          child: Center(
-            child: Text(
-              label,
-              style: TextStyle(
-                color: isActive ? Colors.white : Colors.grey[600],
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
