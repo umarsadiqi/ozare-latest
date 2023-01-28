@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ozare/features/chat/chat.dart';
+import 'package:ozare/features/chat/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/home/home.dart';
 
@@ -17,7 +17,7 @@ class _ChatViewState extends State<ChatView> {
     'Ipsum random text jdkf aoiein dljaife',
     'Ipsum random text jdkf aoiein dljaife',
     'Ipsum random text jdkf aoiein dljaife asdf fawef awef',
-    'Ipsum random text jdkf aoiein dljaife adfa fewq fef',
+    'Ipsum random ',
   ];
 
   @override
@@ -69,6 +69,8 @@ class _ChatViewState extends State<ChatView> {
                     },
                   ),
                 ),
+
+          // if (showChatBox) const ChatInput(),
         ],
       ),
     );

@@ -17,7 +17,9 @@ class ChatBubble extends StatelessWidget {
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
-        width: size.width * 0.7,
+        constraints: BoxConstraints(
+          maxWidth: size.width * 0.7,
+        ),
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
@@ -30,6 +32,8 @@ class ChatBubble extends StatelessWidget {
           ),
         ),
         child: Column(
+          crossAxisAlignment:
+              isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
             Text(
               message,
@@ -39,23 +43,27 @@ class ChatBubble extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 2),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: const [
-                Text(
-                  '12:00 AM',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
+            Align(
+              alignment: Alignment.centerRight,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: const [
+                  Text(
+                    '12:00 AM',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                    ),
                   ),
-                ),
-                SizedBox(width: 8),
-                Icon(
-                  Icons.done_all,
-                  color: primary1Color,
-                  size: 16,
-                ),
-              ],
+                  SizedBox(width: 8),
+                  Icon(
+                    Icons.done_all,
+                    color: primary1Color,
+                    size: 16,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

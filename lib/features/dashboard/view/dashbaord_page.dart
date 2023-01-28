@@ -4,7 +4,7 @@ import 'package:ozare/consts.dart';
 import 'package:ozare/features/chat/chat.dart';
 import 'package:ozare/features/home/home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'upper_section.dart';
+import '../widgets/upper_section.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -123,6 +123,7 @@ class TabItem extends StatelessWidget {
                   gradient: gradient,
                 )
               : null,
+          color: isActive ? null : Colors.transparent,
           child: Center(
             child: Text(
               label,
