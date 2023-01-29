@@ -12,6 +12,7 @@ class SigninPage extends StatefulWidget {
 class _SigninPageState extends State<SigninPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
@@ -19,6 +20,8 @@ class _SigninPageState extends State<SigninPage> {
     passwordController.dispose();
     super.dispose();
   }
+
+  bool isLogin = true;
 
   @override
   Widget build(BuildContext context) {
@@ -69,24 +72,32 @@ class _SigninPageState extends State<SigninPage> {
                 labelText: 'Password',
                 isPassword: true,
               ),
-              const SizedBox(height: 8),
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "Forgot Password?",
-                  style: TextStyle(
-                    color: primary2Color,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+              const SizedBox(height: 16),
+              if (!isLogin)
+                InputField(
+                  controller: confirmPasswordController,
+                  hintText: 'Enter your password again',
+                  labelText: 'Confirm Password',
+                  isPassword: true,
+                ),
+              if (isLogin)
+                const Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      color: primary2Color,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-              ),
 
               ///
               SizedBox(height: size.height * 0.08),
               OButton(
                 onTap: () {},
-                label: 'Login',
+                label: isLogin ? 'Login' : 'Sign Up',
               ),
               const SizedBox(height: 16),
 
@@ -121,24 +132,42 @@ class _SigninPageState extends State<SigninPage> {
 
               /// Social Buttons
 
+              Row(
+                children: [
+                  Expanded(
+                      child: OButton.icon(
+                          onTap: () {}, iconPath: 'assets/icons/google.svg')),
+                  const SizedBox(width: 24),
+                  Expanded(
+                      child: OButton.icon(
+                          onTap: () {}, iconPath: 'assets/icons/apple.svg')),
+                ],
+              ),
+
               ///
               SizedBox(height: size.height * 0.08),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    "Don't have an account?",
-                    style: TextStyle(
+                  Text(
+                    isLogin
+                        ? "Don't have an account?"
+                        : "Already have an account?",
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 14,
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Register',
-                      style: TextStyle(
+                    onPressed: () {
+                      setState(() {
+                        isLogin = !isLogin;
+                      });
+                    },
+                    child: Text(
+                      isLogin ? 'Register' : 'Login',
+                      style: const TextStyle(
                         color: primary2Color,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
