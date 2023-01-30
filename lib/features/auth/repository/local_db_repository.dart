@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:ozare/models/models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,16 +25,18 @@ class LocalDBRepository {
 
   // save user
   Future<void> saveOwner(OUser owner) async {
-    // log("Saving Owner: ${owner.toJson()}");
-    // await _sharedPreferences.setString(SFKeys.user, owner.toJson());
+    log("Saving Owner: ${owner.toJson()}");
+    await _sharedPreferences.setString(SFKeys.user, json.encode(owner));
   }
 
   // get user
   OUser? getOwner() {
-    log("Getting Owner ...");
+    log("Getting OUser ...");
     final String? user = _sharedPreferences.getString(SFKeys.user);
+    log("User: $user");
+
     if (user != null) {
-      return OUser.fromJson(user as Map<String, dynamic>);
+      return OUser.fromJson(json.decode(user) as Map<String, dynamic>);
     }
     return null;
   }

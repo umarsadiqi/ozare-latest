@@ -17,24 +17,22 @@ class TabItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Expanded(
-        child: Container(
-          height: 34,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          decoration: isActive
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  gradient: gradient,
-                )
-              : null,
-          color: isActive ? null : Colors.transparent,
-          child: Center(
-            child: Text(
-              label,
-              style: TextStyle(
-                color: isActive ? Colors.white : Colors.grey[600],
-                fontWeight: FontWeight.w500,
-              ),
+      child: Container(
+        height: 34,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: isActive
+            ? BoxDecoration(
+                borderRadius: BorderRadius.circular(32),
+                gradient: gradient,
+              )
+            : null,
+        color: isActive ? null : Colors.transparent,
+        child: Center(
+          child: Text(
+            label,
+            style: TextStyle(
+              color: isActive ? Colors.white : Colors.grey[600],
+              fontWeight: FontWeight.w500,
             ),
           ),
         ),

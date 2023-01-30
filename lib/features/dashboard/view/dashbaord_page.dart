@@ -26,73 +26,77 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        SizedBox(
-          height: size.height * 0.33,
-          width: size.width,
-          child: const UpperSection(),
-        ),
-
-        const SizedBox(height: 24),
-        // Tab Bar Section
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TabItem(
-                isActive: selectedTab == 0,
-                label: 'Info',
-                onTap: () {
-                  context.read<HomeCubit>().disableHide();
-                  setState(() {
-                    selectedTab = 0;
-                  });
-                },
-              ),
-              TabItem(
-                isActive: selectedTab == 1,
-                label: 'Chat',
-                onTap: () {
-                  context.read<HomeCubit>().disableHide();
-
-                  setState(() {
-                    selectedTab = 1;
-                  });
-                },
-              ),
-              TabItem(
-                isActive: selectedTab == 2,
-                label: 'Place a Bet',
-                onTap: () {
-                  context.read<HomeCubit>().disableHide();
-
-                  setState(() {
-                    selectedTab = 2;
-                  });
-                },
-              ),
-              TabItem(
-                isActive: selectedTab == 3,
-                label: 'Line-Up',
-                onTap: () {
-                  context.read<HomeCubit>().disableHide();
-
-                  setState(() {
-                    selectedTab = 3;
-                  });
-                },
-              ),
-            ],
+    return SizedBox(
+      width: size.width,
+      height: size.height,
+      child: Column(
+        children: [
+          SizedBox(
+            height: size.height * 0.33,
+            width: size.width,
+            child: const UpperSection(),
           ),
-        ),
-        const SizedBox(height: 12),
-        DottedLine(
-          dashColor: Colors.grey[300]!,
-        ),
-        Expanded(child: _tabs[selectedTab]),
-      ],
+
+          const SizedBox(height: 24),
+          // Tab Bar Section
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TabItem(
+                  isActive: selectedTab == 0,
+                  label: 'Info',
+                  onTap: () {
+                    context.read<HomeCubit>().disableHide();
+                    setState(() {
+                      selectedTab = 0;
+                    });
+                  },
+                ),
+                TabItem(
+                  isActive: selectedTab == 1,
+                  label: 'Chat',
+                  onTap: () {
+                    context.read<HomeCubit>().disableHide();
+
+                    setState(() {
+                      selectedTab = 1;
+                    });
+                  },
+                ),
+                TabItem(
+                  isActive: selectedTab == 2,
+                  label: 'Place a Bet',
+                  onTap: () {
+                    context.read<HomeCubit>().disableHide();
+
+                    setState(() {
+                      selectedTab = 2;
+                    });
+                  },
+                ),
+                TabItem(
+                  isActive: selectedTab == 3,
+                  label: 'Line-Up',
+                  onTap: () {
+                    context.read<HomeCubit>().disableHide();
+
+                    setState(() {
+                      selectedTab = 3;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          DottedLine(
+            dashColor: Colors.grey[300]!,
+          ),
+          Expanded(child: _tabs[selectedTab]),
+        ],
+      ),
     );
   }
 }
