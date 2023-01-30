@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ozare/features/dashboard/view/dashbaord_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/home/home.dart';
+import 'package:ozare/features/profile/view/profile_page.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -92,9 +93,7 @@ class HomeView extends StatelessWidget {
           Container(
             color: Colors.blue,
           ),
-          Container(
-            color: Colors.yellow,
-          ),
+          const ProfilePage(),
         ],
       ),
     );
