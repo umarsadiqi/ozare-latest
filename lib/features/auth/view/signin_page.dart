@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ozare/consts.dart';
+import 'package:ozare/features/auth/view/signup_page.dart';
 import 'package:ozare/features/auth/widgets/widgets.dart';
 
 class SigninPage extends StatefulWidget {
@@ -148,7 +149,12 @@ class _SigninPageState extends State<SigninPage> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignupPage()));
+                    },
                     child: const Text(
                       'Register',
                       style: TextStyle(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/auth/view/auth_page.dart';
+import 'package:ozare/features/auth/view/signup_page.dart';
 import 'package:ozare/features/dashboard/bloc/match_bloc.dart';
 import 'package:ozare/features/onboard/view/onboard_page.dart';
 import 'package:ozare/features/splash/view/splash_page.dart';
@@ -25,7 +26,7 @@ class App extends StatelessWidget {
             create: (context) => MatchBloc()..add(MatchListRequested()),
           ),
         ],
-        child: const OnboardPage(),
+        child: const SignupPage(),
       ),
     );
   }

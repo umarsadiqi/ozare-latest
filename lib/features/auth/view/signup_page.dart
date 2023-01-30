@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ozare/consts.dart';
+import 'package:ozare/features/auth/view/signin_page.dart';
 import 'package:ozare/features/auth/widgets/widgets.dart';
 
 class SignupPage extends StatefulWidget {
@@ -10,6 +11,8 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -34,140 +37,90 @@ class _SignupPageState extends State<SignupPage> {
           child: Column(
             children: [
               SizedBox(height: size.height * 0.04),
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
-                child: RichText(
-                    text: const TextSpan(
-                  text: 'Let\'s \nGet ',
+                child: Text(
+                  'Create account',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 32,
                     fontWeight: FontWeight.w600,
                   ),
-                  children: [
-                    TextSpan(
-                      text: 'Started!',
-                      style: TextStyle(
-                        color: primary2Color,
-                        fontSize: 32,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                )),
-              ),
-              SizedBox(height: size.height * 0.08),
-
-              // Email Field
-              InputField(
-                controller: emailController,
-                hintText: 'Enter your email address',
-                labelText: 'Email Address',
-                isPassword: false,
-              ),
-              const SizedBox(height: 16),
-              InputField(
-                controller: passwordController,
-                hintText: 'Enter your password',
-                labelText: 'Password',
-                isPassword: true,
-              ),
-              const SizedBox(height: 16),
-              if (!isLogin)
-                InputField(
-                  controller: confirmPasswordController,
-                  hintText: 'Enter your password again',
-                  labelText: 'Confirm Password',
-                  isPassword: true,
                 ),
-              if (isLogin)
-                const Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    "Forgot Password?",
-                    style: TextStyle(
-                      color: primary2Color,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
+              ),
+              const SizedBox(height: 32),
+
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      InputField(
+                        controller: firstNameController,
+                        hintText: 'Enter your first name',
+                        labelText: 'First Name',
+                        isPassword: false,
+                      ),
+                      const SizedBox(height: 16),
+                      InputField(
+                        controller: lastNameController,
+                        hintText: 'Enter your last name',
+                        labelText: 'Last Name',
+                        isPassword: false,
+                      ),
+                      const SizedBox(height: 16),
+                      InputField(
+                        controller: emailController,
+                        hintText: 'Enter your email address',
+                        labelText: 'Email Address',
+                        isPassword: false,
+                      ),
+                      const SizedBox(height: 16),
+                      InputField(
+                        controller: passwordController,
+                        hintText: 'Enter your password',
+                        labelText: 'Password',
+                        isPassword: true,
+                      ),
+                      const SizedBox(height: 16),
+                      InputField(
+                        controller: confirmPasswordController,
+                        hintText: 'Enter your password again',
+                        labelText: 'Confirm Password',
+                        isPassword: true,
+                      ),
+                      SizedBox(height: size.height * 0.3),
+                    ],
                   ),
                 ),
+              ),
 
               ///
-              SizedBox(height: size.height * 0.08),
+              const SizedBox(height: 24),
               OButton(
                 onTap: () {},
-                label: isLogin ? 'Login' : 'Sign Up',
+                label: 'Register',
               ),
               const SizedBox(height: 16),
-
-              /// Or Continue With
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 1,
-                      color: Colors.grey[300],
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    'Or Continue With',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Container(
-                      height: 1,
-                      color: Colors.grey[300],
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 16),
-
-              /// Social Buttons
-
-              Row(
-                children: [
-                  Expanded(
-                      child: OButton.icon(
-                          onTap: () {}, iconPath: 'assets/icons/google.svg')),
-                  const SizedBox(width: 24),
-                  Expanded(
-                      child: OButton.icon(
-                          onTap: () {}, iconPath: 'assets/icons/apple.svg')),
-                ],
-              ),
-
-              ///
-              SizedBox(height: size.height * 0.08),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    isLogin
-                        ? "Don't have an account?"
-                        : "Already have an account?",
-                    style: const TextStyle(
+                  const Text(
+                    "Already have an account?",
+                    style: TextStyle(
                       color: Colors.black,
                       fontSize: 14,
                     ),
                   ),
                   TextButton(
                     onPressed: () {
-                      setState(() {
-                        isLogin = !isLogin;
-                      });
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SigninPage()));
                     },
-                    child: Text(
-                      isLogin ? 'Register' : 'Login',
-                      style: const TextStyle(
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
                         color: primary2Color,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
