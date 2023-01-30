@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ozare/consts.dart';
+import 'package:ozare/features/auth/bloc/auth_bloc.dart';
 import 'package:ozare/features/auth/view/auth_page.dart';
 import '../widgets/widgets.dart';
 
@@ -108,11 +110,9 @@ class _OnboardPageState extends State<OnboardPage> {
                     ],
                     child: CButton(
                       onTap: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AuthPage(),
-                            ));
+                        context
+                            .read<AuthBloc>()
+                            .add(const AuthOnboardingCompleted());
                       },
                       label: 'Get Started',
                     ),

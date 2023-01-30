@@ -1,5 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ozare/common/dialogs/show_snackbar.dart';
+import 'package:ozare/common/utils/utils.dart';
 import 'package:ozare/consts.dart';
+import 'package:ozare/features/auth/bloc/auth_bloc.dart';
 import 'package:ozare/features/auth/view/signup_page.dart';
 import 'package:ozare/features/auth/widgets/widgets.dart';
 
@@ -13,6 +19,7 @@ class SigninPage extends StatefulWidget {
 class _SigninPageState extends State<SigninPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -29,144 +36,166 @@ class _SigninPageState extends State<SigninPage> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              SizedBox(height: size.height * 0.04),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: RichText(
-                    text: const TextSpan(
-                  text: 'Let\'s \nGet ',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 32,
-                    fontWeight: FontWeight.w600,
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                SizedBox(height: size.height * 0.04),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                      text: const TextSpan(
+                    text: 'Let\'s \nGet ',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 32,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: 'Started!',
+                        style: TextStyle(
+                          color: primary2Color,
+                          fontSize: 32,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  )),
+                ),
+                SizedBox(height: size.height * 0.08),
+
+                // Email Field
+                InputField(
+                  controller: emailController,
+                  hintText: 'Enter your email address',
+                  labelText: 'Email Address',
+                  isPassword: false,
+                  textInputType: TextInputType.emailAddress,
+                  inputFormators: [
+                    InputFormators.spaceNotAllowed,
+                  ],
+                  validator: (val) => Validators.emailValidator(val!),
+                ),
+                const SizedBox(height: 16),
+                InputField(
+                  controller: passwordController,
+                  hintText: 'Enter your password',
+                  labelText: 'Password',
+                  isPassword: true,
+                  textInputType: TextInputType.visiblePassword,
+                  maxLines: 1,
+                  inputFormators: [
+                    InputFormators.spaceNotAllowed,
+                  ],
+                ),
+                const SizedBox(height: 16),
+
+                const Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      color: primary2Color,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
+                ),
+
+                ///
+                SizedBox(height: size.height * 0.08),
+                OButton(
+                  onTap: () {
+                    // check if user has entered valid data
+                    if (formKey.currentState!.validate()) {
+                      context.read<AuthBloc>().add(AuthLoginRequested(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          ));
+                    } else {
+                      showSnackBar(context, "All fields are required");
+                    }
+                  },
+                  label: 'Login',
+                ),
+                const SizedBox(height: 16),
+
+                /// Or Continue With
+                Row(
                   children: [
-                    TextSpan(
-                      text: 'Started!',
+                    Expanded(
+                      child: Container(
+                        height: 1,
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Text(
+                      'Or Continue With',
                       style: TextStyle(
-                        color: primary2Color,
-                        fontSize: 32,
-                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Container(
+                        height: 1,
+                        color: Colors.grey[300],
                       ),
                     ),
                   ],
-                )),
-              ),
-              SizedBox(height: size.height * 0.08),
-
-              // Email Field
-              InputField(
-                controller: emailController,
-                hintText: 'Enter your email address',
-                labelText: 'Email Address',
-                isPassword: false,
-              ),
-              const SizedBox(height: 16),
-              InputField(
-                controller: passwordController,
-                hintText: 'Enter your password',
-                labelText: 'Password',
-                isPassword: true,
-              ),
-              const SizedBox(height: 16),
-
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "Forgot Password?",
-                  style: TextStyle(
-                    color: primary2Color,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
                 ),
-              ),
 
-              ///
-              SizedBox(height: size.height * 0.08),
-              OButton(
-                onTap: () {},
-                label: 'Login',
-              ),
-              const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-              /// Or Continue With
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 1,
-                      color: Colors.grey[300],
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    'Or Continue With',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Container(
-                      height: 1,
-                      color: Colors.grey[300],
-                    ),
-                  ),
-                ],
-              ),
+                /// Social Buttons
 
-              const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                        child: OButton.icon(
+                            onTap: () {}, iconPath: 'assets/icons/google.svg')),
+                    const SizedBox(width: 16),
+                    Expanded(
+                        child: OButton.icon(
+                            onTap: () {}, iconPath: 'assets/icons/apple.svg')),
+                  ],
+                ),
 
-              /// Social Buttons
+                ///
+                SizedBox(height: size.height * 0.08),
 
-              Row(
-                children: [
-                  Expanded(
-                      child: OButton.icon(
-                          onTap: () {}, iconPath: 'assets/icons/google.svg')),
-                  const SizedBox(width: 24),
-                  Expanded(
-                      child: OButton.icon(
-                          onTap: () {}, iconPath: 'assets/icons/apple.svg')),
-                ],
-              ),
-
-              ///
-              SizedBox(height: size.height * 0.08),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Don't have an account?",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignupPage()));
-                    },
-                    child: const Text(
-                      'Register',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Don't have an account?",
                       style: TextStyle(
-                        color: primary2Color,
+                        color: Colors.black,
                         fontSize: 14,
-                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    TextButton(
+                      onPressed: () {
+                        context
+                            .read<AuthBloc>()
+                            .add(const AuthSignupPageRequested());
+                      },
+                      child: const Text(
+                        'Register',
+                        style: TextStyle(
+                          color: primary2Color,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

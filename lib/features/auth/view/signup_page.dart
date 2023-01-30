@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ozare/common/utils/utils.dart';
 import 'package:ozare/consts.dart';
-import 'package:ozare/features/auth/view/signin_page.dart';
+import 'package:ozare/features/auth/bloc/auth_bloc.dart';
 import 'package:ozare/features/auth/widgets/widgets.dart';
+import 'package:ozare/models/ouser.dart';
+
+import '../../../common/dialogs/dialogs.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -16,6 +21,7 @@ class _SignupPageState extends State<SignupPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -50,46 +56,66 @@ class _SignupPageState extends State<SignupPage> {
               ),
               const SizedBox(height: 32),
 
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      InputField(
-                        controller: firstNameController,
-                        hintText: 'Enter your first name',
-                        labelText: 'First Name',
-                        isPassword: false,
-                      ),
-                      const SizedBox(height: 16),
-                      InputField(
-                        controller: lastNameController,
-                        hintText: 'Enter your last name',
-                        labelText: 'Last Name',
-                        isPassword: false,
-                      ),
-                      const SizedBox(height: 16),
-                      InputField(
-                        controller: emailController,
-                        hintText: 'Enter your email address',
-                        labelText: 'Email Address',
-                        isPassword: false,
-                      ),
-                      const SizedBox(height: 16),
-                      InputField(
-                        controller: passwordController,
-                        hintText: 'Enter your password',
-                        labelText: 'Password',
-                        isPassword: true,
-                      ),
-                      const SizedBox(height: 16),
-                      InputField(
-                        controller: confirmPasswordController,
-                        hintText: 'Enter your password again',
-                        labelText: 'Confirm Password',
-                        isPassword: true,
-                      ),
-                      SizedBox(height: size.height * 0.3),
-                    ],
+              Form(
+                key: formKey,
+                child: Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        InputField(
+                          controller: firstNameController,
+                          hintText: 'Enter your first name',
+                          labelText: 'First Name',
+                        ),
+                        const SizedBox(height: 16),
+                        InputField(
+                          controller: lastNameController,
+                          hintText: 'Enter your last name',
+                          labelText: 'Last Name',
+                        ),
+                        const SizedBox(height: 16),
+                        InputField(
+                          controller: emailController,
+                          hintText: 'Enter your email address',
+                          labelText: 'Email Address',
+                          textInputType: TextInputType.emailAddress,
+                          validator: (val) => Validators.emailValidator(val!),
+                          inputFormators: [
+                            InputFormators.spaceNotAllowed,
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        InputField(
+                          controller: passwordController,
+                          hintText: 'Enter your password',
+                          labelText: 'Password',
+                          isPassword: true,
+                          maxLines: 1,
+                          textInputType: TextInputType.visiblePassword,
+                          validator: (val) =>
+                              Validators.passwordValidator(val!),
+                          inputFormators: [
+                            InputFormators.spaceNotAllowed,
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        InputField(
+                          controller: confirmPasswordController,
+                          hintText: 'Enter your password again',
+                          labelText: 'Confirm Password',
+                          isPassword: true,
+                          maxLines: 1,
+                          validator: (val) =>
+                              Validators.confirmPasswordValidator(
+                                  passwordController.text, val!),
+                          textInputType: TextInputType.visiblePassword,
+                          inputFormators: [
+                            InputFormators.spaceNotAllowed,
+                          ],
+                        ),
+                        SizedBox(height: size.height * 0.3),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -97,7 +123,21 @@ class _SignupPageState extends State<SignupPage> {
               ///
               const SizedBox(height: 24),
               OButton(
-                onTap: () {},
+                onTap: () {
+                  if (formKey.currentState!.validate()) {
+                    context.read<AuthBloc>().add(AuthSignupRequested(
+                          ouser: OUser(
+                            uid: null,
+                            email: emailController.text,
+                            firstName: firstNameController.text,
+                            lastName: lastNameController.text,
+                          ),
+                          password: passwordController.text,
+                        ));
+                  } else {
+                    showSnackBar(context, "All fields are required");
+                  }
+                },
                 label: 'Register',
               ),
               const SizedBox(height: 16),
@@ -113,10 +153,9 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SigninPage()));
+                      context
+                          .read<AuthBloc>()
+                          .add(const AuthLoginPageRequested());
                     },
                     child: const Text(
                       'Login',

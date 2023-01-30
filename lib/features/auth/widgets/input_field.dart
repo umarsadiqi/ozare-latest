@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:ozare/common/utils/validators.dart';
 import 'package:ozare/consts.dart';
 
 class InputField extends StatefulWidget {
@@ -8,12 +10,20 @@ class InputField extends StatefulWidget {
     required this.hintText,
     required this.labelText,
     this.isPassword = false,
+    this.textInputType = TextInputType.text,
+    this.inputFormators = const [],
+    this.validator,
+    this.maxLines,
   });
 
   final TextEditingController controller;
   final String hintText;
   final String labelText;
   final bool isPassword;
+  final TextInputType textInputType;
+  final List<TextInputFormatter> inputFormators;
+  final String? Function(String?)? validator;
+  final int? maxLines;
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -36,6 +46,14 @@ class _InputFieldState extends State<InputField> {
         Text(widget.labelText),
         const SizedBox(height: 4),
         TextFormField(
+          obscureText: isObscure,
+          controller: widget.controller,
+          keyboardType: widget.textInputType,
+          inputFormatters: widget.inputFormators,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          maxLines: widget.maxLines,
+          validator:
+              widget.validator ?? (val) => Validators.defaultValidator(val!),
           decoration: InputDecoration(
             hintText: widget.hintText,
             hintStyle: const TextStyle(
