@@ -9,6 +9,7 @@ import 'package:ozare/features/dashboard/view/dashbaord_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/home/home.dart';
 import 'package:ozare/features/profile/view/profile_page.dart';
+import 'package:ozare/features/profile/view/view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -89,11 +90,9 @@ class HomeView extends StatelessWidget {
         children: [
           const DashboardPage(),
           Container(
-            color: Colors.green,
-          ),
-          Container(
             color: Colors.blue,
           ),
+          const NotificationsPage(),
           const ProfilePage(),
         ],
       ),

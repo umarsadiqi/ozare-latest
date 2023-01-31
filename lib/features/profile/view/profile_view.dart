@@ -54,8 +54,7 @@ class _ProfileViewState extends State<ProfileView> {
           const SizedBox(height: 8),
           Expanded(
               child: ListView.builder(
-                  padding:
-                      const EdgeInsets.only(bottom: 64, left: 24, right: 24),
+                  padding: const EdgeInsets.only(bottom: 64),
                   itemCount: 12,
                   itemBuilder: (context, index) {
                     return const NotificationTile();

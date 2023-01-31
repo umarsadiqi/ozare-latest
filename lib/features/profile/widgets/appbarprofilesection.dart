@@ -10,15 +10,24 @@ class AppBarProfileSection extends StatelessWidget {
   const AppBarProfileSection({
     super.key,
     required this.page,
-  });
+  })  : title = '',
+        singlePage = false;
+
+  const AppBarProfileSection.singlePage({
+    super.key,
+    required this.title,
+  })  : singlePage = true,
+        page = PPage.profile;
 
   final PPage page;
+  final String title;
+  final bool singlePage;
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return SizedBox(
-      height: size.height * 0.28,
+      height: singlePage ? size.height * 0.115 : size.height * 0.28,
       width: size.width,
       child: Stack(alignment: Alignment.center, children: [
         // App Bar Section
@@ -55,6 +64,15 @@ class AppBarProfileSection extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                if (page == PPage.profile || singlePage)
+                  GestureDetector(
+                    onTap: () {},
+                    child: const CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.white30,
+                      child: Icon(Icons.menu, color: Colors.white),
+                    ),
+                  ),
                 if (page != PPage.profile)
                   GestureDetector(
                     onTap: () {
@@ -68,13 +86,8 @@ class AppBarProfileSection extends StatelessWidget {
                       child: Icon(Icons.arrow_back, color: Colors.white),
                     ),
                   ),
-                if (page == PPage.profile)
-                  const CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.transparent,
-                  ),
                 Text(
-                  getAppBarTitle(),
+                  singlePage ? title : getAppBarTitle(),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -96,46 +109,46 @@ class AppBarProfileSection extends StatelessWidget {
                 ),
               ],
             )),
-
-        Positioned(
-          top: size.height * 0.135,
-          left: 0,
-          right: 0,
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            PButton(
-              label: 'Account',
-              icon: Icons.person_outline,
-              onTap: () {
-                context
-                    .read<ProfileBloc>()
-                    .add(const ProfilePageChanged(PPage.editAccount));
-              },
-            ),
-            Container(
-              height: 120,
-              width: 120,
-              margin: const EdgeInsets.symmetric(horizontal: 18),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 4),
-                color: Colors.white,
-                image: const DecorationImage(
-                  image: AssetImage('assets/images/default.jpg'),
-                  fit: BoxFit.cover,
+        if (!singlePage)
+          Positioned(
+            top: size.height * 0.135,
+            left: 0,
+            right: 0,
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              PButton(
+                label: 'Account',
+                icon: Icons.person_outline,
+                onTap: () {
+                  context
+                      .read<ProfileBloc>()
+                      .add(const ProfilePageChanged(PPage.editAccount));
+                },
+              ),
+              Container(
+                height: 120,
+                width: 120,
+                margin: const EdgeInsets.symmetric(horizontal: 18),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 4),
+                  color: Colors.white,
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/default.jpg'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            PButton(
-              label: 'Settings',
-              icon: Icons.settings_outlined,
-              onTap: () {
-                context
-                    .read<ProfileBloc>()
-                    .add(const ProfilePageChanged(PPage.settings));
-              },
-            ),
-          ]),
-        ),
+              PButton(
+                label: 'Settings',
+                icon: Icons.settings_outlined,
+                onTap: () {
+                  context
+                      .read<ProfileBloc>()
+                      .add(const ProfilePageChanged(PPage.settings));
+                },
+              ),
+            ]),
+          ),
       ]),
     );
   }
