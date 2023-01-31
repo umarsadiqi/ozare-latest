@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/dashboard/models/match.dart';
@@ -23,6 +25,10 @@ class MatchBloc extends Bloc<MatchEvent, MatchState> {
     try {
       emit(state.copyWith(status: MatchStatus.loading));
       final matches = await _matchRepository.getMatchList();
+      if (matches != null) {
+        log('matches: ${matches.length.toString()}');
+        emit(state.copyWith(matches: matches, status: MatchStatus.success));
+      }
       // emit(state.copyWith(matches: matches, status: MatchStatus.success));
     } catch (_) {
       emit(state.copyWith(status: MatchStatus.failure));

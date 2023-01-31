@@ -16,4 +16,9 @@ class Match {
     required this.team2score,
     required this.matchTime,
   });
+
+  @override
+  String toString() {
+    return 'Match(team1name: $team1name, team2name: $team2name, team1logo: $team1logo, team2logo: $team2logo, team1score: $team1score, team2score: $team2score, matchTime: $matchTime)';
+  }
 }

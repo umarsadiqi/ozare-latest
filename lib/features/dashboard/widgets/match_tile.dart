@@ -1,15 +1,22 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'dart:core' hide Match;
+
+import 'package:ozare/features/dashboard/models/match.dart';
 
 class MatchTile extends StatelessWidget {
   const MatchTile({
     super.key,
+    required this.match,
   });
+
+  final Match match;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(right: 8),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: const AssetImage('assets/images/bg.png'),
@@ -32,31 +39,34 @@ class MatchTile extends StatelessWidget {
             'Time Reamining',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
           ),
-          const Text(
-            '15:30',
-            style: TextStyle(
+          Text(
+            match.matchTime,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 14,
             ),
           ),
           const Spacer(),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.asset(
-                      'assets/images/logo1.png',
-                      height: 66,
+                    Image.network(
+                      match.team1logo,
+                      height: 62,
                     ),
                     const SizedBox(height: 4),
-                    const Text(
-                      'St. Germain',
-                      style: TextStyle(
+                    AutoSizeText(
+                      match.team1name,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),
@@ -64,25 +74,27 @@ class MatchTile extends StatelessWidget {
                   ],
                 ),
               ),
-              const Text(
-                "2 : 1",
-                style: TextStyle(
+              Text(
+                "${match.team1score} : ${match.team2score}",
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 32,
+                  fontSize: 28,
                 ),
               ),
               Expanded(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.asset(
-                      'assets/images/logo2.png',
-                      height: 66,
+                    Image.network(
+                      match.team2logo,
+                      height: 62,
                     ),
                     const SizedBox(height: 4),
-                    const Text(
-                      'Man Utd',
-                      style: TextStyle(
+                    AutoSizeText(
+                      match.team2name,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
                       ),

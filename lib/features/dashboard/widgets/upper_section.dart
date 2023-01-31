@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ozare/common/widgets/widgets.dart';
 import 'package:ozare/consts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/dashboard/bloc/match_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'match_tile.dart';
 
@@ -87,28 +89,53 @@ class UpperSection extends StatelessWidget {
             // TODO: implement listener
           },
           builder: (context, state) {
-            return SizedBox(
-              height: size.height * 0.33 - size.height * 0.125,
-              child: CarouselSlider(
-                options: CarouselOptions(
-                  enableInfiniteScroll: false,
-                  enlargeCenterPage: true,
-                  enlargeFactor: 0.15,
-                  viewportFraction: 0.8,
-                  // enlargeStrategy: CenterPageEnlargeStrategy.height,
+            if (state.status == MatchStatus.loading) {
+              return SizedBox(
+                height: size.height * 0.33 - size.height * 0.125,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    enableInfiniteScroll: false,
+                    enlargeCenterPage: true,
+                    enlargeFactor: 0.15,
+                    viewportFraction: 0.8,
+                    // enlargeStrategy: CenterPageEnlargeStrategy.height,
+                  ),
+                  items: List.generate(
+                      3,
+                      (index) => Animate(
+                            onComplete: (controller) {
+                              controller.repeat();
+                            },
+                            effects: [
+                              ShimmerEffect(
+                                  duration: const Duration(milliseconds: 400),
+                                  color: primary2Color.withOpacity(0.3))
+                            ],
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Colors.white),
+                            ),
+                          )),
                 ),
-                items: List.generate(4, (index) => const MatchTile()),
-              ),
-
-              // ListView.builder(
-              //   scrollDirection: Axis.horizontal,
-              //   padding: const EdgeInsets.only(left: 24, bottom: 12),
-              //   itemCount: 3,
-              //   itemBuilder: (context, index) {
-              //     return const MatchTile();
-              //   },
-              // ),
-            );
+              );
+            } else if (state.status == MatchStatus.success) {
+              return SizedBox(
+                height: size.height * 0.33 - size.height * 0.125,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    enableInfiniteScroll: false,
+                    enlargeCenterPage: true,
+                    enlargeFactor: 0.15,
+                    viewportFraction: 0.8,
+                    // enlargeStrategy: CenterPageEnlargeStrategy.height,
+                  ),
+                  items: List.generate(state.matches.length,
+                      (index) => MatchTile(match: state.matches[index])),
+                ),
+              );
+            }
+            return const Loader(message: 'Loading...');
           },
         ),
       ),

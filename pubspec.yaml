@@ -33,6 +33,8 @@ dependencies:
   dotted_line: ^3.1.0
   carousel_slider: ^4.2.1
   flutter_animate: ^3.0.0
+  auto_size_text: ^3.0.0
+  shimmer: ^2.0.0
 
   # State Management
   flutter_bloc: ^8.1.1
