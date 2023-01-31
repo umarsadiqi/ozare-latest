@@ -16,6 +16,7 @@ class NotificationsPage extends StatelessWidget {
         Expanded(
           child: SingleChildScrollView(
             child: Column(children: [
+              const SizedBox(height: 8),
               const Heading(heading: 'Today'),
               const SizedBox(height: 8),
               ...List.generate(3, (index) => const NotificationTile()),

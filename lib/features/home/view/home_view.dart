@@ -87,13 +87,11 @@ class HomeView extends StatelessWidget {
           : null,
       body: IndexedStack(
         index: selectedTab,
-        children: [
-          const DashboardPage(),
-          Container(
-            color: Colors.blue,
-          ),
-          const NotificationsPage(),
-          const ProfilePage(),
+        children: const [
+          DashboardPage(),
+          PaymentsPage(),
+          NotificationsPage(),
+          ProfilePage(),
         ],
       ),
     );

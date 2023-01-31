@@ -7,3 +7,4 @@ export 'profile_tile.dart';
 export 'options_box.dart';
 export 'gender_picker.dart';
 export 'notifications_tile.dart';
+export 'wallet_tile.dart';

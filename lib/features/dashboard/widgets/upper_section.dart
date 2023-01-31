@@ -58,7 +58,7 @@ class UpperSection extends StatelessWidget {
               CircleAvatar(
                 radius: 20,
                 backgroundColor: Colors.white30,
-                child: Icon(Icons.arrow_back, color: Colors.white),
+                child: Icon(Icons.menu, color: Colors.white),
               ),
               Text(
                 'Match',

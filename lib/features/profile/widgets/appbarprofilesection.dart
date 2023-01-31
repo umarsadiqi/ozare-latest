@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ozare/common/widgets/widgets.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/profile/bloc/profile_bloc.dart';
-import 'package:ozare/features/profile/view/profile_page.dart';
 import 'package:ozare/features/profile/widgets/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,17 +10,20 @@ class AppBarProfileSection extends StatelessWidget {
     super.key,
     required this.page,
   })  : title = '',
-        singlePage = false;
+        singlePage = false,
+        appBarAction = null;
 
   const AppBarProfileSection.singlePage({
     super.key,
     required this.title,
+    this.appBarAction,
   })  : singlePage = true,
         page = PPage.profile;
 
   final PPage page;
   final String title;
   final bool singlePage;
+  final Widget? appBarAction;
 
   @override
   Widget build(BuildContext context) {
@@ -94,19 +96,20 @@ class AppBarProfileSection extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    context
-                        .read<ProfileBloc>()
-                        .add(const ProfilePageChanged(PPage.notifications));
-                  },
-                  child: const CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.white30,
-                    child:
-                        Icon(Icons.notifications_outlined, color: Colors.white),
-                  ),
-                ),
+                appBarAction ??
+                    GestureDetector(
+                      onTap: () {
+                        context
+                            .read<ProfileBloc>()
+                            .add(const ProfilePageChanged(PPage.notifications));
+                      },
+                      child: const CircleAvatar(
+                        radius: 20,
+                        backgroundColor: Colors.white30,
+                        child: Icon(Icons.notifications_outlined,
+                            color: Colors.white),
+                      ),
+                    ),
               ],
             )),
         if (!singlePage)
