@@ -8,7 +8,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ozare/features/dashboard/view/dashbaord_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/home/home.dart';
-import 'package:ozare/features/profile/view/profile_page.dart';
 import 'package:ozare/features/profile/view/view.dart';
 
 class HomeView extends StatelessWidget {
@@ -20,11 +19,13 @@ class HomeView extends StatelessWidget {
         context.select((HomeCubit cubit) => cubit.state.tabIndex);
     final hideStatus = context.select((HomeCubit cubit) => cubit.state.hide);
     final size = MediaQuery.of(context).size;
-    log('selected Tab: ${selectedTab.toString()}');
-    log('hideStatus: ${hideStatus.toString()}');
+    final showBetButton = selectedTab == 0 && !hideStatus;
+    // log('showBetButton: ${showBetButton.toString()}');
+    // log('selected Tab: ${selectedTab.toString()}');
+    // log('hideStatus: ${hideStatus.toString()}');
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      floatingActionButton: !hideStatus
+      floatingActionButton: showBetButton
           ? Container(
               height: 60,
               width: 60,
@@ -63,7 +64,7 @@ class HomeView extends StatelessWidget {
                       context.read<HomeCubit>().setTab(1);
                     },
                   ),
-                  const Spacer(),
+                  if (selectedTab == 0) const Spacer(),
                   BottomNavItem(
                     label: 'Notifications',
                     iconPath: 'assets/icons/bell.svg',

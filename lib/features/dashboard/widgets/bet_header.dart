@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Header extends StatelessWidget {
-  const Header({
+class BetHeader extends StatelessWidget {
+  const BetHeader({
     super.key,
   });
 

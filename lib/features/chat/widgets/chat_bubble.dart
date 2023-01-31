@@ -23,7 +23,8 @@ class ChatBubble extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: Colors.grey[200],
+          color: isMe ? primary2Color : Colors.grey[200],
+          // gradient: isMe ? gradient : null,
           borderRadius: BorderRadius.only(
             topLeft: isMe ? const Radius.circular(16) : Radius.zero,
             topRight: const Radius.circular(16),
@@ -35,10 +36,23 @@ class ChatBubble extends StatelessWidget {
           crossAxisAlignment:
               isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
+            if (!isMe)
+              Row(
+                children: const [
+                  Text(
+                    'John Doe',
+                    style: TextStyle(
+                      color: primary1Color,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
             Text(
               message,
-              style: const TextStyle(
-                color: Colors.black,
+              style: TextStyle(
+                color: isMe ? Colors.white : Colors.black,
                 fontSize: 14,
               ),
             ),
@@ -48,20 +62,22 @@ class ChatBubble extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
+                children: [
                   Text(
                     '12:00 AM',
                     style: TextStyle(
-                      color: Colors.grey,
+                      color: isMe ? Colors.white : Colors.grey,
                       fontSize: 12,
                     ),
                   ),
-                  SizedBox(width: 8),
-                  Icon(
-                    Icons.done_all,
-                    color: primary1Color,
-                    size: 16,
-                  ),
+                  // if (isMe) ...[
+                  //   const SizedBox(width: 8),
+                  //   const Icon(
+                  //     Icons.done_all,
+                  //     color: primary1Color,
+                  //     size: 16,
+                  //   ),
+                  // ]
                 ],
               ),
             ),

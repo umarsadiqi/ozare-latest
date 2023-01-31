@@ -1,6 +1,7 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:ozare/features/chat/chat.dart';
+import 'package:ozare/features/dashboard/view/bet_view.dart';
 import 'package:ozare/features/home/home.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +18,7 @@ class _DashboardPageState extends State<DashboardPage> {
   final List<Widget> _tabs = [
     const Center(child: Text('Info')),
     const ChatView(),
-    const Center(child: Text('Bet')),
+    const BetView(),
     const Center(child: Text('Line-Up')),
   ];
 
@@ -58,7 +59,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   isActive: selectedTab == 1,
                   label: 'Chat',
                   onTap: () {
-                    context.read<HomeCubit>().disableHide();
+                    context.read<HomeCubit>().enableHide();
 
                     setState(() {
                       selectedTab = 1;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ozare/consts.dart';
 
-class ChatTile extends StatelessWidget {
-  const ChatTile({
+class BetTile extends StatelessWidget {
+  const BetTile({
     super.key,
   });
 

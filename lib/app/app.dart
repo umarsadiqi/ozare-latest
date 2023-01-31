@@ -4,6 +4,7 @@ import 'package:ozare/features/auth/bloc/auth_bloc.dart';
 import 'package:ozare/features/auth/repository/auth_repository.dart';
 import 'package:ozare/features/auth/repository/local_db_repository.dart';
 import 'package:ozare/features/dashboard/bloc/match_bloc.dart';
+import 'package:ozare/features/dashboard/repository/match_repository.dart';
 import 'package:ozare/features/home/cubit/home_cubit.dart';
 import 'package:ozare/features/profile/bloc/profile_bloc.dart';
 import 'package:ozare/features/profile/repository/profile_repository.dart';
@@ -24,7 +25,10 @@ class App extends StatelessWidget {
           )..add(const AuthCheckRequested()),
         ),
         BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
-        BlocProvider<MatchBloc>(create: (context) => MatchBloc()),
+        BlocProvider<MatchBloc>(
+            create: (context) => MatchBloc(
+                  matchRepository: getIt<MatchRepository>(),
+                )),
         BlocProvider<ProfileBloc>(
             create: (context) => ProfileBloc(
                   profileRepository: getIt<ProfileRepository>(),

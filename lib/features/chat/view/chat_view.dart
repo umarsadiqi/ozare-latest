@@ -27,50 +27,26 @@ class _ChatViewState extends State<ChatView> {
       height: size.height * 0.55,
       child: Column(
         children: [
-          if (showChatBox) const SizedBox(height: 12),
-
-          showChatBox
-              ? ConversationHeader(onTap: () {
-                  context.read<HomeCubit>().disableHide();
-                  setState(() {
-                    showChatBox = false;
-                  });
-                })
-              : const Header(),
-
-          if (!showChatBox) const Divider(),
-
-          // Chat List
-          showChatBox
-              ? Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.only(bottom: 32),
-                    itemCount: messages.length,
-                    itemBuilder: (context, index) {
-                      return ChatBubble(
-                        message: messages[index],
-                        isMe: index % 2 == 0,
-                      );
-                    },
-                  ),
-                )
-              : Expanded(
-                  child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                          onTap: () {
-                            context.read<HomeCubit>().enableHide();
-                            setState(() {
-                              showChatBox = true;
-                            });
-                          },
-                          child: const ChatTile());
-                    },
-                  ),
-                ),
-
-          if (showChatBox) const ChatInput(),
+          // const SizedBox(height: 12),
+          // ConversationHeader(onTap: () {
+          //   context.read<HomeCubit>().disableHide();
+          //   setState(() {
+          //     showChatBox = false;
+          //   });
+          // }),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.only(bottom: 32),
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                return ChatBubble(
+                  message: messages[index],
+                  isMe: index % 2 == 0,
+                );
+              },
+            ),
+          ),
+          const ChatInput(),
         ],
       ),
     );

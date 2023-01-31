@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ozare/app/app.dart';
 import 'package:ozare/app/app_bloc_observer.dart';
+import 'package:ozare/features/dashboard/repository/match_repository.dart';
 import 'package:ozare/features/profile/repository/profile_repository.dart';
 import 'package:ozare/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,4 +38,5 @@ Future<void> setupDependencies() async {
       LocalDBRepository(sharedPreferences: getIt<SharedPreferences>()));
   getIt.registerSingleton<ProfileRepository>(
       ProfileRepository(firestore: getIt<FirebaseFirestore>()));
+  getIt.registerSingleton<MatchRepository>(MatchRepository());
 }
