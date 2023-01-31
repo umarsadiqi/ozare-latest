@@ -37,8 +37,8 @@ class _SplashPageState extends State<SplashPage> {
                 gradient: gradient,
               ),
             ),
-            SvgPicture.asset(
-              'assets/images/splash.svg',
+            Image.asset(
+              'assets/images/splash.png',
               height: size.height * 1.1,
               width: size.width * 1.1,
               fit: BoxFit.cover,

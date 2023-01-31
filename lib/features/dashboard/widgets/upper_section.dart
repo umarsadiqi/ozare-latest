@@ -41,8 +41,8 @@ class UpperSection extends StatelessWidget {
       Positioned(
         top: 0,
         right: 0,
-        child: SvgPicture.asset(
-          'assets/images/pattern.svg',
+        child: Image.asset(
+          'assets/images/pattern.png',
           color: Colors.white.withOpacity(0.11),
           width: size.width,
           height: size.height * 0.3,

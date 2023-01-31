@@ -14,6 +14,8 @@ class InputField extends StatefulWidget {
     this.inputFormators = const [],
     this.validator,
     this.maxLines,
+    this.suffix = const SizedBox(),
+    this.readOnly = false,
   });
 
   final TextEditingController controller;
@@ -24,6 +26,8 @@ class InputField extends StatefulWidget {
   final List<TextInputFormatter> inputFormators;
   final String? Function(String?)? validator;
   final int? maxLines;
+  final Widget suffix;
+  final bool readOnly;
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -46,6 +50,7 @@ class _InputFieldState extends State<InputField> {
         Text(widget.labelText),
         const SizedBox(height: 4),
         TextFormField(
+          readOnly: widget.readOnly,
           obscureText: isObscure,
           controller: widget.controller,
           keyboardType: widget.textInputType,
@@ -94,7 +99,7 @@ class _InputFieldState extends State<InputField> {
                       color: !isObscure ? primary2Color : Colors.grey[400],
                     ),
                   )
-                : null,
+                : widget.suffix,
           ),
         ),
       ],

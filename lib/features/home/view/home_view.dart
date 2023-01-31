@@ -22,6 +22,7 @@ class HomeView extends StatelessWidget {
     log('selected Tab: ${selectedTab.toString()}');
     log('hideStatus: ${hideStatus.toString()}');
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: !hideStatus
           ? Container(
               height: 60,
