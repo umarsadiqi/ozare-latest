@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ozare/features/event/bloc/event_bloc.dart';
 import 'package:ozare/features/event/view/event_view.dart';
 import 'package:ozare/models/models.dart';
 
@@ -12,6 +14,13 @@ class EventPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return EventView(event: event);
+    return BlocConsumer<EventBloc, EventState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return EventView(event: event);
+      },
+    );
   }
 }

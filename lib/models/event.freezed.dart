@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Event _$EventFromJson(Map<String, dynamic> json) {
+  return _Event.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Event {
   String get id => throw _privateConstructorUsedError;
@@ -25,6 +29,7 @@ mixin _$Event {
   String get logo1 => throw _privateConstructorUsedError;
   String get logo2 => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $EventCopyWith<Event> get copyWith => throw _privateConstructorUsedError;
 }
@@ -177,7 +182,7 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Event with DiagnosticableTreeMixin implements _Event {
   const _$_Event(
       {required this.id,
@@ -188,6 +193,9 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
       required this.time,
       required this.logo1,
       required this.logo2});
+
+  factory _$_Event.fromJson(Map<String, dynamic> json) =>
+      _$$_EventFromJson(json);
 
   @override
   final String id;
@@ -241,6 +249,7 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
             (identical(other.logo2, logo2) || other.logo2 == logo2));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, score1, score2, team1, team2, time, logo1, logo2);
@@ -250,6 +259,13 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
   @pragma('vm:prefer-inline')
   _$$_EventCopyWith<_$_Event> get copyWith =>
       __$$_EventCopyWithImpl<_$_Event>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_EventToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Event implements Event {
@@ -262,6 +278,8 @@ abstract class _Event implements Event {
       required final String time,
       required final String logo1,
       required final String logo2}) = _$_Event;
+
+  factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
 
   @override
   String get id;

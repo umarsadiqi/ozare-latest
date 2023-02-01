@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ozare/consts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ozare/features/chat/bloc/chat_bloc.dart';
+import 'package:ozare/features/chat/models/chat.dart';
+import 'package:ozare/features/profile/bloc/profile_bloc.dart';
+import 'package:uuid/uuid.dart';
 
-class ChatInput extends StatelessWidget {
+class ChatInput extends StatefulWidget {
   const ChatInput({super.key});
+
+  @override
+  State<ChatInput> createState() => _ChatInputState();
+}
+
+class _ChatInputState extends State<ChatInput> {
+  final messageController = TextEditingController();
+
+  @override
+  void dispose() {
+    messageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final uid = context.read<ProfileBloc>().state.user!.uid;
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -28,6 +47,7 @@ class ChatInput extends StatelessWidget {
               height: 52,
               child: TextField(
                 cursorColor: primary2Color,
+                controller: messageController,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(
                     left: 12,
@@ -42,9 +62,28 @@ class ChatInput extends StatelessWidget {
                         color: Colors.grey,
                       ),
                       const SizedBox(width: 22),
-                      SvgPicture.asset(
-                        'assets/icons/send.svg',
-                        color: primary2Color,
+                      GestureDetector(
+                        onTap: () {
+                          if (messageController.text.isNotEmpty) {
+                            context.read<ChatBloc>().add(
+                                  ChatSend(
+                                    chat: Chat(
+                                      id: const Uuid().v4(),
+                                      message: messageController.text,
+                                      senderId: uid!,
+                                      timestamp: DateTime.now(),
+                                    ),
+                                  ),
+                                );
+                            messageController.clear();
+                            // hide keyboard
+                            FocusScope.of(context).unfocus();
+                          }
+                        },
+                        child: SvgPicture.asset(
+                          'assets/icons/send.svg',
+                          color: primary2Color,
+                        ),
                       ),
                       const SizedBox(width: 22),
                     ],

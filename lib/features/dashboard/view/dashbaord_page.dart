@@ -6,6 +6,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ozare/common/widgets/widgets.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/dashboard/bloc/dash_bloc.dart';
+import 'package:ozare/features/event/event.dart';
 import 'package:ozare/features/event/view/event_page.dart';
 import 'package:ozare/models/models.dart';
 
@@ -238,8 +239,12 @@ class LeagueSection extends StatelessWidget {
               ),
               itemBuilder: (context, index, _) {
                 final event = events[index];
+
                 return GestureDetector(
                     onTap: () {
+                      context
+                          .read<EventBloc>()
+                          .add(EventInitializedRequested(event: event));
                       Navigator.push(
                         context,
                         MaterialPageRoute(

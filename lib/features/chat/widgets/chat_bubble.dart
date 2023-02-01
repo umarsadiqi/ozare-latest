@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ozare/consts.dart';
+import 'package:ozare/features/chat/models/chat.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ozare/features/profile/bloc/profile_bloc.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({
     super.key,
-    required this.message,
-    required this.isMe,
+    required this.chat,
   });
 
-  final String message;
-  final bool isMe;
+  final Chat chat;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final isMe = context.read<ProfileBloc>().state.user!.uid == chat.senderId;
     return Align(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
@@ -50,7 +53,7 @@ class ChatBubble extends StatelessWidget {
                 ],
               ),
             Text(
-              message,
+              chat.message,
               style: TextStyle(
                 color: isMe ? Colors.white : Colors.black,
                 fontSize: 14,
@@ -64,7 +67,9 @@ class ChatBubble extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    '12:00 AM',
+                    // extract time from timestamp
+
+                    DateFormat.Hm().format(chat.timestamp),
                     style: TextStyle(
                       color: isMe ? Colors.white : Colors.grey,
                       fontSize: 12,

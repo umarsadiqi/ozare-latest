@@ -40,7 +40,7 @@ class _SigninPageState extends State<SigninPage> {
             key: formKey,
             child: Column(
               children: [
-                SizedBox(height: size.height * 0.04),
+                SizedBox(height: size.height * 0.03),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: RichText(
@@ -63,7 +63,7 @@ class _SigninPageState extends State<SigninPage> {
                     ],
                   )),
                 ),
-                SizedBox(height: size.height * 0.08),
+                SizedBox(height: size.height * 0.06),
 
                 // Email Field
                 InputField(
@@ -89,7 +89,7 @@ class _SigninPageState extends State<SigninPage> {
                     InputFormators.spaceNotAllowed,
                   ],
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
 
                 const Align(
                   alignment: Alignment.centerRight,
@@ -104,7 +104,7 @@ class _SigninPageState extends State<SigninPage> {
                 ),
 
                 ///
-                SizedBox(height: size.height * 0.08),
+                SizedBox(height: size.height * 0.07),
                 OButton(
                   onTap: () {
                     // check if user has entered valid data
