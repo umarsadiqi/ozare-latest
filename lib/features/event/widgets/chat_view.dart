@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ozare/features/chat/widgets/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ozare/features/home/home.dart';
+import 'widgets.dart';
 
 class ChatView extends StatefulWidget {
   const ChatView({super.key});

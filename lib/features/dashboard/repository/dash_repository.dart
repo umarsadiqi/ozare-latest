@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:ozare/features/dashboard/models/match.dart';
+import 'package:ozare/models/models.dart';
 
-class MatchRepository {
+class DashRepository {
   final String apiURl =
       'https://livescore6.p.rapidapi.com/matches/v2/list-live?Category=soccer';
   final String liveGamesEndPoint = 'list-live';
@@ -14,44 +14,55 @@ class MatchRepository {
     'X-RapidAPI-Host': 'livescore6.p.rapidapi.com',
   };
 
-  Future<List<Match>?> getMatchList() async {
+  Future<List<League>?> getLeagues() async {
     try {
       final response = await http.get(
         Uri.parse(apiURl),
         headers: header,
       );
 
-      final List<Match> allMatches = [];
+      List<League> parsedLeagues = [];
 
       log(response.statusCode.toString());
+
       if (response.statusCode == 200) {
         final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
-        final stages = responseMap['Stages'];
-        for (final stage in stages) {
-          final events = stage['Events'];
-          final List<Match> matches = await _getMatchesFromEvents(events);
-          allMatches.addAll(matches);
+        final leagues = responseMap['Stages'];
+
+        // extract leagues
+        for (final l in leagues) {
+          final events = l['Events'];
+          final List<Event> parsedEvents = await _parseEvents(events);
+
+          var league = League(
+            id: l['Sid'] ?? '',
+            name: l['Snm'] ?? '',
+            events: parsedEvents,
+          );
+
+          parsedLeagues.add(league);
         }
       }
-      return allMatches;
+      return parsedLeagues;
     } catch (event) {
       log(event.toString());
       return null;
     }
   }
 
-  _getMatchesFromEvents(List<dynamic> events) {
-    final List<Match> matches = [];
+  _parseEvents(List<dynamic> events) {
+    final List<Event> matches = [];
     for (final event in events) {
       try {
-        final match = Match(
-          team1name: event['T1'][0]['Nm'] as String,
-          team2name: event['T2'][0]['Nm'] as String,
-          team1logo: logoBaseUrl + event['T1'][0]['Img'],
-          team2logo: logoBaseUrl + event['T2'][0]['Img'],
-          team1score: event["Tr1"] as String,
-          team2score: event["Tr2"] as String,
-          matchTime:
+        final match = Event(
+          id: event['Eid'] as String,
+          team1: event['T1'][0]['Nm'] as String,
+          team2: event['T2'][0]['Nm'] as String,
+          logo1: logoBaseUrl + event['T1'][0]['Img'],
+          logo2: logoBaseUrl + event['T2'][0]['Img'],
+          score1: event["Tr1"] as String,
+          score2: event["Tr2"] as String,
+          time:
               (event["Eps"] as String).replaceAll('\'', '').replaceAll('+', ''),
         );
         matches.add(match);

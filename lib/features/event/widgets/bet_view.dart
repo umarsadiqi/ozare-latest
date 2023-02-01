@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ozare/features/chat/chat.dart';
-import 'package:ozare/features/dashboard/widgets/bet_tile.dart';
+import 'widgets.dart';
 
 class BetView extends StatelessWidget {
   const BetView({super.key});

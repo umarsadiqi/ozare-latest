@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ozare/features/dashboard/bloc/match_bloc.dart';
+import 'package:ozare/features/dashboard/bloc/dash_bloc.dart';
 import 'package:ozare/features/home/view/home_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    context.read<MatchBloc>().add(MatchListRequested());
+    context.read<DashBloc>().add(DashLeaguesRequested());
     super.initState();
   }
 

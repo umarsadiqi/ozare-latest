@@ -1,14 +1,12 @@
-import 'dart:developer';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ozare/consts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ozare/features/dashboard/view/dashbaord_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/home/home.dart';
 import 'package:ozare/features/profile/view/view.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -34,10 +32,11 @@ class HomeView extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: const Center(
-                  child: FaIcon(
-                FontAwesomeIcons.trophy,
-                color: Colors.white,
-              )),
+                child: Icon(
+                  FontAwesome.award,
+                  color: Colors.white,
+                ),
+              ),
             )
           : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

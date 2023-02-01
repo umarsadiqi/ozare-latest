@@ -384,14 +384,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  font_awesome_flutter:
+  fluttericon:
     dependency: "direct main"
     description:
-      name: font_awesome_flutter
-      sha256: "875dbb9ec1ad30d68102019ceb682760d06c72747c1c5b7885781b95f88569cc"
+      name: fluttericon
+      sha256: "252fa8043826e93d972a602497a260cb3d62b5aea6d045793e4381590f2c1e99"
       url: "https://pub.dev"
     source: hosted
-    version: "10.3.0"
+    version: "2.0.0"
   freezed:
     dependency: "direct dev"
     description:
@@ -760,14 +760,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
-  shimmer:
-    dependency: "direct main"
-    description:
-      name: shimmer
-      sha256: "1f1009b5845a1f88f1c5630212279540486f97409e9fc3f63883e71070d107bf"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   sky_engine:
     dependency: transitive
     description: flutter

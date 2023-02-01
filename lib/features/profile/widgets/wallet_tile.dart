@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ozare/features/profile/view/view.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 
 class WalletTile extends StatelessWidget {
   const WalletTile({
@@ -67,8 +67,8 @@ class WalletTile extends StatelessWidget {
           const Spacer(),
           IconButton(
               onPressed: () {},
-              icon: FaIcon(
-                FontAwesomeIcons.penToSquare,
+              icon: Icon(
+                FontAwesome5.copy,
                 color: Colors.grey[600]!,
                 size: 22,
               ))
