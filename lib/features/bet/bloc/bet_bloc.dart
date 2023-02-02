@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ozare/features/bet/models/bet.dart';
 import 'package:ozare/features/bet/repository/bet_repository.dart';
+import 'package:collection/collection.dart';
 
 part 'bet_event.dart';
 part 'bet_state.dart';
@@ -28,8 +29,16 @@ class BetBloc extends Bloc<BetEvent, BetState> {
     BetCreated event,
     Emitter<BetState> emit,
   ) async {
-    await _betRepository.createBet(eventId, event.bet);
-    emit(state.copyWith(status: BetStatus.success));
+    final Bet? bet =
+        state.bets.firstWhereOrNull((b) => b.userId == event.bet.userId);
+
+    if (bet != null) {
+      emit(state.copyWith(betStatus: CreateBetStatus.exists));
+    } else {
+      await _betRepository.createBet(eventId, event.bet);
+      emit(state.copyWith(
+          status: BetStatus.success, betStatus: CreateBetStatus.created));
+    }
   }
 
   /// [BetsUpdated] event handler

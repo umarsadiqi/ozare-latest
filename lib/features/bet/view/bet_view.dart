@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
+import 'package:ozare/common/dialogs/show_snackbar.dart';
 import 'package:ozare/common/widgets/widgets.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/bet/bloc/bet_bloc.dart';
@@ -21,8 +22,8 @@ class BetView extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      floatingActionButton: GestureDetector(
-        onTap: () {
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
           /// show input dialog
           showDialog(
             context: context,
@@ -32,19 +33,11 @@ class BetView extends StatelessWidget {
             ),
           );
         },
-        child: Container(
-          height: 60,
-          width: 60,
-          decoration: const BoxDecoration(
-            gradient: gradient,
-            shape: BoxShape.circle,
-          ),
-          child: const Center(
-            child: Icon(
-              FontAwesome.award,
-              color: Colors.white,
-            ),
-          ),
+        backgroundColor: primary2Color,
+        label: const Text('Place a Bet'),
+        icon: const Icon(
+          FontAwesome.award,
+          color: Colors.white,
         ),
       ),
       body: SizedBox(
@@ -58,7 +51,9 @@ class BetView extends StatelessWidget {
 
             BlocConsumer<BetBloc, BetState>(
               listener: (context, state) {
-                // TODO: implement listener
+                if (state.betStatus == CreateBetStatus.exists) {
+                  showSnackBar(context, 'You already betted on this match');
+                }
               },
               builder: (context, state) {
                 final status = state.status;

@@ -25,7 +25,7 @@ class MatchCategoryTabItem extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10, right: 14),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(32),
-            color: isActive ? Colors.white : Colors.white24,
+            color: isActive ? primary2Color : Colors.white,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
@@ -38,13 +38,13 @@ class MatchCategoryTabItem extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: isActive ? primary2Color : Colors.white.withOpacity(0.9),
+              color: isActive ? Colors.white : primary2Color.withOpacity(0.9),
             ),
             const SizedBox(width: 8),
             Text(
               label,
               style: TextStyle(
-                color: isActive ? primary2Color : Colors.white.withOpacity(0.9),
+                color: isActive ? Colors.white : primary2Color.withOpacity(0.9),
                 fontWeight: isActive ? FontWeight.w600 : null,
               ),
             ),

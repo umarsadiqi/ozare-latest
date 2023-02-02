@@ -2,7 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ozare/consts.dart';
-import 'package:ozare/features/dash/view/dashbaord_page.dart';
+import 'package:ozare/features/dash/view/dash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/home/home.dart';
 import 'package:ozare/features/profile/view/view.dart';

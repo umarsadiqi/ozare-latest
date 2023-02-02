@@ -95,39 +95,65 @@ class _DashboardPageState extends State<DashboardPage> {
                     ],
                   )),
 
-              // Match Categories
+              // SearchBar
               Positioned(
-                top: size.height * 0.12,
-                width: size.width,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Row(
-                    children: [
-                      MatchCategoryTabItem(
-                        isActive: true,
-                        label: 'Soccer',
-                        onTap: () {},
-                        icon: FontAwesome5.futbol,
-                      ),
-                      MatchCategoryTabItem(
-                        isActive: false,
-                        label: 'Basketball',
-                        onTap: () {},
-                        icon: FontAwesome5.basketball_ball,
-                      ),
-                      MatchCategoryTabItem(
-                        isActive: false,
-                        label: 'Cricket',
-                        onTap: () {},
-                        icon: Maki.cricket,
-                      ),
-                    ],
+                top: size.height * 0.115,
+                child: Container(
+                  height: 50,
+                  width: size.width,
+                  padding: const EdgeInsets.symmetric(horizontal: 28),
+                  child: TextField(
+                    scrollPadding: const EdgeInsets.only(left: 22),
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.only(left: 22),
+                        hintText: 'Search ...',
+                        fillColor: Colors.white,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(32),
+                            borderSide: const BorderSide(
+                              color: primary2Color,
+                            )),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(32),
+                            borderSide: const BorderSide(
+                              color: primary2Color,
+                            )),
+                        suffixIcon: const Icon(Icons.search)),
                   ),
                 ),
               ),
             ]),
           ),
+
+          /// Match Categories
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              children: [
+                MatchCategoryTabItem(
+                  isActive: true,
+                  label: 'Soccer',
+                  onTap: () {},
+                  icon: FontAwesome5.futbol,
+                ),
+                MatchCategoryTabItem(
+                  isActive: false,
+                  label: 'Basketball',
+                  onTap: () {},
+                  icon: FontAwesome5.basketball_ball,
+                ),
+                MatchCategoryTabItem(
+                  isActive: false,
+                  label: 'Cricket',
+                  onTap: () {},
+                  icon: Maki.cricket,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
 
           /// MATCHES LISTS \\\
           BlocConsumer<DashBloc, DashState>(
