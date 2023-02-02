@@ -10,11 +10,27 @@ class DashRepository {
   final String logoBaseUrl = 'https://lsm-static-prod.livescore.com/medium/';
 
   final Map<String, String> header = {
-    'X-RapidAPI-Key': '6190ca4df7msh6635b430765a458p16c2b5jsn706049e663d1',
+    'X-RapidAPI-Key': '07585b4120mshbc941a57c6ebd11p11de9bjsn089233df6ab2',
     'X-RapidAPI-Host': 'livescore6.p.rapidapi.com',
   };
 
   Future<List<League>?> getLeagues() async {
+    log("************* getLeagues() *************");
+    final leagues = await _getLeagues();
+    // retry if leagues is null
+    if (leagues == null || leagues.isEmpty) {
+      // add delay
+      await Future.delayed(const Duration(minutes: 10));
+      return await getLeagues();
+    } else if (leagues.isNotEmpty) {
+      // add delay
+      await Future.delayed(const Duration(seconds: 30));
+      return await getLeagues();
+    }
+    return leagues;
+  }
+
+  Future<List<League>?> _getLeagues() async {
     try {
       final response = await http.get(
         Uri.parse(apiURl),
@@ -33,7 +49,7 @@ class DashRepository {
         for (final l in leagues) {
           final events = l['Events'];
           final List<Event> parsedEvents = await _parseEvents(events);
-
+          if (parsedEvents.isEmpty) continue;
           var league = League(
             id: l['Sid'] ?? '',
             name: l['Snm'] ?? '',
@@ -58,12 +74,13 @@ class DashRepository {
           id: event['Eid'] as String,
           team1: event['T1'][0]['Nm'] as String,
           team2: event['T2'][0]['Nm'] as String,
+          id1: event['T1'][0]['ID'] as String,
+          id2: event['T2'][0]['ID'] as String,
           logo1: logoBaseUrl + event['T1'][0]['Img'],
           logo2: logoBaseUrl + event['T2'][0]['Img'],
           score1: event["Tr1"] as String,
           score2: event["Tr2"] as String,
-          time:
-              (event["Eps"] as String).replaceAll('\'', '').replaceAll('+', ''),
+          time: (event["Eps"] as String).replaceAll('\'', ''),
         );
         matches.add(match);
         log(match.toString());

@@ -6,7 +6,6 @@ import 'package:ozare/common/widgets/loader.dart';
 import 'package:ozare/features/auth/bloc/auth_bloc.dart';
 import 'package:ozare/features/auth/view/signin_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ozare/features/dashboard/view/dashbaord_page.dart';
 import 'package:ozare/features/home/home.dart';
 import 'package:ozare/features/onboard/view/onboard_page.dart';
 

@@ -7,13 +7,14 @@ import 'package:get_it/get_it.dart';
 import 'package:ozare/app/app.dart';
 import 'package:ozare/app/app_bloc_observer.dart';
 import 'package:ozare/features/chat/repository/chat_repository.dart';
-import 'package:ozare/features/dashboard/repository/dash_repository.dart';
+import 'package:ozare/features/dash/repository/dash_repository.dart';
 import 'package:ozare/features/event/repository/event_repository.dart';
 import 'package:ozare/features/profile/repository/profile_repository.dart';
 import 'package:ozare/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'features/auth/repository/repository.dart';
+import 'features/bet/repository/bet_repository.dart';
 
 final getIt = GetIt.instance;
 
@@ -46,4 +47,7 @@ Future<void> setupDependencies() async {
 
   getIt.registerSingleton<ChatRepository>(
       ChatRepository(firestore: getIt<FirebaseFirestore>()));
+
+  getIt.registerSingleton<BetRepository>(
+      BetRepository(firestore: getIt<FirebaseFirestore>()));
 }

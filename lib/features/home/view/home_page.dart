@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ozare/features/dashboard/bloc/dash_bloc.dart';
+import 'package:ozare/features/dash/bloc/dash_bloc.dart';
 import 'package:ozare/features/home/view/home_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

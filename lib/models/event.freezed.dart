@@ -21,6 +21,8 @@ Event _$EventFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Event {
   String get id => throw _privateConstructorUsedError;
+  String get id1 => throw _privateConstructorUsedError;
+  String get id2 => throw _privateConstructorUsedError;
   String get score1 => throw _privateConstructorUsedError;
   String get score2 => throw _privateConstructorUsedError;
   String get team1 => throw _privateConstructorUsedError;
@@ -41,6 +43,8 @@ abstract class $EventCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String id1,
+      String id2,
       String score1,
       String score2,
       String team1,
@@ -64,6 +68,8 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
   @override
   $Res call({
     Object? id = null,
+    Object? id1 = null,
+    Object? id2 = null,
     Object? score1 = null,
     Object? score2 = null,
     Object? team1 = null,
@@ -76,6 +82,14 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      id1: null == id1
+          ? _value.id1
+          : id1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      id2: null == id2
+          ? _value.id2
+          : id2 // ignore: cast_nullable_to_non_nullable
               as String,
       score1: null == score1
           ? _value.score1
@@ -117,6 +131,8 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String id1,
+      String id2,
       String score1,
       String score2,
       String team1,
@@ -136,6 +152,8 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
   @override
   $Res call({
     Object? id = null,
+    Object? id1 = null,
+    Object? id2 = null,
     Object? score1 = null,
     Object? score2 = null,
     Object? team1 = null,
@@ -148,6 +166,14 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      id1: null == id1
+          ? _value.id1
+          : id1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      id2: null == id2
+          ? _value.id2
+          : id2 // ignore: cast_nullable_to_non_nullable
               as String,
       score1: null == score1
           ? _value.score1
@@ -186,6 +212,8 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
 class _$_Event with DiagnosticableTreeMixin implements _Event {
   const _$_Event(
       {required this.id,
+      required this.id1,
+      required this.id2,
       required this.score1,
       required this.score2,
       required this.team1,
@@ -199,6 +227,10 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
 
   @override
   final String id;
+  @override
+  final String id1;
+  @override
+  final String id2;
   @override
   final String score1;
   @override
@@ -216,7 +248,7 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Event(id: $id, score1: $score1, score2: $score2, team1: $team1, team2: $team2, time: $time, logo1: $logo1, logo2: $logo2)';
+    return 'Event(id: $id, id1: $id1, id2: $id2, score1: $score1, score2: $score2, team1: $team1, team2: $team2, time: $time, logo1: $logo1, logo2: $logo2)';
   }
 
   @override
@@ -225,6 +257,8 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
     properties
       ..add(DiagnosticsProperty('type', 'Event'))
       ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('id1', id1))
+      ..add(DiagnosticsProperty('id2', id2))
       ..add(DiagnosticsProperty('score1', score1))
       ..add(DiagnosticsProperty('score2', score2))
       ..add(DiagnosticsProperty('team1', team1))
@@ -240,6 +274,8 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
         (other.runtimeType == runtimeType &&
             other is _$_Event &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.id1, id1) || other.id1 == id1) &&
+            (identical(other.id2, id2) || other.id2 == id2) &&
             (identical(other.score1, score1) || other.score1 == score1) &&
             (identical(other.score2, score2) || other.score2 == score2) &&
             (identical(other.team1, team1) || other.team1 == team1) &&
@@ -251,8 +287,8 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, score1, score2, team1, team2, time, logo1, logo2);
+  int get hashCode => Object.hash(runtimeType, id, id1, id2, score1, score2,
+      team1, team2, time, logo1, logo2);
 
   @JsonKey(ignore: true)
   @override
@@ -271,6 +307,8 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
 abstract class _Event implements Event {
   const factory _Event(
       {required final String id,
+      required final String id1,
+      required final String id2,
       required final String score1,
       required final String score2,
       required final String team1,
@@ -283,6 +321,10 @@ abstract class _Event implements Event {
 
   @override
   String get id;
+  @override
+  String get id1;
+  @override
+  String get id2;
   @override
   String get score1;
   @override

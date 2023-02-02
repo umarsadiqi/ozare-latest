@@ -23,6 +23,7 @@ mixin _$Chat {
   String get id => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   String get senderId => throw _privateConstructorUsedError;
+  String get senderName => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +36,12 @@ abstract class $ChatCopyWith<$Res> {
   factory $ChatCopyWith(Chat value, $Res Function(Chat) then) =
       _$ChatCopyWithImpl<$Res, Chat>;
   @useResult
-  $Res call({String id, String message, String senderId, DateTime timestamp});
+  $Res call(
+      {String id,
+      String message,
+      String senderId,
+      String senderName,
+      DateTime timestamp});
 }
 
 /// @nodoc
@@ -54,6 +60,7 @@ class _$ChatCopyWithImpl<$Res, $Val extends Chat>
     Object? id = null,
     Object? message = null,
     Object? senderId = null,
+    Object? senderName = null,
     Object? timestamp = null,
   }) {
     return _then(_value.copyWith(
@@ -69,6 +76,10 @@ class _$ChatCopyWithImpl<$Res, $Val extends Chat>
           ? _value.senderId
           : senderId // ignore: cast_nullable_to_non_nullable
               as String,
+      senderName: null == senderName
+          ? _value.senderName
+          : senderName // ignore: cast_nullable_to_non_nullable
+              as String,
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
@@ -83,7 +94,12 @@ abstract class _$$_ChatCopyWith<$Res> implements $ChatCopyWith<$Res> {
       __$$_ChatCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String message, String senderId, DateTime timestamp});
+  $Res call(
+      {String id,
+      String message,
+      String senderId,
+      String senderName,
+      DateTime timestamp});
 }
 
 /// @nodoc
@@ -98,6 +114,7 @@ class __$$_ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res, _$_Chat>
     Object? id = null,
     Object? message = null,
     Object? senderId = null,
+    Object? senderName = null,
     Object? timestamp = null,
   }) {
     return _then(_$_Chat(
@@ -112,6 +129,10 @@ class __$$_ChatCopyWithImpl<$Res> extends _$ChatCopyWithImpl<$Res, _$_Chat>
       senderId: null == senderId
           ? _value.senderId
           : senderId // ignore: cast_nullable_to_non_nullable
+              as String,
+      senderName: null == senderName
+          ? _value.senderName
+          : senderName // ignore: cast_nullable_to_non_nullable
               as String,
       timestamp: null == timestamp
           ? _value.timestamp
@@ -128,6 +149,7 @@ class _$_Chat with DiagnosticableTreeMixin implements _Chat {
       {required this.id,
       required this.message,
       required this.senderId,
+      required this.senderName,
       required this.timestamp});
 
   factory _$_Chat.fromJson(Map<String, dynamic> json) => _$$_ChatFromJson(json);
@@ -139,11 +161,13 @@ class _$_Chat with DiagnosticableTreeMixin implements _Chat {
   @override
   final String senderId;
   @override
+  final String senderName;
+  @override
   final DateTime timestamp;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Chat(id: $id, message: $message, senderId: $senderId, timestamp: $timestamp)';
+    return 'Chat(id: $id, message: $message, senderId: $senderId, senderName: $senderName, timestamp: $timestamp)';
   }
 
   @override
@@ -154,6 +178,7 @@ class _$_Chat with DiagnosticableTreeMixin implements _Chat {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('message', message))
       ..add(DiagnosticsProperty('senderId', senderId))
+      ..add(DiagnosticsProperty('senderName', senderName))
       ..add(DiagnosticsProperty('timestamp', timestamp));
   }
 
@@ -166,6 +191,8 @@ class _$_Chat with DiagnosticableTreeMixin implements _Chat {
             (identical(other.message, message) || other.message == message) &&
             (identical(other.senderId, senderId) ||
                 other.senderId == senderId) &&
+            (identical(other.senderName, senderName) ||
+                other.senderName == senderName) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp));
   }
@@ -173,7 +200,7 @@ class _$_Chat with DiagnosticableTreeMixin implements _Chat {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, message, senderId, timestamp);
+      Object.hash(runtimeType, id, message, senderId, senderName, timestamp);
 
   @JsonKey(ignore: true)
   @override
@@ -194,6 +221,7 @@ abstract class _Chat implements Chat {
       {required final String id,
       required final String message,
       required final String senderId,
+      required final String senderName,
       required final DateTime timestamp}) = _$_Chat;
 
   factory _Chat.fromJson(Map<String, dynamic> json) = _$_Chat.fromJson;
@@ -204,6 +232,8 @@ abstract class _Chat implements Chat {
   String get message;
   @override
   String get senderId;
+  @override
+  String get senderName;
   @override
   DateTime get timestamp;
   @override

@@ -1,22 +1,31 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:ozare/common/widgets/oval_clipper.dart';
 import 'package:ozare/consts.dart';
+import 'package:ozare/features/bet/bloc/bet_bloc.dart';
+import 'package:ozare/features/bet/repository/bet_repository.dart';
 import 'package:ozare/features/chat/bloc/chat_bloc.dart';
 import 'package:ozare/features/chat/repository/chat_repository.dart';
-import 'package:ozare/features/dashboard/widgets/event_tile.dart';
+import 'package:ozare/features/dash/bloc/dash_bloc.dart';
+import 'package:ozare/features/dash/widgets/event_tile.dart';
+import 'package:ozare/features/event/widgets/bet_dialog.dart';
 import 'package:ozare/main.dart';
-import 'package:ozare/models/models.dart';
+import 'package:ozare/models/event.dart';
 
 import '../widgets/widgets.dart';
 
 class EventView extends StatefulWidget {
   const EventView({
     super.key,
+    required this.eventId,
+    required this.leagueId,
     required this.event,
   });
 
+  final String eventId;
+  final String leagueId;
   final Event event;
 
   @override
@@ -35,11 +44,17 @@ class _MatchViewState extends State<EventView> {
       BlocProvider(
         create: (context) => ChatBloc(
           chatRepository: getIt<ChatRepository>(),
-          eventId: widget.event.id,
+          eventId: widget.eventId,
         )..add(ChatSubscriptionRequested()),
         child: const ChatView(),
       ),
-      const BetView(),
+      BlocProvider(
+        create: (context) => BetBloc(
+          betRepository: getIt<BetRepository>(),
+          eventId: widget.eventId,
+        )..add(const BetSubscriptionRequested()),
+        child: const BetView(),
+      ),
       const Center(child: Text('Line-Up')),
     ];
     super.initState();
@@ -48,9 +63,37 @@ class _MatchViewState extends State<EventView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          /// show input dialog
+          showDialog(
+            context: context,
+            builder: (context) => BetDialog(
+              event: widget.event,
+            ),
+          );
+        },
+        child: Container(
+          height: 60,
+          width: 60,
+          decoration: const BoxDecoration(
+            gradient: gradient,
+            shape: BoxShape.circle,
+          ),
+          child: const Center(
+            child: Icon(
+              FontAwesome.award,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
       body: Column(
         children: [
-          UpperSection(event: widget.event),
+          UpperSection(
+            eventId: widget.eventId,
+            leagueId: widget.leagueId,
+          ),
           const SizedBox(height: 12),
           // Tab Bar Section
           Padding(
@@ -108,13 +151,16 @@ class _MatchViewState extends State<EventView> {
   }
 }
 
+/// Upper Section
 class UpperSection extends StatelessWidget {
   const UpperSection({
     super.key,
-    required this.event,
+    required this.eventId,
+    required this.leagueId,
   });
 
-  final Event event;
+  final String eventId;
+  final String leagueId;
 
   @override
   Widget build(BuildContext context) {
@@ -191,8 +237,18 @@ class UpperSection extends StatelessWidget {
             height: size.height * 0.15,
             width: size.width,
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: EventTile(
-              event: event,
+            child: BlocBuilder<DashBloc, DashState>(
+              builder: (context, state) {
+                final event = state.leagues
+                    .firstWhere(
+                      (league) => league.id == leagueId,
+                    )
+                    .events
+                    .firstWhere((event) => event.id == eventId);
+                return EventTile(
+                  event: event,
+                );
+              },
             ),
           ),
         ),

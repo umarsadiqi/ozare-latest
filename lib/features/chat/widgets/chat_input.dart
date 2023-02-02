@@ -26,7 +26,7 @@ class _ChatInputState extends State<ChatInput> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final uid = context.read<ProfileBloc>().state.user!.uid;
+    final sender = context.read<ProfileBloc>().state.user;
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -69,9 +69,11 @@ class _ChatInputState extends State<ChatInput> {
                                   ChatSend(
                                     chat: Chat(
                                       id: const Uuid().v4(),
+                                      senderName:
+                                          '${sender!.firstName} ${sender.lastName}',
                                       message: messageController.text,
-                                      senderId: uid!,
-                                      timestamp: DateTime.now(),
+                                      senderId: sender.uid!,
+                                      timestamp: DateTime.now().toUtc(),
                                     ),
                                   ),
                                 );

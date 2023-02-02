@@ -10,6 +10,7 @@ class Chat with _$Chat {
     required String id,
     required String message,
     required String senderId,
+    required String senderName,
     required DateTime timestamp,
   }) = _Chat;
 

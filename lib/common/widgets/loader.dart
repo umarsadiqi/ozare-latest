@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:ozare/consts.dart';
 
 class Loader extends StatelessWidget {
@@ -22,12 +23,18 @@ class Loader extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: Center(
-              child: Text(
-                message,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
+              child: Animate(
+                onComplete: (controller) {
+                  controller.repeat();
+                },
+                effects: const [ShimmerEffect()],
+                child: Text(
+                  message,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),

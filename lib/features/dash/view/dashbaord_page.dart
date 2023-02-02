@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
@@ -5,7 +7,7 @@ import 'package:fluttericon/maki_icons.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ozare/common/widgets/widgets.dart';
 import 'package:ozare/consts.dart';
-import 'package:ozare/features/dashboard/bloc/dash_bloc.dart';
+import 'package:ozare/features/dash/bloc/dash_bloc.dart';
 import 'package:ozare/features/event/event.dart';
 import 'package:ozare/features/event/view/event_page.dart';
 import 'package:ozare/models/models.dart';
@@ -131,10 +133,12 @@ class _DashboardPageState extends State<DashboardPage> {
           BlocConsumer<DashBloc, DashState>(
             listener: (context, state) {},
             builder: (context, state) {
+              log('Dash State: ${state.status.toString()}}');
               if (state.status == DashStatus.loading) {
                 return const LoadingSection();
               } else if (state.status == DashStatus.success) {
                 final List<League> leagues = state.leagues;
+                log('Leagues Length: ${leagues.length.toString()}');
                 if (leagues.isEmpty) {
                   return const NoEventsTile();
                 }
@@ -249,6 +253,8 @@ class LeagueSection extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => EventPage(
+                            eventId: event.id,
+                            leagueId: league.id,
                             event: event,
                           ),
                         ),

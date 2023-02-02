@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ozare/consts.dart';
+import 'package:ozare/features/bet/models/bet.dart';
 
 class BetTile extends StatelessWidget {
   const BetTile({
     super.key,
+    required this.bet,
   });
+
+  final Bet bet;
 
   @override
   Widget build(BuildContext context) {

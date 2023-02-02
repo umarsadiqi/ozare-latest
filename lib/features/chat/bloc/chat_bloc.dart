@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -36,16 +37,17 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     ChatSubscriptionRequested event,
     Emitter<ChatState> emit,
   ) async {
-    await emit.forEach(
-      _chatRepository.chatStream(eventId),
-      onData: (chats) => state.copyWith(
-        chats: chats,
-        status: ChatStatus.success,
-      ),
-      onError: (_, __) => state.copyWith(
-        status: ChatStatus.failure,
-      ),
-    );
+    await emit.forEach(_chatRepository.chatStream(eventId),
+        onData: (chats) => state.copyWith(
+              chats: chats,
+              status: ChatStatus.success,
+            ),
+        onError: (erro, __) {
+          log('ChatBloc: onError: ${erro.toString()}');
+          return state.copyWith(
+            status: ChatStatus.failure,
+          );
+        });
   }
 
   /// [ChatSend] event handler

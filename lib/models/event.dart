@@ -8,6 +8,8 @@ part 'event.g.dart';
 class Event with _$Event {
   const factory Event({
     required String id,
+    required String id1,
+    required String id2,
     required String score1,
     required String score2,
     required String team1,

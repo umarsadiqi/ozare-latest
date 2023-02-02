@@ -41,10 +41,10 @@ class ChatBubble extends StatelessWidget {
           children: [
             if (!isMe)
               Row(
-                children: const [
+                children: [
                   Text(
-                    'John Doe',
-                    style: TextStyle(
+                    chat.senderName,
+                    style: const TextStyle(
                       color: primary1Color,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -60,32 +60,32 @@ class ChatBubble extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 2),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    // extract time from timestamp
+            // Align(
+            //   alignment: Alignment.centerRight,
+            //   child: Row(
+            //     mainAxisSize: MainAxisSize.min,
+            //     mainAxisAlignment: MainAxisAlignment.end,
+            //     children: [
+            //       Text(
+            //         // extract time from timestamp
 
-                    DateFormat.Hm().format(chat.timestamp),
-                    style: TextStyle(
-                      color: isMe ? Colors.white : Colors.grey,
-                      fontSize: 12,
-                    ),
-                  ),
-                  // if (isMe) ...[
-                  //   const SizedBox(width: 8),
-                  //   const Icon(
-                  //     Icons.done_all,
-                  //     color: primary1Color,
-                  //     size: 16,
-                  //   ),
-                  // ]
-                ],
-              ),
-            ),
+            //         DateFormat.Hm().format(chat.timestamp),
+            //         style: TextStyle(
+            //           color: isMe ? Colors.white : Colors.grey,
+            //           fontSize: 12,
+            //         ),
+            //       ),
+            //       // if (isMe) ...[
+            //       //   const SizedBox(width: 8),
+            //       //   const Icon(
+            //       //     Icons.done_all,
+            //       //     color: primary1Color,
+            //       //     size: 16,
+            //       //   ),
+            //       // ]
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),
