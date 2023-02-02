@@ -133,7 +133,7 @@ class _DashboardPageState extends State<DashboardPage> {
           BlocConsumer<DashBloc, DashState>(
             listener: (context, state) {},
             builder: (context, state) {
-              log('Dash State: ${state.status.toString()}}');
+              log('Dash State: ${state.status.toString()}');
               if (state.status == DashStatus.loading) {
                 return const LoadingSection();
               } else if (state.status == DashStatus.success) {

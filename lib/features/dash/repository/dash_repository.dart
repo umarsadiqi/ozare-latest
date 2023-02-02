@@ -17,16 +17,6 @@ class DashRepository {
   Future<List<League>?> getLeagues() async {
     log("************* getLeagues() *************");
     final leagues = await _getLeagues();
-    // retry if leagues is null
-    if (leagues == null || leagues.isEmpty) {
-      // add delay
-      await Future.delayed(const Duration(minutes: 10));
-      return await getLeagues();
-    } else if (leagues.isNotEmpty) {
-      // add delay
-      await Future.delayed(const Duration(seconds: 30));
-      return await getLeagues();
-    }
     return leagues;
   }
 
@@ -39,7 +29,7 @@ class DashRepository {
 
       List<League> parsedLeagues = [];
 
-      log(response.statusCode.toString());
+      log('Response Code: ${response.statusCode}');
 
       if (response.statusCode == 200) {
         final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
@@ -83,7 +73,6 @@ class DashRepository {
           time: (event["Eps"] as String).replaceAll('\'', ''),
         );
         matches.add(match);
-        log(match.toString());
       } catch (e) {}
     }
     return matches;

@@ -14,7 +14,7 @@ class BetTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 1, 1, 1),
+      padding: const EdgeInsets.fromLTRB(16, 1, 1, 1),
       child: Column(
         children: [
           Row(
@@ -23,22 +23,22 @@ class BetTile extends StatelessWidget {
               SizedBox(
                   width: size.width * 0.4,
                   child: Row(
-                    children: const [
+                    children: [
                       // User Avatar
-                      CircleAvatar(
-                        radius: 25,
-                        backgroundColor: primary1Color,
-                        child: CircleAvatar(
-                          radius: 24,
-                          backgroundImage: AssetImage('assets/images/user.png'),
-                        ),
-                      ),
+                      // const CircleAvatar(
+                      //   radius: 21,
+                      //   backgroundColor: primary1Color,
+                      //   child: CircleAvatar(
+                      //     radius: 20,
+                      //     backgroundImage: AssetImage('assets/images/user.png'),
+                      //   ),
+                      // ),
 
                       // User Name
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Text(
-                        'Tomer',
-                        style: TextStyle(
+                        bet.userName,
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 16,
                         ),
@@ -47,10 +47,10 @@ class BetTile extends StatelessWidget {
                   )),
               SizedBox(
                 width: size.width * 0.2,
-                child: const Center(
+                child: Center(
                   child: Text(
-                    "4 TON",
-                    style: TextStyle(
+                    "${bet.tokens} TON",
+                    style: const TextStyle(
                       color: Colors.black,
                     ),
                   ),

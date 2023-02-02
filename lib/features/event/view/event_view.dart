@@ -10,7 +10,7 @@ import 'package:ozare/features/chat/bloc/chat_bloc.dart';
 import 'package:ozare/features/chat/repository/chat_repository.dart';
 import 'package:ozare/features/dash/bloc/dash_bloc.dart';
 import 'package:ozare/features/dash/widgets/event_tile.dart';
-import 'package:ozare/features/event/widgets/bet_dialog.dart';
+import 'package:ozare/features/bet/widgets/bet_dialog.dart';
 import 'package:ozare/main.dart';
 import 'package:ozare/models/event.dart';
 
@@ -53,7 +53,7 @@ class _MatchViewState extends State<EventView> {
           betRepository: getIt<BetRepository>(),
           eventId: widget.eventId,
         )..add(const BetSubscriptionRequested()),
-        child: const BetView(),
+        child: BetView(event: widget.event),
       ),
       const Center(child: Text('Line-Up')),
     ];
@@ -63,31 +63,6 @@ class _MatchViewState extends State<EventView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: GestureDetector(
-        onTap: () {
-          /// show input dialog
-          showDialog(
-            context: context,
-            builder: (context) => BetDialog(
-              event: widget.event,
-            ),
-          );
-        },
-        child: Container(
-          height: 60,
-          width: 60,
-          decoration: const BoxDecoration(
-            gradient: gradient,
-            shape: BoxShape.circle,
-          ),
-          child: const Center(
-            child: Icon(
-              FontAwesome.award,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
       body: Column(
         children: [
           UpperSection(

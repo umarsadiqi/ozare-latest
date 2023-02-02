@@ -92,35 +92,48 @@ class _BetDialogState extends State<BetDialog> {
             ),
             const SizedBox(height: 12),
             const Text(
-              'Enter the amount you want to bet',
+              'Enter the number of tokens you want to bet',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
             ),
             const SizedBox(height: 12),
-            Container(
-              height: 50,
-              width: size.width * 0.6,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Center(
-                child: TextField(
-                  controller: betController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Enter the amount',
-                    hintStyle: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
+            Row(
+              children: [
+                Container(
+                  height: 50,
+                  width: size.width * 0.5,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Center(
+                    child: TextField(
+                      controller: betController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'enter number of tokens',
+                        hintStyle: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  child: Text('x'),
+                ),
+                Image.asset(
+                  'assets/images/token.png',
+                  height: 32,
+                ),
+              ],
             ),
             const Spacer(),
             GestureDetector(
