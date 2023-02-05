@@ -141,7 +141,7 @@ class _DashPageState extends State<DashPage> {
                     if (selectedTab != 0) {
                       context
                           .read<DashBloc>()
-                          .add(const DashCategoryChanged('soccer'));
+                          .add(const DashCategoryChanged(DashCategory.soccer));
                       setState(() {
                         selectedTab = 0;
                       });
@@ -154,9 +154,8 @@ class _DashPageState extends State<DashPage> {
                   label: 'Basketball',
                   onTap: () {
                     if (selectedTab != 1) {
-                      context
-                          .read<DashBloc>()
-                          .add(const DashCategoryChanged('basketball'));
+                      context.read<DashBloc>().add(
+                          const DashCategoryChanged(DashCategory.basketball));
                       setState(() {
                         selectedTab = 1;
                       });
@@ -183,30 +182,31 @@ class _DashPageState extends State<DashPage> {
           BlocConsumer<DashBloc, DashState>(
             listener: (context, state) {},
             builder: (context, state) {
-              log('Dash State: ${state.status.toString()}');
-              if (state.status == DashStatus.loading) {
+              if (state is DashLoading) {
                 return const LoadingSection();
-              } else if (state.status == DashStatus.success) {
-                final List<League> leagues = state.leagues;
-                log('Leagues Length: ${leagues.length.toString()}');
-                if (leagues.isEmpty) {
-                  return const NoEventsTile();
-                }
-                // tpo
-                return Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.only(bottom: 32),
-                    itemCount: leagues.length,
-                    itemBuilder: (context, index) {
-                      final League league = leagues[index];
-                      return Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: LeagueSection(league: league));
-                    },
-                  ),
+              } else if (state is DashFailure) {
+                return Center(
+                  child: Text(state.message),
                 );
               }
-              return const Loader(message: 'Loading...');
+              final List<League> leagues = state.leagues;
+              log('Leagues Length: ${leagues.length.toString()}');
+              if (leagues.isEmpty) {
+                return const NoEventsTile();
+              }
+              // tpo
+              return Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(bottom: 32),
+                  itemCount: leagues.length,
+                  itemBuilder: (context, index) {
+                    final League league = leagues[index];
+                    return Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: LeagueSection(league: league));
+                  },
+                ),
+              );
             },
           ),
         ],

@@ -13,7 +13,7 @@ class DashBloc extends Bloc<DashEvent, DashState> {
   DashBloc({
     required DashRepository dashRepository,
   })  : _dashRepository = dashRepository,
-        super(DashState(status: DashStatus.loading)) {
+        super(const DashLoading()) {
     on<DashLeaguesRequested>(_onDashLeaguesRequested);
     on<DashLeaguesUpdated>(_onDashLeaguesUpdated);
     on<DashLeaguesUpdateRequested>(_onDashLeaguesUpdateRequested);
@@ -27,6 +27,7 @@ class DashBloc extends Bloc<DashEvent, DashState> {
     DashCategoryChanged event,
     Emitter<DashState> emit,
   ) {
+    emit(const DashLoading());
     add(DashLeaguesRequested(event.category));
   }
 
@@ -37,17 +38,19 @@ class DashBloc extends Bloc<DashEvent, DashState> {
   ) async {
     log('DashLeaguesRequested event called!');
     try {
-      emit(DashState(status: DashStatus.loading, leagues: []));
-
-      final leagues = await _dashRepository.getLeagues(event.category);
-      log('leagues: $leagues');
+      final leagues =
+          await _dashRepository.getLeagues(categoryToStr(event.category));
       if (leagues != null) {
-        log('leagues length: ${leagues.length.toString()}');
+        if (event.category == DashCategory.soccer) {
+          emit(DashSoccerState(leagues: leagues));
+        } else if (event.category == DashCategory.basketball) {
+          emit(DashSoccerState(leagues: leagues));
+        }
         add(DashLeaguesUpdated(leagues, event.category));
       }
       //emit(state.copyWith(matches: matches, status: DashStatus.success));
-    } catch (_) {
-      emit(state.copyWith(status: DashStatus.failure));
+    } catch (error) {
+      emit(DashFailure(error.toString()));
     }
   }
 
@@ -56,13 +59,12 @@ class DashBloc extends Bloc<DashEvent, DashState> {
     DashLeaguesUpdated event,
     Emitter<DashState> emit,
   ) async {
-    emit(state.copyWith(leagues: event.leagues, status: DashStatus.success));
     if (event.leagues.isEmpty) {
       // add delay 10 minutes
       await Future.delayed(const Duration(minutes: 10));
     } else if (event.leagues.isNotEmpty) {
       // add delay 30 seconds
-      await Future.delayed(const Duration(seconds: 15));
+      await Future.delayed(const Duration(seconds: 30));
     }
     add(DashLeaguesUpdateRequested(event.leagues, event.category));
   }
@@ -74,13 +76,23 @@ class DashBloc extends Bloc<DashEvent, DashState> {
     Emitter<DashState> emit,
   ) async {
     try {
-      final leagues = await _dashRepository.getLeagues(event.category);
-      log('leagues: $leagues');
+      final leagues =
+          await _dashRepository.getLeagues(categoryToStr(event.category));
       if (leagues != null) {
         add(DashLeaguesUpdated(leagues, event.category));
       } else {}
-    } catch (_) {
-      emit(state.copyWith(status: DashStatus.failure));
+    } catch (error) {
+      emit(DashFailure(error.toString()));
+    }
+  }
+
+  /// helper function
+  String categoryToStr(DashCategory category) {
+    switch (category) {
+      case DashCategory.soccer:
+        return 'soccer';
+      case DashCategory.basketball:
+        return 'basketball';
     }
   }
 }

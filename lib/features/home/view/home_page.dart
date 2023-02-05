@@ -13,7 +13,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    context.read<DashBloc>().add(const DashLeaguesRequested("soccer"));
+    context
+        .read<DashBloc>()
+        .add(const DashLeaguesRequested(DashCategory.soccer));
     super.initState();
   }
 

@@ -1,5 +1,7 @@
 part of 'dash_bloc.dart';
 
+enum DashCategory { soccer, basketball }
+
 @immutable
 abstract class DashEvent extends Equatable {
   const DashEvent();
@@ -9,7 +11,7 @@ abstract class DashEvent extends Equatable {
 }
 
 class DashLeaguesRequested extends DashEvent {
-  final String category;
+  final DashCategory category;
 
   const DashLeaguesRequested(this.category);
 }
@@ -17,7 +19,7 @@ class DashLeaguesRequested extends DashEvent {
 class DashLeaguesUpdated extends DashEvent {
   const DashLeaguesUpdated(this.leagues, this.category);
 
-  final String category;
+  final DashCategory category;
   final List<League> leagues;
 
   @override
@@ -28,16 +30,15 @@ class DashLeaguesUpdateRequested extends DashEvent {
   const DashLeaguesUpdateRequested(this.leagues, this.category);
 
   final List<League> leagues;
-  final String category;
+  final DashCategory category;
   @override
   List<Object> get props => [leagues, category];
 }
 
 class DashCategoryChanged extends DashEvent {
   const DashCategoryChanged(this.category);
-  final String category;
-  final List<League> leagues = const [];
+  final DashCategory category;
 
   @override
-  List<Object> get props => [category, leagues];
+  List<Object> get props => [category];
 }

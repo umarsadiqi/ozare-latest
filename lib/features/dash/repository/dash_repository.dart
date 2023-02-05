@@ -51,7 +51,6 @@ class DashRepository {
       }
       return parsedLeagues;
     } catch (event) {
-      log(event.toString());
       return null;
     }
   }

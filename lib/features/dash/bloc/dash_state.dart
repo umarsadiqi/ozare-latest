@@ -2,28 +2,48 @@ part of 'dash_bloc.dart';
 
 enum DashStatus { loading, success, failure }
 
-enum SportsCategory { soccer, basketball }
-
-class DashState {
+abstract class DashState {
   final List<League> leagues;
-  final DashStatus status;
-  final SportsCategory category;
 
-  DashState({
+  const DashState({
     this.leagues = const [],
-    this.status = DashStatus.loading,
-    this.category = SportsCategory.soccer,
   });
+}
 
-  DashState copyWith({
+class DashLoading extends DashState {
+  const DashLoading();
+
+  List<Object> get props => [];
+}
+
+class DashFailure extends DashState {
+  const DashFailure(this.message);
+
+  final String message;
+
+  List<Object> get props => [];
+}
+
+class DashSoccerState extends DashState {
+  const DashSoccerState({required super.leagues});
+
+  List<Object> get props => [leagues];
+
+  DashSoccerState copyWith({
     List<League>? leagues,
-    DashStatus? status,
-    SportsCategory? category,
   }) {
-    return DashState(
-      leagues: leagues ?? this.leagues,
-      status: status ?? this.status,
-      category: category ?? this.category,
-    );
+    return DashSoccerState(leagues: leagues ?? this.leagues);
+  }
+}
+
+class DashBasketballState extends DashState {
+  const DashBasketballState({required super.leagues});
+
+  List<Object> get props => [leagues];
+
+  DashBasketballState copyWith({
+    List<League>? leagues,
+  }) {
+    return DashBasketballState(leagues: leagues ?? this.leagues);
   }
 }

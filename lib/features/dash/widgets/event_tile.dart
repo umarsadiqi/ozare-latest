@@ -51,7 +51,7 @@ class EventTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 SizedBox(
-                  height: size.height * 0.035,
+                  height: size.height * 0.04,
                   child: AutoSizeText(
                     event.team1,
                     maxLines: 2,
@@ -74,7 +74,7 @@ class EventTile extends StatelessWidget {
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24,
+                  fontSize: 20,
                 ),
               ),
               Text(
@@ -97,7 +97,7 @@ class EventTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 SizedBox(
-                  height: size.height * 0.035,
+                  height: size.height * 0.04,
                   child: AutoSizeText(
                     event.team2,
                     maxLines: 2,
