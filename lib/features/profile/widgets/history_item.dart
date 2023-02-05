@@ -12,7 +12,7 @@ class HistoryItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              width: size.width * 0.25,
+              width: size.width * 0.245,
               child: const Align(
                 alignment: Alignment.centerRight,
                 child: Text(
@@ -43,7 +43,7 @@ class HistoryItem extends StatelessWidget {
             ),
             const SizedBox(width: 6),
             SizedBox(
-              width: size.width * 0.25,
+              width: size.width * 0.245,
               child: const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(

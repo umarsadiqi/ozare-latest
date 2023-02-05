@@ -14,14 +14,16 @@ import 'package:ozare/models/models.dart';
 
 import '../widgets/widgets.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+class DashPage extends StatefulWidget {
+  const DashPage({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  State<DashPage> createState() => _DashPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashPageState extends State<DashPage> {
+  int selectedTab = 0;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -133,21 +135,43 @@ class _DashboardPageState extends State<DashboardPage> {
             child: Row(
               children: [
                 MatchCategoryTabItem(
-                  isActive: true,
+                  isActive: selectedTab == 0,
                   label: 'Soccer',
-                  onTap: () {},
+                  onTap: () {
+                    if (selectedTab != 0) {
+                      context
+                          .read<DashBloc>()
+                          .add(const DashCategoryChanged('soccer'));
+                      setState(() {
+                        selectedTab = 0;
+                      });
+                    }
+                  },
                   icon: FontAwesome5.futbol,
                 ),
                 MatchCategoryTabItem(
-                  isActive: false,
+                  isActive: selectedTab == 1,
                   label: 'Basketball',
-                  onTap: () {},
+                  onTap: () {
+                    if (selectedTab != 1) {
+                      context
+                          .read<DashBloc>()
+                          .add(const DashCategoryChanged('basketball'));
+                      setState(() {
+                        selectedTab = 1;
+                      });
+                    }
+                  },
                   icon: FontAwesome5.basketball_ball,
                 ),
                 MatchCategoryTabItem(
-                  isActive: false,
+                  isActive: selectedTab == 2,
                   label: 'Cricket',
-                  onTap: () {},
+                  onTap: () {
+                    // setState(() {
+                    //   selectedTab = 2;
+                    // });
+                  },
                   icon: Maki.cricket,
                 ),
               ],
@@ -295,21 +319,3 @@ class LeagueSection extends StatelessWidget {
     );
   }
 }
-
-
-
-      // Match List Section
-              // height: size.height * 0.15,
-              // Positioned(
-              //   top: size.height * 0.12,
-              //   left: 0,
-              //   right: 0,
-              //   child: BlocConsumer<MatchBloc, MatchState>(
-              //     listener: (context, state) {
-              //       // TODO: implement listener
-              //     },
-              //     builder: (context, state) {
-              //      
-              //   ),
-              // ),
-        

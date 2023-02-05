@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/chat/models/chat.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

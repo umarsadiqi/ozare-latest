@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/auth/view/auth_page.dart';
 

@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +5,6 @@ import 'package:ozare/common/dialogs/show_snackbar.dart';
 import 'package:ozare/common/utils/utils.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/auth/bloc/auth_bloc.dart';
-import 'package:ozare/features/auth/view/signup_page.dart';
 import 'package:ozare/features/auth/widgets/widgets.dart';
 
 class SigninPage extends StatefulWidget {

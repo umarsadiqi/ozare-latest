@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ozare/common/widgets/heading.dart';
 
 import '../widgets/widgets.dart';
 

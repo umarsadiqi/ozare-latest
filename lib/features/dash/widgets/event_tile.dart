@@ -17,7 +17,7 @@ class EventTile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: const AssetImage(
@@ -47,11 +47,11 @@ class EventTile extends StatelessWidget {
               children: [
                 Image.network(
                   event.logo1,
-                  height: 62,
+                  height: size.height * 0.07,
                 ),
                 const SizedBox(height: 2),
                 SizedBox(
-                  height: 36,
+                  height: size.height * 0.035,
                   child: AutoSizeText(
                     event.team1,
                     maxLines: 2,
@@ -93,11 +93,11 @@ class EventTile extends StatelessWidget {
               children: [
                 Image.network(
                   event.logo2,
-                  height: 62,
+                  height: size.height * 0.07,
                 ),
                 const SizedBox(height: 2),
                 SizedBox(
-                  height: 36,
+                  height: size.height * 0.035,
                   child: AutoSizeText(
                     event.team2,
                     maxLines: 2,

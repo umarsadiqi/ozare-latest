@@ -1,7 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:ozare/common/widgets/oval_clipper.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/bet/bloc/bet_bloc.dart';
@@ -10,7 +9,6 @@ import 'package:ozare/features/chat/bloc/chat_bloc.dart';
 import 'package:ozare/features/chat/repository/chat_repository.dart';
 import 'package:ozare/features/dash/bloc/dash_bloc.dart';
 import 'package:ozare/features/dash/widgets/event_tile.dart';
-import 'package:ozare/features/bet/widgets/bet_dialog.dart';
 import 'package:ozare/main.dart';
 import 'package:ozare/models/event.dart';
 
@@ -141,7 +139,7 @@ class UpperSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: size.height * 0.265,
+      height: size.height * 0.27,
       width: size.width,
       child: Stack(children: [
         Positioned(
@@ -164,6 +162,7 @@ class UpperSection extends StatelessWidget {
           right: 0,
           child: Image.asset(
             'assets/images/pattern.png',
+            fit: BoxFit.cover,
             color: Colors.white.withOpacity(0.11),
             width: size.width,
             height: size.height * 0.3,
@@ -205,13 +204,13 @@ class UpperSection extends StatelessWidget {
         // Match List Section
         // height: size.height * 0.15,
         Positioned(
-          top: size.height * 0.11,
+          top: size.height * 0.12,
           left: 0,
           right: 0,
           child: Container(
-            height: size.height * 0.15,
+            height: size.height * 0.155,
             width: size.width,
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 18),
             child: BlocBuilder<DashBloc, DashState>(
               builder: (context, state) {
                 final event = state.leagues

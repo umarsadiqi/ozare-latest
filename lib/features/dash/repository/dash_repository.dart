@@ -5,7 +5,7 @@ import 'package:ozare/models/models.dart';
 
 class DashRepository {
   final String apiURl =
-      'https://livescore6.p.rapidapi.com/matches/v2/list-live?Category=soccer';
+      'https://livescore6.p.rapidapi.com/matches/v2/list-live?Category=';
   final String liveGamesEndPoint = 'list-live';
   final String logoBaseUrl = 'https://lsm-static-prod.livescore.com/medium/';
 
@@ -14,16 +14,16 @@ class DashRepository {
     'X-RapidAPI-Host': 'livescore6.p.rapidapi.com',
   };
 
-  Future<List<League>?> getLeagues() async {
+  Future<List<League>?> getLeagues(String category) async {
     log("************* getLeagues() *************");
-    final leagues = await _getLeagues();
+    final leagues = await _getLeagues(apiURl + category);
     return leagues;
   }
 
-  Future<List<League>?> _getLeagues() async {
+  Future<List<League>?> _getLeagues(String url) async {
     try {
       final response = await http.get(
-        Uri.parse(apiURl),
+        Uri.parse(url),
         headers: header,
       );
 
