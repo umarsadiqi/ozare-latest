@@ -23,6 +23,13 @@ class DashPage extends StatefulWidget {
 
 class _DashPageState extends State<DashPage> {
   int selectedTab = 0;
+  final searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +42,14 @@ class _DashPageState extends State<DashPage> {
           ///// APP BAR /////
 
           SizedBox(
-            height: size.height * 0.21,
+            height: size.height * 0.22,
             width: size.width,
             child: Stack(children: [
               // Oval Bottom Clipper
               Positioned(
                 top: 0,
                 child: SizedBox(
-                  height: size.height * 0.21,
+                  height: size.height * 0.22,
                   width: size.width,
                   child: ClipPath(
                     clipper: OvalBottomClipper(),
@@ -99,17 +106,27 @@ class _DashPageState extends State<DashPage> {
 
               // SearchBar
               Positioned(
-                top: size.height * 0.115,
+                top: size.height * 0.1225,
                 child: Container(
-                  height: 50,
+                  height: 40,
                   width: size.width,
                   padding: const EdgeInsets.symmetric(horizontal: 28),
                   child: TextField(
                     scrollPadding: const EdgeInsets.only(left: 22),
+                    textInputAction: TextInputAction.search,
+                    cursorColor: Colors.grey[600],
+                    style: TextStyle(
+                      color: Colors.grey[800],
+                      fontSize: 12,
+                    ),
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(left: 22),
-                        hintText: 'Search ...',
-                        fillColor: Colors.white,
+                        hintText: 'search team/player/league',
+                        hintStyle: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey[600],
+                        ),
+                        fillColor: Colors.white.withOpacity(0.9),
                         filled: true,
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(32),
@@ -121,7 +138,11 @@ class _DashPageState extends State<DashPage> {
                             borderSide: const BorderSide(
                               color: primary2Color,
                             )),
-                        suffixIcon: const Icon(Icons.search)),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          size: 20,
+                          color: Colors.grey[800]!,
+                        )),
                   ),
                 ),
               ),
