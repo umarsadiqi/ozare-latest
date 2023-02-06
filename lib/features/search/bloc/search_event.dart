@@ -12,3 +12,12 @@ class SearchRequested extends SearchEvent {
   @override
   List<Object> get props => [query];
 }
+
+class SearchStatusChanged extends SearchEvent {
+  const SearchStatusChanged(this.status);
+
+  final SearchStatus status;
+
+  @override
+  List<Object?> get props => [status];
+}

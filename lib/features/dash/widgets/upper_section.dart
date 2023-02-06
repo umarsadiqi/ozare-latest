@@ -95,53 +95,59 @@ class _UpperSectionState extends State<UpperSection> {
             height: 40,
             width: size.width,
             padding: const EdgeInsets.symmetric(horizontal: 28),
-            child: TextField(
-              scrollPadding: const EdgeInsets.only(left: 22),
-              textInputAction: TextInputAction.search,
-              cursorColor: Colors.grey[600],
-              controller: searchController,
-              style: TextStyle(
-                color: Colors.grey[800],
-                fontSize: 12,
-              ),
-              onSubmitted: (value) {
-                if (searchController.text.isNotEmpty) {
-                  context
-                      .read<SearchBloc>()
-                      .add(SearchRequested(searchController.text));
-                }
-              },
-              onTapOutside: (value) {
-                if (searchController.text.isNotEmpty) {
-                  context
-                      .read<SearchBloc>()
-                      .add(SearchRequested(searchController.text));
-                }
-              },
-              decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(left: 22),
-                  hintText: 'search team/player/league',
-                  hintStyle: TextStyle(
+            child: BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
+                return TextField(
+                  scrollPadding: const EdgeInsets.only(left: 22),
+                  textInputAction: TextInputAction.search,
+                  cursorColor: Colors.grey[600],
+                  controller: searchController,
+                  style: TextStyle(
+                    color: Colors.grey[800],
                     fontSize: 12,
-                    color: Colors.grey[600],
                   ),
-                  fillColor: Colors.white.withOpacity(0.9),
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(32),
-                      borderSide: const BorderSide(
-                        color: primary2Color,
-                      )),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(32),
-                      borderSide: const BorderSide(
-                        color: primary2Color,
-                      )),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    size: 20,
-                    color: Colors.grey[800]!,
-                  )),
+                  onSubmitted: (value) {
+                    if (searchController.text.isNotEmpty) {
+                      context
+                          .read<SearchBloc>()
+                          .add(SearchRequested(searchController.text));
+                    }
+                  },
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(left: 22),
+                    hintText: 'search team/player/league',
+                    hintStyle: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[600],
+                    ),
+                    fillColor: Colors.white.withOpacity(0.9),
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        borderSide: const BorderSide(
+                          color: primary2Color,
+                        )),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        borderSide: const BorderSide(
+                          color: primary2Color,
+                        )),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      size: 20,
+                      color: Colors.grey[800]!,
+                    ),
+                    suffixIcon: state.status == SearchStatus.succeed
+                        ? IconButton(
+                            onPressed: () {
+                              context.read<SearchBloc>().add(
+                                  const SearchStatusChanged(SearchStatus.none));
+                            },
+                            icon: const Icon(Icons.close, color: Colors.grey))
+                        : null,
+                  ),
+                );
+              },
             ),
           ),
         ),

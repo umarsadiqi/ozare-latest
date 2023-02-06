@@ -52,5 +52,5 @@ Future<void> setupDependencies() async {
   getIt.registerSingleton<BetRepository>(
       BetRepository(firestore: getIt<FirebaseFirestore>()));
 
-  getIt.registerSingleton<SearchRepo>(const SearchRepo());
+  getIt.registerSingleton<SearchRepo>(SearchRepo());
 }
