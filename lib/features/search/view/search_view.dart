@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ozare/features/dash/widgets/upper_section.dart';
 import 'package:ozare/features/search/bloc/search_bloc.dart';
 import 'package:ozare/features/search/models/team.dart';
+import 'package:ozare/features/search/widgets/widgets.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({
@@ -55,48 +56,7 @@ class SearchView extends StatelessWidget {
             itemCount: teams.length,
             itemBuilder: (context, index, _) {
               final Team team = teams[index];
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(children: [
-                  Container(
-                    height: 58,
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300], shape: BoxShape.circle),
-                    child: Image.network(team.logo),
-                  ),
-                  const SizedBox(width: 16),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(team.name),
-                      Row(
-                        children: [
-                          Text(
-                            'Country: ',
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 12,
-                            ),
-                          ),
-                          Text(
-                            team.country,
-                            style: TextStyle(
-                              color: Colors.grey[700],
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ]),
-              );
+              return TeamTile(team: team);
             },
             options: CarouselOptions(
               viewportFraction: 0.8,

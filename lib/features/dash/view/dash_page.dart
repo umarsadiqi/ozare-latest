@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/common/widgets/widgets.dart';
 import 'package:ozare/features/dash/view/dash_view.dart';
+import 'package:ozare/features/event/view/event_page.dart';
 import 'package:ozare/features/search/bloc/search_bloc.dart';
 import 'package:ozare/features/search/view/search_view.dart';
 
@@ -30,6 +31,8 @@ class DashPage extends StatelessWidget {
               return SearchView(teams: state.teams, state: state);
             case SearchStatus.failure:
               return const Loader(message: 'failure');
+            // case SearchStatus.match:
+            //   return EventV
           }
         },
       ),

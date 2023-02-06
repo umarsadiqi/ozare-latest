@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ozare/features/search/models/team.dart';
 import 'package:ozare/features/search/repo/search_repo.dart';
+import 'package:ozare/models/event.dart';
 
 part 'search_event.dart';
 part 'search_state.dart';
@@ -13,6 +14,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         super(const SearchState()) {
     on<SearchRequested>(_onSearchRequested);
     on<SearchStatusChanged>(_onSearchStatusChanged);
+    on<SearchTeamMatchRequested>(_onSearchTeamMatchRequested);
   }
 
   final SearchRepo _repo;
@@ -22,9 +24,20 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     SearchStatusChanged event,
     Emitter<SearchState> emit,
   ) {
-    emit(const SearchState(status: SearchStatus.none, query: ''));
+    emit(const SearchState(status: SearchStatus.none, query: '', match: null));
   }
 
+/////
+  Future<void> _onSearchTeamMatchRequested(
+    SearchTeamMatchRequested event,
+    Emitter<SearchState> emit,
+  ) async {
+    emit(state.copyWith(status: SearchStatus.loading));
+    final match = await _repo.getLiveMatchByTeam(event.teamId);
+    emit(state.copyWith(status: SearchStatus.match, match: match));
+  }
+
+////
   Future<void> _onSearchRequested(
     SearchRequested event,
     Emitter<SearchState> emit,

@@ -95,7 +95,7 @@ class SearchRepo {
       }
     } catch (error) {
       log('Error getting match by team id: ${error.toString()}');
-      return null;
     }
+    return null;
   }
 }
