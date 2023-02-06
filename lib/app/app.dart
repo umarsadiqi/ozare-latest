@@ -10,6 +10,8 @@ import 'package:ozare/features/event/repository/event_repository.dart';
 import 'package:ozare/features/home/cubit/home_cubit.dart';
 import 'package:ozare/features/profile/bloc/profile_bloc.dart';
 import 'package:ozare/features/profile/repository/profile_repository.dart';
+import 'package:ozare/features/search/bloc/search_bloc.dart';
+import 'package:ozare/features/search/repo/search_repo.dart';
 import 'package:ozare/features/splash/view/splash_page.dart';
 import 'package:ozare/main.dart';
 
@@ -48,6 +50,11 @@ class App extends StatelessWidget {
             create: (context) => EventBloc(
                   eventRepository: getIt<EventRepository>(),
                 )),
+
+        // Search Bloc
+        BlocProvider<SearchBloc>(
+          create: (context) => SearchBloc(repo: getIt<SearchRepo>()),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

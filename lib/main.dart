@@ -10,6 +10,7 @@ import 'package:ozare/features/chat/repository/chat_repository.dart';
 import 'package:ozare/features/dash/repository/dash_repository.dart';
 import 'package:ozare/features/event/repository/event_repository.dart';
 import 'package:ozare/features/profile/repository/profile_repository.dart';
+import 'package:ozare/features/search/repo/search_repo.dart';
 import 'package:ozare/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,4 +51,6 @@ Future<void> setupDependencies() async {
 
   getIt.registerSingleton<BetRepository>(
       BetRepository(firestore: getIt<FirebaseFirestore>()));
+
+  getIt.registerSingleton<SearchRepo>(const SearchRepo());
 }
