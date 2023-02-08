@@ -33,14 +33,19 @@ Future<void> setupDependencies() async {
   getIt.registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance);
   getIt.registerSingleton<SharedPreferences>(
       await SharedPreferences.getInstance());
+
   getIt.registerSingleton<AuthRepository>(AuthRepository(
       firebaseAuth: FirebaseAuth.instance,
       firestore: FirebaseFirestore.instance));
+
   getIt.registerSingleton<LocalDBRepository>(
       LocalDBRepository(sharedPreferences: getIt<SharedPreferences>()));
+
   getIt.registerSingleton<ProfileRepository>(
       ProfileRepository(firestore: getIt<FirebaseFirestore>()));
+
   getIt.registerSingleton<DashRepository>(DashRepository());
+
   getIt.registerSingleton<EventRepository>(
       EventRepository(firestore: getIt<FirebaseFirestore>()));
 
