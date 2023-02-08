@@ -14,7 +14,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         super(const SearchState()) {
     on<SearchRequested>(_onSearchRequested);
     on<SearchStatusChanged>(_onSearchStatusChanged);
-    on<SearchTeamMatchRequested>(_onSearchTeamMatchRequested);
+    // on<SearchTeamMatchRequested>(_onSearchTeamMatchRequested);
   }
 
   final SearchRepo _repo;
@@ -28,14 +28,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   }
 
 /////
-  Future<void> _onSearchTeamMatchRequested(
-    SearchTeamMatchRequested event,
-    Emitter<SearchState> emit,
-  ) async {
-    emit(state.copyWith(status: SearchStatus.loading));
-    final match = await _repo.getLiveMatchByTeam(event.teamId);
-    emit(state.copyWith(status: SearchStatus.match, match: match));
-  }
+  // Future<void> _onSearchTeamMatchRequested(
+  //   SearchTeamMatchRequested event,
+  //   Emitter<SearchState> emit,
+  // ) async {
+  //   emit(state.copyWith(status: SearchStatus.loading));
+  //   final match = await _repo.getLiveMatchByTeam(event.teamId);
+  //   emit(state.copyWith(status: SearchStatus.match, match: match));
+  // }
 
 ////
   Future<void> _onSearchRequested(

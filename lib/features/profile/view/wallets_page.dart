@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ozare/features/profile/view/add_wallet_page.dart';
 
 import '../widgets/widgets.dart';
 
@@ -6,27 +7,27 @@ final List<Wallet> wallets = [
   Wallet(
     name: 'Coinbase',
     iconPath: 'assets/images/coinbase_logo.png',
-    key: 'Wallet A -  6854787561',
+    key: 'Wallet A',
   ),
   Wallet(
     name: 'Sollet',
     iconPath: 'assets/images/sollet_logo.png',
-    key: 'Wallet B -  6854787561',
+    key: 'Wallet B',
   ),
   Wallet(
     name: 'Solflare',
     iconPath: 'assets/images/solflare_logo.png',
-    key: 'Wallet C -  6854787561',
+    key: 'Wallet C',
   ),
   Wallet(
     name: 'Ambire',
     iconPath: 'assets/images/ambire_logo.png',
-    key: 'Wallet D -  6854787561',
+    key: 'Wallet D',
   ),
   Wallet(
     name: 'Slope',
     iconPath: 'assets/images/slope_logo.png',
-    key: 'Wallet E -  6854787561',
+    key: 'Wallet E',
   ),
 ];
 
@@ -40,7 +41,10 @@ class PaymentsPage extends StatelessWidget {
         AppBarProfileSection.singlePage(
           title: 'Wallets',
           appBarAction: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const AddWallet()));
+            },
             child: const CircleAvatar(
               radius: 20,
               backgroundColor: Colors.white30,

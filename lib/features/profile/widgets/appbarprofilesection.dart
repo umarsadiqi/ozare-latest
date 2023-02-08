@@ -29,7 +29,7 @@ class AppBarProfileSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return SizedBox(
-      height: singlePage ? size.height * 0.115 : size.height * 0.28,
+      height: singlePage ? size.height * 0.125 : size.height * 0.28,
       width: size.width,
       child: Stack(alignment: Alignment.center, children: [
         // App Bar Section

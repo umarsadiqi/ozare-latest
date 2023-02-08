@@ -15,7 +15,7 @@ class TeamTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<SearchBloc>().add(SearchTeamMatchRequested(team.id));
+        // context.read<SearchBloc>().add(SearchTeamMatchRequested(team.id));
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8),

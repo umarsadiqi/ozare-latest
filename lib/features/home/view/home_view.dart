@@ -56,7 +56,7 @@ class HomeView extends StatelessWidget {
                     },
                   ),
                   BottomNavItem(
-                    label: 'Payments',
+                    label: 'Wallets',
                     iconPath: 'assets/icons/wallet.svg',
                     isActive: selectedTab == 1,
                     onTap: () {
