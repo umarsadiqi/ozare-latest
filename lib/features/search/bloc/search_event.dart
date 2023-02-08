@@ -22,11 +22,18 @@ class SearchStatusChanged extends SearchEvent {
   List<Object?> get props => [status];
 }
 
-// class SearchTeamMatchRequested extends SearchEvent {
-//   const SearchTeamMatchRequested(this.teamId);
+class SearchTeamMatchRequested extends SearchEvent {
+  const SearchTeamMatchRequested(this.team);
 
-//   final int teamId;
+  final Team team;
 
-//   @override
-//   List<Object> get props => [teamId];
-// }
+  @override
+  List<Object> get props => [team];
+}
+
+class SearchScheduleBackPressed extends SearchEvent {
+  const SearchScheduleBackPressed();
+
+  @override
+  List<Object> get props => [];
+}

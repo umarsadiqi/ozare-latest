@@ -115,7 +115,7 @@ class _UpperSectionState extends State<UpperSection> {
                   },
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.only(left: 22),
-                    hintText: 'search team/player/league',
+                    hintText: 'search teams',
                     hintStyle: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[600],

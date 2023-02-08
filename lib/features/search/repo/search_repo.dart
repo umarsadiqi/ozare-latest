@@ -32,7 +32,6 @@ class SearchRepo {
         // extract leagues
         for (final response in responses) {
           final teamResponse = response['team'] as Map<String, dynamic>;
-          log('Team Response: ${teamResponse.toString()}');
           try {
             final Team team = Team.fromJson(teamResponse);
             parsedTeams.add(team);
@@ -48,54 +47,64 @@ class SearchRepo {
     }
   }
 
-  Future<Event?> getLiveMatchByTeam(int teamId) async {
+  Future<List<Fixture>> getLiveMatchByTeam(int teamId) async {
+    log('\n\n###################################################');
+    log('Schedule Match for team: $teamId');
+
+    final List<Fixture> fixtures = [];
+
     try {
       final response = await http.get(
           Uri.parse(
-              'https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all&team=$teamId'),
+              'https://api-football-v1.p.rapidapi.com/v3/fixtures?season=2022&team=$teamId'),
           headers: header);
       if (response.statusCode == 200) {
         final responseMap = jsonDecode(response.body) as Map<String, dynamic>;
 
-        if (responseMap['results'] < 1) return null;
+        if (responseMap['results'] < 1) return fixtures;
 
         final responses = responseMap['response'] as List;
-        if (responses.isEmpty) return null;
 
-        final data = responses.first;
+        for (final response in responses) {
+          try {
+            // extract Event Fields
+            final int id = response['fixture']['id'];
 
-        // extract Event Fields
-        final int id = data['fixutre']['id'];
+            final String venueName = response['fixture']['venue']['name'];
+            final String venueCity = response['fixture']['venue']['city'];
+            final String date = response['fixture']['date'];
 
-        final int elapsedTime = data['fixture']['status']['elapsed'];
-        final String team1 = data['teams']['home']['name'];
-        final String logo1 = data['teams']['home']['logo'];
-        final int id1 = data['teams']['home']['id'];
+            final String team1 = response['teams']['home']['name'];
+            final String logo1 = response['teams']['home']['logo'];
+            final int id1 = response['teams']['home']['id'];
 
-        final String team2 = data['teams']['away']['name'];
-        final String logo2 = data['teams']['away']['logo'];
-        final int id2 = data['teams']['away']['id'];
+            final String team2 = response['teams']['away']['name'];
+            final String logo2 = response['teams']['away']['logo'];
+            final int id2 = response['teams']['away']['id'];
 
-        final int score1 = data['goals']['home'];
-        final int score2 = data['goals']['away'];
-
-        // Event Object
-        return Event(
-          id: '$id',
-          id1: '$id1',
-          id2: '$id2',
-          score1: '$score1',
-          score2: '$score2',
-          team1: team1,
-          team2: team2,
-          time: '$elapsedTime',
-          logo1: logo1,
-          logo2: logo2,
-        );
+            fixtures.add(Fixture(
+              id: id,
+              date: date,
+              venueName: venueName,
+              venueCity: venueCity,
+              team1ID: id1,
+              team2ID: id2,
+              team1Name: team1,
+              team2Name: team2,
+              team1Logo: logo1,
+              team2Logo: logo2,
+            ));
+          } catch (e) {
+            log('Error in parsing fixture: $e');
+            continue;
+          }
+        }
       }
     } catch (error) {
       log('Error getting match by team id: ${error.toString()}');
     }
-    return null;
+    log('###################################################\n\n');
+
+    return fixtures;
   }
 }

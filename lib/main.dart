@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ozare/app/app.dart';
-import 'package:ozare/app/app_bloc_observer.dart';
 import 'package:ozare/features/chat/repository/chat_repository.dart';
 import 'package:ozare/features/dash/repository/dash_repository.dart';
 import 'package:ozare/features/event/repository/event_repository.dart';
@@ -27,7 +25,7 @@ void main() async {
 
   await setupDependencies();
 
-  Bloc.observer = AppBlocObserver();
+  // Bloc.observer = AppBlocObserver();
   runApp(const App());
 }
 

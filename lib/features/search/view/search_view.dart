@@ -34,36 +34,17 @@ class SearchView extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 32, right: 24),
-            child: Text(
-              'Teams (${teams.length})',
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey[700],
-                  fontSize: 12),
-            ),
-          ),
-        ),
         const SizedBox(height: 12),
-        SizedBox(
-          height: 72,
-          width: size.width,
-          child: CarouselSlider.builder(
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.fromLTRB(24, 0, 24, 64),
             itemCount: teams.length,
-            itemBuilder: (context, index, _) {
+            itemBuilder: (context, index) {
               final Team team = teams[index];
-              return TeamTile(team: team);
+              return Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: TeamTile(team: team));
             },
-            options: CarouselOptions(
-              viewportFraction: 0.8,
-              enableInfiniteScroll: false,
-              enlargeCenterPage: true,
-              scrollDirection: Axis.horizontal,
-            ),
           ),
         )
       ],
