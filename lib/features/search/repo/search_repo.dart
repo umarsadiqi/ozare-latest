@@ -89,8 +89,6 @@ class SearchRepo {
               continue;
             }
 
-            ///
-
             fixtures.add(Fixture(
               id: id,
               date: date,

@@ -70,7 +70,6 @@ class LeagueSection extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => EventPage(
-                            eventId: event.id,
                             leagueId: league.id,
                             event: event,
                           ),
