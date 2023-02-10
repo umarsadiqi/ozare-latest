@@ -23,22 +23,25 @@ class HomeView extends StatelessWidget {
     // log('hideStatus: ${hideStatus.toString()}');
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      floatingActionButton: showBetButton
-          ? Container(
-              height: 60,
-              width: 60,
-              decoration: const BoxDecoration(
-                gradient: gradient,
-                shape: BoxShape.circle,
-              ),
-              child: const Center(
-                child: Icon(
-                  FontAwesome.award,
-                  color: Colors.white,
-                ),
-              ),
-            )
-          : null,
+      floatingActionButton:
+          // showBetButton
+          //     ?
+          Container(
+        height: 60,
+        width: 60,
+        decoration: const BoxDecoration(
+          gradient: gradient,
+          shape: BoxShape.circle,
+        ),
+        child: const Center(
+          child: Icon(
+            FontAwesome.award,
+            color: Colors.white,
+          ),
+        ),
+      )
+      // : null
+      ,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: !hideStatus
           ? BottomAppBar(
@@ -63,7 +66,7 @@ class HomeView extends StatelessWidget {
                       context.read<HomeCubit>().setTab(1);
                     },
                   ),
-                  if (selectedTab == 0) const Spacer(),
+                  const Spacer(),
                   BottomNavItem(
                     label: 'Notifications',
                     iconPath: 'assets/icons/bell.svg',
