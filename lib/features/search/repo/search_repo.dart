@@ -52,6 +52,7 @@ class SearchRepo {
     log('Schedule Match for team: $teamId');
 
     final List<Fixture> fixtures = [];
+    final currentDate = DateTime.now();
 
     try {
       final response = await http.get(
@@ -81,6 +82,14 @@ class SearchRepo {
             final String team2 = response['teams']['away']['name'];
             final String logo2 = response['teams']['away']['logo'];
             final int id2 = response['teams']['away']['id'];
+
+            ///
+            final d = DateTime.parse(date);
+            if (d.isBefore(currentDate)) {
+              continue;
+            }
+
+            ///
 
             fixtures.add(Fixture(
               id: id,

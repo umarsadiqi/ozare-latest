@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:ozare/features/dash/widgets/upper_section.dart';
 import 'package:ozare/features/search/bloc/search_bloc.dart';
@@ -17,7 +16,6 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Column(
       children: [
         const UpperSection(),
