@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,31 @@ class OnboardPage extends StatefulWidget {
 }
 
 class _OnboardPageState extends State<OnboardPage> {
-  final int _currentPage = 0;
+  int _currentPage = 0;
+
+  final List<OnboardContent> contents = [
+    const OnboardContent(
+      bgImage: 'assets/images/mockup.png',
+      fgImage: 'assets/images/tiles.png',
+      title: 'Transform any text into a bet',
+      subtitle:
+          'Add our telegram bot & transform any verifiable statement into a bet directly from your telegram group chat',
+    ),
+    const OnboardContent(
+      bgImage: 'assets/images/bg2.png',
+      fgImage: 'assets/images/tiles2.png',
+      title: 'Lorem Ipsum',
+      subtitle:
+          'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    ),
+    const OnboardContent(
+      bgImage: 'assets/images/mockup.png',
+      fgImage: 'assets/images/tiles.png',
+      title: 'Lorem Ipsum',
+      subtitle:
+          'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +63,7 @@ class _OnboardPageState extends State<OnboardPage> {
                 top: size.height * 0.15,
                 right: 0,
                 bottom: size.height * 0.1,
-                child: Image.asset('assets/images/mockup.png'),
+                child: Image.asset(contents[_currentPage].bgImage),
               ),
             ),
             Animate(
@@ -54,7 +79,7 @@ class _OnboardPageState extends State<OnboardPage> {
                 left: -30,
                 right: size.width * 0.3,
                 bottom: size.height * 0.1,
-                child: Image.asset('assets/images/tiles.png'),
+                child: Image.asset(contents[_currentPage].fgImage),
               ),
             ),
             Positioned(
@@ -71,17 +96,19 @@ class _OnboardPageState extends State<OnboardPage> {
                     )),
                 child: Column(children: [
                   const Spacer(),
-                  const Text(
-                    "Earn Tokens",
-                    style: TextStyle(
+                  AutoSizeText(
+                    contents[_currentPage].title,
+                    maxFontSize: 24,
+                    minFontSize: 20,
+                    maxLines: 1,
+                    style: const TextStyle(
                       color: Colors.black,
-                      fontSize: 24,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Initiate bets & earn tokens directly from your Telegram group chats',
+                    contents[_currentPage].subtitle,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey[700],
@@ -108,11 +135,15 @@ class _OnboardPageState extends State<OnboardPage> {
                     ],
                     child: CButton(
                       onTap: () {
-                        context
-                            .read<AuthBloc>()
-                            .add(const AuthOnboardingCompleted());
+                        _currentPage == 2
+                            ? context
+                                .read<AuthBloc>()
+                                .add(const AuthOnboardingCompleted())
+                            : setState(() {
+                                _currentPage++;
+                              });
                       },
-                      label: 'Get Started',
+                      label: _currentPage == 2 ? 'Get Started' : 'Next',
                     ),
                   ),
                   const Spacer(),
@@ -138,4 +169,18 @@ class _OnboardPageState extends State<OnboardPage> {
           borderRadius: BorderRadius.circular(16)),
     );
   }
+}
+
+class OnboardContent {
+  const OnboardContent({
+    required this.bgImage,
+    required this.fgImage,
+    required this.title,
+    required this.subtitle,
+  });
+
+  final String bgImage;
+  final String fgImage;
+  final String title;
+  final String subtitle;
 }
