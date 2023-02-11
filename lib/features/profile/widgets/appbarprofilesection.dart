@@ -54,6 +54,7 @@ class AppBarProfileSection extends StatelessWidget {
           right: 0,
           child: Image.asset(
             'assets/images/pattern.png',
+            fit: BoxFit.cover,
             color: Colors.white.withOpacity(0.11),
             width: size.width,
             height: size.height * 0.3,

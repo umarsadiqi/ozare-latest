@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ozare/common/widgets/widgets.dart';
 import 'package:ozare/features/profile/widgets/widgets.dart';
 
+import 'language_view.dart';
+
 class SettingsView extends StatelessWidget {
   const SettingsView({
     super.key,
@@ -44,7 +46,12 @@ class SettingsView extends StatelessWidget {
             ProfileTile(
               label: 'Languages',
               icon: Icons.language_outlined,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LanguageView()));
+              },
             ),
             ProfileTile(
               label: 'Log Out',
