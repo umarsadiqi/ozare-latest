@@ -1,10 +1,19 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:ozare/consts.dart';
-import 'package:ozare/features/auth/widgets/widgets.dart';
+import 'package:ozare/translations/locale_keys.g.dart';
 
-class LanguageView extends StatelessWidget {
+class LanguageView extends StatefulWidget {
   const LanguageView({super.key});
+
+  @override
+  State<LanguageView> createState() => _LanguageViewState();
+}
+
+class _LanguageViewState extends State<LanguageView> {
+  Locale get selectedLocale => context.locale;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +34,7 @@ class LanguageView extends StatelessWidget {
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Phoenix.rebirth(context);
           },
         ),
         centerTitle: true,
@@ -34,43 +43,53 @@ class LanguageView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(children: [
           LanguageTile(
-            label: 'English (US)',
+            label: LocaleKeys.english.tr(),
             code: FlagsCode.US,
-            isActive: true,
-            onTap: () {},
+            isActive: selectedLocale.languageCode == 'en',
+            onTap: () {
+              context.setLocale(const Locale('en'));
+            },
           ),
           LanguageTile(
-            label: 'Russian (RU)',
+            label: LocaleKeys.russian.tr(),
             code: FlagsCode.RU,
-            isActive: false,
-            onTap: () {},
+            isActive: selectedLocale.languageCode == 'ru',
+            onTap: () {
+              context.setLocale(const Locale('ru'));
+            },
           ),
           LanguageTile(
-            label: 'Hindi (IN)',
+            label: LocaleKeys.hindi.tr(),
             code: FlagsCode.IN,
-            isActive: false,
-            onTap: () {},
+            isActive: selectedLocale.languageCode == 'hi',
+            onTap: () {
+              context.setLocale(const Locale('hi'));
+            },
           ),
           LanguageTile(
-            label: 'German (DE)',
+            label: LocaleKeys.german.tr(),
             code: FlagsCode.DE,
-            isActive: false,
-            onTap: () {},
+            isActive: selectedLocale.languageCode == 'de',
+            onTap: () {
+              context.setLocale(const Locale('de'));
+            },
           ),
           LanguageTile(
-            label: 'Portuguese (BR)',
+            label: LocaleKeys.portuguese.tr(),
             code: FlagsCode.BR,
-            isActive: false,
-            onTap: () {},
+            isActive: selectedLocale.languageCode == 'pt',
+            onTap: () {
+              context.setLocale(const Locale('pt'));
+            },
           ),
           LanguageTile(
-            label: 'Indonesian (ID)',
+            label: LocaleKeys.indonesian.tr(),
             code: FlagsCode.ID,
-            isActive: false,
-            onTap: () {},
+            isActive: selectedLocale.languageCode == 'id',
+            onTap: () {
+              context.setLocale(const Locale('id'));
+            },
           ),
-          const SizedBox(height: 24),
-          OButton(onTap: () {}, label: "Save & Continue")
         ]),
       ),
     );
@@ -93,32 +112,35 @@ class LanguageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: isActive ? 12 : 6),
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: isActive ? Colors.grey[200] : null,
-      ),
-      child: Row(children: [
-        Flag.fromCode(code, height: 24, width: 24),
-        const SizedBox(width: 16),
-        Text(
-          label,
-          style: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w500,
-            fontSize: 13,
-          ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.only(top: isActive ? 12 : 6),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: isActive ? Colors.grey[200] : null,
         ),
-        const Spacer(),
-        if (isActive)
-          const Icon(
-            Icons.check,
-            size: 18,
-            color: primary2Color,
+        child: Row(children: [
+          Flag.fromCode(code, height: 24, width: 24),
+          const SizedBox(width: 16),
+          Text(
+            label,
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 13,
+            ),
           ),
-      ]),
+          const Spacer(),
+          if (isActive)
+            const Icon(
+              Icons.check,
+              size: 18,
+              color: primary2Color,
+            ),
+        ]),
+      ),
     );
   }
 }

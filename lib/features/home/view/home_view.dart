@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/home/home.dart';
 import 'package:ozare/features/profile/view/view.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:ozare/translations/locale_keys.g.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -51,7 +54,7 @@ class HomeView extends StatelessWidget {
                 width: size.width,
                 child: Row(children: [
                   BottomNavItem(
-                    label: 'Home',
+                    label: LocaleKeys.home.tr(),
                     iconPath: 'assets/icons/home.svg',
                     isActive: selectedTab == 0,
                     onTap: () {
@@ -59,7 +62,7 @@ class HomeView extends StatelessWidget {
                     },
                   ),
                   BottomNavItem(
-                    label: 'Wallets',
+                    label: LocaleKeys.wallets.tr(),
                     iconPath: 'assets/icons/wallet.svg',
                     isActive: selectedTab == 1,
                     onTap: () {
@@ -68,7 +71,7 @@ class HomeView extends StatelessWidget {
                   ),
                   const Spacer(),
                   BottomNavItem(
-                    label: 'Notifications',
+                    label: LocaleKeys.notifications.tr(),
                     iconPath: 'assets/icons/bell.svg',
                     isActive: selectedTab == 2,
                     onTap: () {
@@ -76,7 +79,7 @@ class HomeView extends StatelessWidget {
                     },
                   ),
                   BottomNavItem(
-                    label: 'Profile',
+                    label: LocaleKeys.profile.tr(),
                     iconPath: 'assets/images/user.png',
                     isActive: selectedTab == 3,
                     isProfile: true,
@@ -138,6 +141,7 @@ class BottomNavItem extends StatelessWidget {
                   ),
                   Text(
                     label,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 11,
@@ -158,14 +162,17 @@ class BottomNavItem extends StatelessWidget {
                     color: isActive ? primary1Color : Colors.grey,
                     height: 28,
                   ),
-                  const SizedBox(height: 2),
-                  Text(
+                  const SizedBox(height: 4),
+                  AutoSizeText(
                     label,
+                    textAlign: TextAlign.center,
+                    maxFontSize: 11,
+                    minFontSize: 8,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
-                      fontSize: 11,
                       color: isActive ? primary1Color : Colors.grey,
                       letterSpacing: 0.2,
+                      height: 1.1,
                     ),
                   ),
                   const SizedBox(height: 4),

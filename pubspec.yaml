@@ -53,6 +53,8 @@ dependencies:
   uuid: ^3.0.7
   collection: ^1.17.0
   flag: ^6.0.0
+  easy_localization: ^3.0.1
+  flutter_phoenix: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +70,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/translations/
 
   fonts:
     - family: Poppins

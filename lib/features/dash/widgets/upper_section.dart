@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ozare/common/widgets/oval_clipper.dart';
 import 'package:ozare/consts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/search/bloc/search_bloc.dart';
+import 'package:ozare/translations/locale_keys.g.dart';
 
 class UpperSection extends StatefulWidget {
   const UpperSection({
@@ -115,7 +117,7 @@ class _UpperSectionState extends State<UpperSection> {
                   },
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.only(left: 22),
-                    hintText: 'search teams',
+                    hintText: LocaleKeys.search_teams.tr(),
                     hintStyle: TextStyle(
                       fontSize: 12,
                       color: Colors.grey[600],

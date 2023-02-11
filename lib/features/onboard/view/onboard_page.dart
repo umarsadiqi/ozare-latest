@@ -1,9 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/auth/bloc/auth_bloc.dart';
+import 'package:ozare/translations/locale_keys.g.dart';
 import '../widgets/widgets.dart';
 
 class OnboardPage extends StatefulWidget {
@@ -17,12 +19,11 @@ class _OnboardPageState extends State<OnboardPage> {
   int _currentPage = 0;
 
   final List<OnboardContent> contents = [
-    const OnboardContent(
+    OnboardContent(
       bgImage: 'assets/images/mockup.png',
       fgImage: 'assets/images/tiles.png',
-      title: 'Transform any text into a bet',
-      subtitle:
-          'Add our telegram bot & transform any verifiable statement into a bet directly from your telegram group chat',
+      title: LocaleKeys.transform_any_test_into_a_bet.tr(),
+      subtitle: LocaleKeys.add_our_telegram_bot.tr(),
     ),
     const OnboardContent(
       bgImage: 'assets/images/bg2.png',
@@ -101,6 +102,7 @@ class _OnboardPageState extends State<OnboardPage> {
                     maxFontSize: 24,
                     minFontSize: 20,
                     maxLines: 1,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
@@ -143,7 +145,9 @@ class _OnboardPageState extends State<OnboardPage> {
                                 _currentPage++;
                               });
                       },
-                      label: _currentPage == 2 ? 'Get Started' : 'Next',
+                      label: _currentPage == 2
+                          ? LocaleKeys.get_started.tr()
+                          : LocaleKeys.next.tr(),
                     ),
                   ),
                   const Spacer(),

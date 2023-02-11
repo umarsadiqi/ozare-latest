@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:ozare/features/auth/bloc/auth_bloc.dart';
 import 'package:ozare/features/auth/repository/auth_repository.dart';
 import 'package:ozare/features/auth/repository/local_db_repository.dart';
@@ -14,6 +15,7 @@ import 'package:ozare/features/search/bloc/search_bloc.dart';
 import 'package:ozare/features/search/repo/search_repo.dart';
 import 'package:ozare/features/splash/view/splash_page.dart';
 import 'package:ozare/main.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -58,6 +60,9 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         theme: ThemeData(
           fontFamily: 'Poppins',
         ),

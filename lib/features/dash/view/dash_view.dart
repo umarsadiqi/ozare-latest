@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
@@ -7,6 +8,7 @@ import 'package:fluttericon/maki_icons.dart';
 import 'package:ozare/features/dash/bloc/dash_bloc.dart';
 import 'package:ozare/features/dash/widgets/widgets.dart';
 import 'package:ozare/models/league.dart';
+import 'package:ozare/translations/locale_keys.g.dart';
 
 class DashView extends StatefulWidget {
   const DashView({
@@ -36,7 +38,7 @@ class _DashViewState extends State<DashView> {
             children: [
               MatchCategoryTabItem(
                 isActive: selectedTab == 0,
-                label: 'Soccer',
+                label: LocaleKeys.soccer.tr(),
                 onTap: () {
                   if (selectedTab != 0) {
                     context
@@ -51,7 +53,7 @@ class _DashViewState extends State<DashView> {
               ),
               MatchCategoryTabItem(
                 isActive: selectedTab == 1,
-                label: 'Basketball',
+                label: LocaleKeys.basketball.tr(),
                 onTap: () {
                   if (selectedTab != 1) {
                     context.read<DashBloc>().add(
@@ -65,7 +67,7 @@ class _DashViewState extends State<DashView> {
               ),
               MatchCategoryTabItem(
                 isActive: selectedTab == 2,
-                label: 'Cricket',
+                label: LocaleKeys.cricket.tr(),
                 onTap: () {
                   // setState(() {
                   //   selectedTab = 2;
