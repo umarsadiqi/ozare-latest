@@ -25,3 +25,9 @@ class ProfileHistoryRequested extends ProfileEvent {
   @override
   List<Object> get props => [];
 }
+
+class ProfileNotificationsRequested extends ProfileEvent {
+  const ProfileNotificationsRequested();
+  @override
+  List<Object> get props => [];
+}

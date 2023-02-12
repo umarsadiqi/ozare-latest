@@ -57,12 +57,16 @@ class _ProfileViewState extends State<ProfileView> {
           Heading(heading: LocaleKeys.notifications.tr()),
           const SizedBox(height: 8),
           Expanded(
-              child: ListView.builder(
-                  padding: const EdgeInsets.only(bottom: 64),
-                  itemCount: 12,
-                  itemBuilder: (context, index) {
-                    return const NotificationTile();
-                  })),
+              child: widget.state.notifications.isEmpty
+                  ? const Center(child: Text('No Notifications'))
+                  : ListView.builder(
+                      padding: const EdgeInsets.only(bottom: 64),
+                      itemCount: widget.state.notifications.length,
+                      itemBuilder: (context, index) {
+                        return NotificationTile(
+                          notification: widget.state.notifications[index],
+                        );
+                      })),
         ],
 
         /// Edit Account

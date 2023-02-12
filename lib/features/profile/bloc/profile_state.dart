@@ -18,6 +18,7 @@ class ProfileState extends Equatable {
     this.user,
     this.message = '',
     this.history = const [],
+    this.notifications = const [],
   });
 
   final ProfileStatus status;
@@ -25,6 +26,7 @@ class ProfileState extends Equatable {
   final OUser? user;
   final String message;
   final List<History> history;
+  final List<Notification> notifications;
 
   ProfileState copyWith({
     ProfileStatus? status,
@@ -32,6 +34,7 @@ class ProfileState extends Equatable {
     OUser? user,
     String? message,
     List<History>? history,
+    List<Notification>? notifications,
   }) {
     return ProfileState(
       status: status ?? this.status,
@@ -39,9 +42,10 @@ class ProfileState extends Equatable {
       user: user ?? this.user,
       message: message ?? this.message,
       history: history ?? this.history,
+      notifications: notifications ?? this.notifications,
     );
   }
 
   @override
-  List<Object> get props => [status, page, message, history];
+  List<Object> get props => [status, page, message, history, notifications];
 }

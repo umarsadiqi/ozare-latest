@@ -17,7 +17,9 @@ class _HomePageState extends State<HomePage> {
     context
         .read<DashBloc>()
         .add(const DashLeaguesRequested(DashCategory.soccer));
-    context.read<ProfileBloc>().add(const ProfileHistoryRequested());
+    context.read<ProfileBloc>()
+      ..add(const ProfileHistoryRequested())
+      ..add(const ProfileNotificationsRequested());
     super.initState();
   }
 
