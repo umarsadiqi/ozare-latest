@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/auth/widgets/input_field.dart';
+import 'package:ozare/features/profile/bloc/profile_bloc.dart';
 import 'package:ozare/features/profile/widgets/widgets.dart';
 import 'package:ozare/common/widgets/widgets.dart';
 import 'package:ozare/models/models.dart';
@@ -46,7 +50,7 @@ class _EditAccountViewState extends State<EditAccountView> {
     super.dispose();
   }
 
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate = DateTime(2000);
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +133,22 @@ class _EditAccountViewState extends State<EditAccountView> {
                 const SizedBox(height: 32),
                 OButton(
                   label: 'Update',
-                  onTap: () {},
+                  onTap: () {
+                    log('Update button tapped');
+                    // Check if the user has changed any data
+
+                    // If the user has changed any data, then update the user
+                    context.read<ProfileBloc>().add(ProfileChanged(
+                            ouser: OUser(
+                          uid: widget.oUser.uid,
+                          email: widget.oUser.email,
+                          firstName: firstNameController.text,
+                          lastName: lastNameController.text,
+                          dob: dobController.text,
+                          phoneNumber: phoneController.text,
+                          gender: int.parse(genderController.text),
+                        )));
+                  },
                 ),
                 SizedBox(height: size.height * 0.2),
               ],
@@ -145,8 +164,8 @@ class _EditAccountViewState extends State<EditAccountView> {
         context: context,
         initialDate: selectedDate,
         initialDatePickerMode: DatePickerMode.day,
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2101));
+        firstDate: DateTime(1950),
+        lastDate: DateTime(2010));
     if (pickedDate != null) {
       setState(() {
         selectedDate = pickedDate;

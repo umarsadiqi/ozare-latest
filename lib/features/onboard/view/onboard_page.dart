@@ -25,20 +25,6 @@ class _OnboardPageState extends State<OnboardPage> {
       title: LocaleKeys.transform_any_test_into_a_bet.tr(),
       subtitle: LocaleKeys.add_our_telegram_bot.tr(),
     ),
-    const OnboardContent(
-      bgImage: 'assets/images/bg2.png',
-      fgImage: 'assets/images/tiles2.png',
-      title: 'Lorem Ipsum',
-      subtitle:
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    ),
-    const OnboardContent(
-      bgImage: 'assets/images/mockup.png',
-      fgImage: 'assets/images/tiles.png',
-      title: 'Lorem Ipsum',
-      subtitle:
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-    ),
   ];
 
   @override
@@ -116,12 +102,12 @@ class _OnboardPageState extends State<OnboardPage> {
                       color: Colors.grey[700],
                     ),
                   ),
-                  const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:
-                        List.generate(3, (index) => buildDot(index: index)),
-                  ),
+                  // const Spacer(),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children:
+                  //       List.generate(3, (index) => buildDot(index: index)),
+                  // ),
                   const Spacer(),
                   Animate(
                     onComplete: (controller) {
@@ -136,19 +122,12 @@ class _OnboardPageState extends State<OnboardPage> {
                       )
                     ],
                     child: CButton(
-                      onTap: () {
-                        _currentPage == 2
-                            ? context
-                                .read<AuthBloc>()
-                                .add(const AuthOnboardingCompleted())
-                            : setState(() {
-                                _currentPage++;
-                              });
-                      },
-                      label: _currentPage == 2
-                          ? LocaleKeys.get_started.tr()
-                          : LocaleKeys.next.tr(),
-                    ),
+                        onTap: () {
+                          context
+                              .read<AuthBloc>()
+                              .add(const AuthOnboardingCompleted());
+                        },
+                        label: LocaleKeys.get_started.tr()),
                   ),
                   const Spacer(),
                 ]),

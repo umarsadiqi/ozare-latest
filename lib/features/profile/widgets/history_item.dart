@@ -35,7 +35,7 @@ class HistoryItem extends StatelessWidget {
             SizedBox(
               width: 24,
               height: 24,
-              child: Image.asset('assets/images/logo1.png'),
+              child: Image.network(history.logo1),
             ),
             const SizedBox(width: 8),
             const Text(
@@ -46,7 +46,7 @@ class HistoryItem extends StatelessWidget {
             SizedBox(
               width: 24,
               height: 24,
-              child: Image.asset('assets/images/logo2.png'),
+              child: Image.network(history.logo2),
             ),
             const SizedBox(width: 6),
             SizedBox(

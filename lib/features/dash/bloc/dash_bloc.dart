@@ -46,7 +46,9 @@ class DashBloc extends Bloc<DashEvent, DashState> {
         } else if (event.category == DashCategory.basketball) {
           emit(DashSoccerState(leagues: leagues));
         }
-        add(DashLeaguesUpdated(leagues, event.category));
+
+        /// TODO: call the DashLeaguesUpdated event to update the leagues
+        // add(DashLeaguesUpdated(leagues, event.category));
       }
       //emit(state.copyWith(matches: matches, status: DashStatus.success));
     } catch (error) {

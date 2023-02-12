@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ozare/features/auth/repository/repository.dart';
 import 'package:ozare/features/profile/repository/profile_repository.dart';
 import 'package:ozare/main.dart';
@@ -22,6 +23,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfileChanged>(_onProfileChanged);
     on<ProfileHistoryRequested>(_onProfileHistoryRequested);
     on<ProfileNotificationsRequested>(_onProfileNotificationsRequested);
+    on<ProfileUpdated>(_onProfileUpdated);
     _ouserSubscription = _profileRepository
         .ouserStream(ouser.uid!)
         .listen((ouser) => add(ProfileChanged(ouser: ouser)));
@@ -56,25 +58,38 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   /// [ProfileHistoryRequested] event handler
-  void _onProfileHistoryRequested(
+  Future<void> _onProfileHistoryRequested(
     ProfileHistoryRequested event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(state.copyWith(status: ProfileStatus.loading));
-    final List<History> history =
-        await _profileRepository.getHistory(ouser.uid!);
-    emit(state.copyWith(history: history, status: ProfileStatus.loaded));
+    /// listen to history stream
+    await emit.forEach(
+      _profileRepository.historyStream(ouser.uid!),
+      onData: (history) => state.copyWith(history: history),
+    );
   }
 
   /// [ProfileNotificationsRequested] event handler
-  void _onProfileNotificationsRequested(
+  Future<void> _onProfileNotificationsRequested(
     ProfileNotificationsRequested event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(state.copyWith(status: ProfileStatus.loading));
-    final List<Notification> notifications =
-        await _profileRepository.getNotifications(ouser.uid!);
-    emit(state.copyWith(
-        notifications: notifications, status: ProfileStatus.loaded));
+    /// listen to notifications stream
+    await emit.forEach(
+      _profileRepository.notificationStream(ouser.uid!),
+      onData: (notifications) => state.copyWith(notifications: notifications),
+    );
+  }
+
+  /// [ProfileUpdated] event handler
+  Future<void> _onProfileUpdated(
+    ProfileUpdated event,
+    Emitter<ProfileState> emit,
+  ) async {
+    log('🧱 ProfileUpdated: ${event.ouser}');
+    // emit(state.copyWith(status: ProfileStatus.loading));
+    //  await _profileRepository.updateProfile(event.ouser);
+    emit(state.copyWith(status: ProfileStatus.loaded));
+    add(const ProfilePageChanged(PPage.profile));
   }
 }

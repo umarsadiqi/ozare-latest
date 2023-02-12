@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:ozare/common/widgets/widgets.dart';
+import 'package:ozare/features/auth/bloc/auth_bloc.dart';
 import 'package:ozare/features/profile/widgets/widgets.dart';
 import 'package:ozare/translations/locale_keys.g.dart';
 
@@ -58,7 +61,10 @@ class SettingsView extends StatelessWidget {
             ProfileTile(
               label: LocaleKeys.log_out.tr(),
               icon: Icons.logout_outlined,
-              onTap: () {},
+              onTap: () {
+                context.read<AuthBloc>().add(const AuthLogoutRequested());
+                Phoenix.rebirth(context);
+              },
             ),
           ]),
           const SizedBox(height: 24),

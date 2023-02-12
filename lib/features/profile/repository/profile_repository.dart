@@ -21,27 +21,34 @@ class ProfileRepository {
         .map((snapshot) => OUser.fromJson(snapshot.data()!));
   }
 
-  /// Get the user's history
-  Future<List<History>> getHistory(String uid) async {
+  /// User's history stream
+  Stream<List<History>> historyStream(String uid) {
     log('Getting user history ...');
-    final snapshot = await _firestore
+    return _firestore
         .collection('users')
         .doc(uid)
         .collection('history')
-        .get();
-    return snapshot.docs.map((doc) => History.fromJson(doc.data())).toList();
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => History.fromJson(doc.data())).toList());
   }
 
-  /// Get the user's notification
-  Future<List<Notification>> getNotifications(String uid) async {
-    log('Getting user notification ...');
-    final snapshot = await _firestore
+  /// User's notifications stream
+  Stream<List<Notification>> notificationStream(String uid) {
+    log('Getting user notifications ...');
+    return _firestore
         .collection('users')
         .doc(uid)
         .collection('notification')
-        .get();
-    return snapshot.docs
-        .map((doc) => Notification.fromJson(doc.data()))
-        .toList();
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => Notification.fromJson(doc.data()))
+            .toList());
+  }
+
+  /// Update the user's profile
+  Future<void> updateProfile(OUser ouser) async {
+    log('Updating user profile ...');
+    await _firestore.collection('users').doc(ouser.uid).update(ouser.toJson());
   }
 }

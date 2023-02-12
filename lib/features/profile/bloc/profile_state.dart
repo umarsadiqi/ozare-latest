@@ -15,7 +15,7 @@ class ProfileState extends Equatable {
   const ProfileState({
     this.status = ProfileStatus.loading,
     this.page = PPage.profile,
-    this.user,
+    this.user = const OUser(uid: null, email: '', firstName: '', lastName: ''),
     this.message = '',
     this.history = const [],
     this.notifications = const [],
@@ -23,7 +23,7 @@ class ProfileState extends Equatable {
 
   final ProfileStatus status;
   final PPage page;
-  final OUser? user;
+  final OUser user;
   final String message;
   final List<History> history;
   final List<Notification> notifications;
@@ -47,5 +47,6 @@ class ProfileState extends Equatable {
   }
 
   @override
-  List<Object> get props => [status, page, message, history, notifications];
+  List<Object> get props =>
+      [status, page, message, history, notifications, user];
 }
