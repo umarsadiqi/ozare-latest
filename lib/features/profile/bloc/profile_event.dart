@@ -19,3 +19,9 @@ class ProfilePageChanged extends ProfileEvent {
   @override
   List<Object> get props => [page];
 }
+
+class ProfileHistoryRequested extends ProfileEvent {
+  const ProfileHistoryRequested();
+  @override
+  List<Object> get props => [];
+}

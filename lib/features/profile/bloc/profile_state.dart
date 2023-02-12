@@ -17,27 +17,31 @@ class ProfileState extends Equatable {
     this.page = PPage.profile,
     this.user,
     this.message = '',
+    this.history = const [],
   });
 
   final ProfileStatus status;
   final PPage page;
   final OUser? user;
   final String message;
+  final List<History> history;
 
   ProfileState copyWith({
     ProfileStatus? status,
     PPage? page,
     OUser? user,
     String? message,
+    List<History>? history,
   }) {
     return ProfileState(
       status: status ?? this.status,
       page: page ?? this.page,
       user: user ?? this.user,
       message: message ?? this.message,
+      history: history ?? this.history,
     );
   }
 
   @override
-  List<Object> get props => [status, page, message];
+  List<Object> get props => [status, page, message, history];
 }

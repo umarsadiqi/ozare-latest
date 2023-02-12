@@ -13,10 +13,12 @@ class ProfileView extends StatefulWidget {
     super.key,
     required this.ouser,
     required this.page,
+    required this.state,
   });
 
   final PPage page;
   final OUser ouser;
+  final ProfileState state;
 
   @override
   State<ProfileView> createState() => _ProfileViewState();
@@ -78,13 +80,17 @@ class _ProfileViewState extends State<ProfileView> {
           Heading(heading: LocaleKeys.recent_history.tr()),
           const SizedBox(height: 8),
           Expanded(
-              child: ListView.builder(
-                  padding:
-                      const EdgeInsets.only(bottom: 64, left: 24, right: 24),
-                  itemCount: 12,
-                  itemBuilder: (context, index) {
-                    return const HistoryItem();
-                  })),
+              child: widget.state.history.isEmpty
+                  ? const Center(child: Text('No History'))
+                  : ListView.builder(
+                      padding: const EdgeInsets.only(
+                          bottom: 64, left: 24, right: 24),
+                      itemCount: widget.state.history.length,
+                      itemBuilder: (context, index) {
+                        return HistoryItem(
+                          history: widget.state.history[index],
+                        );
+                      })),
         ]
       ],
     );
