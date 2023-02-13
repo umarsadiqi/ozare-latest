@@ -58,25 +58,25 @@ class LiveBetsView extends StatelessWidget {
           final List<LiveBet> bets = state.liveBets;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Expanded(
-              child: bets.isEmpty
-                  ? Center(
-                      child: Text(
-                        'No bets yet',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey[900],
-                        ),
+            child: bets.isEmpty
+                ? Center(
+                    child: Text(
+                      'No bets yet',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey[900],
                       ),
-                    )
-                  : ListView.builder(
+                    ),
+                  )
+                : SizedBox.expand(
+                    child: ListView.builder(
                       itemCount: bets.length,
                       itemBuilder: (context, index) => LivebetTile(
                         bet: bets[index],
                       ),
                     ),
-            ),
+                  ),
           );
         },
       ),
@@ -97,6 +97,8 @@ class LivebetTile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Container(
+      height: 120,
+      width: size.width,
       margin: const EdgeInsets.symmetric(vertical: 4),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
