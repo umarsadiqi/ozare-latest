@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ozare/common/widgets/widgets.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/profile/bloc/profile_bloc.dart';
@@ -133,20 +136,9 @@ class AppBarProfileSection extends StatelessWidget {
                       .add(const ProfilePageChanged(PPage.editAccount));
                 },
               ),
-              Container(
-                height: 120,
-                width: 120,
-                margin: const EdgeInsets.symmetric(horizontal: 18),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 4),
-                  color: Colors.white,
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        imageUrl!), // const AssetImage('assets/images/default.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              ProfilePhotoBox(
+                page: page,
+                imageUrl: imageUrl,
               ),
               PButton(
                 label: LocaleKeys.settings.tr(),

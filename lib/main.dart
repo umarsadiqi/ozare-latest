@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get_it/get_it.dart';
@@ -47,6 +48,7 @@ void main() async {
 
 Future<void> setupDependencies() async {
   getIt.registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance);
+  getIt.registerSingleton<FirebaseStorage>(FirebaseStorage.instance);
   getIt.registerSingleton<SharedPreferences>(
       await SharedPreferences.getInstance());
 
@@ -58,7 +60,11 @@ Future<void> setupDependencies() async {
       LocalDBRepository(sharedPreferences: getIt<SharedPreferences>()));
 
   getIt.registerSingleton<ProfileRepository>(
-      ProfileRepository(firestore: getIt<FirebaseFirestore>()));
+    ProfileRepository(
+      firestore: getIt<FirebaseFirestore>(),
+      storage: getIt<FirebaseStorage>(),
+    ),
+  );
 
   getIt.registerSingleton<DashRepository>(DashRepository());
 

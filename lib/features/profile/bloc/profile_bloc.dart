@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:equatable/equatable.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ozare/features/auth/repository/repository.dart';
 import 'package:ozare/features/profile/repository/profile_repository.dart';
 import 'package:ozare/main.dart';
@@ -23,6 +25,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfileHistoryRequested>(_onProfileHistoryRequested);
     on<ProfileNotificationsRequested>(_onProfileNotificationsRequested);
     on<ProfileUpdateRequested>(_onProfileUpdateRequested);
+    on<ProfilePhotoUploadRequested>(_onProfilePhotoUploadRequested);
     _ouserSubscription = _profileRepository
         .ouserStream(ouser.uid!)
         .listen((ouser) => add(ProfileChanged(ouser: ouser)));
@@ -89,5 +92,27 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(state.copyWith(status: ProfileStatus.loading));
     await _profileRepository.updateProfile(event.ouser);
     add(const ProfilePageChanged(PPage.profile));
+  }
+
+  /// [ProfilePhotoUploadRequested] event handler
+  /// Upload the user's profile photo
+  /// and update the user's profile
+  /// with the new photo url
+  Future<void> _onProfilePhotoUploadRequested(
+    ProfilePhotoUploadRequested event,
+    Emitter<ProfileState> emit,
+  ) async {
+    log('🧱 ProfilePhotoUploadRequested');
+    emit(state.copyWith(status: ProfileStatus.loading));
+
+    final String photoUrl = await _profileRepository.uploadPhoto(
+      state.user.uid!,
+      event.imageFile,
+    );
+
+    final OUser ouser = state.user.copyWith(photoURL: photoUrl);
+
+    await _profileRepository.updateProfile(ouser);
+    emit(state.copyWith(user: ouser, status: ProfileStatus.loaded));
   }
 }

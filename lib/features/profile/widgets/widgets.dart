@@ -8,3 +8,4 @@ export 'options_box.dart';
 export 'gender_picker.dart';
 export 'notifications_tile.dart';
 export 'wallet_tile.dart';
+export 'profile_photo_box.dart';

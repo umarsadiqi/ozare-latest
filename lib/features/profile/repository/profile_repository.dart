@@ -1,15 +1,22 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ozare/models/history.dart';
 import 'package:ozare/models/models.dart';
 import 'package:ozare/models/notification.dart';
 
 class ProfileRepository {
   final FirebaseFirestore _firestore;
+  final FirebaseStorage _storage;
 
-  ProfileRepository({required FirebaseFirestore firestore})
-      : _firestore = firestore;
+  ProfileRepository({
+    required FirebaseFirestore firestore,
+    required FirebaseStorage storage,
+  })  : _storage = storage,
+        _firestore = firestore;
 
   /// Get the user's profile
   Stream<OUser> ouserStream(String uid) {
@@ -50,5 +57,13 @@ class ProfileRepository {
   Future<void> updateProfile(OUser ouser) async {
     log('Updating user profile ...');
     await _firestore.collection('users').doc(ouser.uid).update(ouser.toJson());
+  }
+
+  /// Upload the user's profile image to firebase storage
+  Future<String> uploadPhoto(String uid, XFile imageFile) async {
+    log('Uploading user profile image ...');
+    final ref = _storage.ref().child('users/$uid/profile.jpg');
+    await ref.putFile(File(imageFile.path));
+    return ref.getDownloadURL();
   }
 }

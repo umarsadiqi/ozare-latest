@@ -20,8 +20,8 @@ class PButton extends StatelessWidget {
         children: [
           const SizedBox(height: 12),
           Container(
-            height: 42,
-            width: 42,
+            height: 38,
+            width: 38,
             decoration: BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
@@ -37,13 +37,17 @@ class PButton extends StatelessWidget {
               child: Icon(
                 icon,
                 color: Colors.grey[700],
+                size: 20,
               ),
             ),
           ),
           const SizedBox(height: 4),
           Text(
             label,
-            style: TextStyle(color: Colors.grey[700]),
+            style: TextStyle(
+              color: Colors.grey[700],
+              fontSize: 12,
+            ),
           ),
         ],
       ),

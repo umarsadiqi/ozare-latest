@@ -38,3 +38,10 @@ class ProfileUpdateRequested extends ProfileEvent {
   @override
   List<Object> get props => [ouser];
 }
+
+class ProfilePhotoUploadRequested extends ProfileEvent {
+  const ProfilePhotoUploadRequested(this.imageFile);
+  final XFile imageFile;
+  @override
+  List<Object> get props => [imageFile];
+}
