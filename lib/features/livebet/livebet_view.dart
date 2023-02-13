@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
@@ -71,17 +72,132 @@ class LiveBetsView extends StatelessWidget {
                     )
                   : ListView.builder(
                       itemCount: bets.length,
-                      itemBuilder: (context, index) {
-                        final LiveBet bet = bets[index];
-                        return ListTile(
-                          title: Text('${bet.team1} vs ${bet.team2}'),
-                          subtitle: Text('${bet.tokens} Tokens'),
-                        );
-                      },
+                      itemBuilder: (context, index) => LivebetTile(
+                        bet: bets[index],
+                      ),
                     ),
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class LivebetTile extends StatelessWidget {
+  const LivebetTile({
+    super.key,
+    required this.bet,
+  });
+
+  final LiveBet bet;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: const AssetImage(
+            'assets/images/bg.png',
+          ),
+          colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.5), BlendMode.hardLight),
+          fit: BoxFit.cover,
+        ),
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: primary2Color.withOpacity(0.2),
+            blurRadius: 4,
+            offset: const Offset(1, 3),
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: size.width * 0.3,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.network(
+                  bet.logo1,
+                  height: size.height * 0.05,
+                ),
+                const SizedBox(height: 6),
+                SizedBox(
+                  height: size.height * 0.04,
+                  child: AutoSizeText(
+                    bet.team1,
+                    maxLines: 2,
+                    maxFontSize: 14,
+                    minFontSize: 10,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '${bet.score1} : ${bet.score2}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                '${bet.tokens} Tokens',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            width: size.width * 0.3,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.network(
+                  bet.logo2,
+                  height: size.height * 0.05,
+                ),
+                const SizedBox(height: 2),
+                SizedBox(
+                  height: size.height * 0.04,
+                  child: AutoSizeText(
+                    bet.team2,
+                    maxLines: 2,
+                    maxFontSize: 14,
+                    minFontSize: 10,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
