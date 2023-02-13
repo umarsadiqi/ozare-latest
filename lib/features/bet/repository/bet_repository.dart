@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ozare/features/bet/models/bet.dart';
+import 'package:ozare/features/bet/models/userbet.dart';
 import 'package:ozare/models/history.dart';
 import 'package:ozare/models/notification.dart';
 
@@ -18,6 +19,7 @@ class BetRepository {
     required Bet bet,
     required History history,
     required Notification notification,
+    required Userbet userbet,
   }) async {
     log('BetRepository: createBet: $eventId');
 
@@ -44,6 +46,14 @@ class BetRepository {
         .collection('notification')
         .doc()
         .set(notification.toJson());
+
+    // add userbet to user
+    // await _firestore
+    //     .collection('users')
+    //     .doc(bet.userId)
+    //     .collection('bets')
+    //     .doc(userbet.id)
+    //     .set(userbet.toJson());
   }
 
   // Get all bets in current event

@@ -80,9 +80,8 @@ class EventTile extends StatelessWidget {
                   ),
                 ),
               Text(
-                event.score1 != ''
-                    ? '${event.time}`'
-                    : DateFormat.yMd().format(DateTime.parse(event.time)),
+                '${event.time}`',
+                textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14,

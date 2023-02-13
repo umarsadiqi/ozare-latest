@@ -16,6 +16,9 @@ class ScheduleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final d = DateTime.parse(fixture.date);
+    final dt =
+        '${d.hour}:${d.minute.toString().padRight(2, '0')}\n${d.day}-${d.month}-${d.year}';
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -32,7 +35,7 @@ class ScheduleTile extends StatelessWidget {
                 logo2: fixture.team2Logo,
                 score1: '',
                 score2: '',
-                time: DateTime.parse(fixture.date).toString(),
+                time: dt,
               ),
               leagueId: null,
             ),
@@ -97,9 +100,9 @@ class ScheduleTile extends StatelessWidget {
                 SizedBox(
                   width: 64,
                   child: AutoSizeText(
-                    DateTime.parse(fixture.date).toString(),
+                    dt,
                     textAlign: TextAlign.center,
-                    maxLines: 1,
+                    maxLines: 2,
                     maxFontSize: 12,
                     minFontSize: 10,
                     style: const TextStyle(

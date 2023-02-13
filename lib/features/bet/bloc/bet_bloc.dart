@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ozare/features/bet/models/bet.dart';
+import 'package:ozare/features/bet/models/userbet.dart';
 import 'package:ozare/features/bet/repository/bet_repository.dart';
 import 'package:collection/collection.dart';
 import 'package:ozare/models/history.dart';
@@ -59,6 +60,11 @@ class BetBloc extends Bloc<BetEvent, BetState> {
               'You have created a bet for ${event.event.team1} vs ${event.event.team2}',
           type: 'Bet',
           date: DateTime.now().toIso8601String(),
+        ),
+        userbet: Userbet(
+          id: const Uuid().v4(),
+          bet: event.bet,
+          event: event.event,
         ),
       );
       emit(state.copyWith(

@@ -53,8 +53,8 @@ class ProfilePhotoBox extends StatelessWidget {
                 );
               },
               child: Container(
-                height: 38,
-                width: 38,
+                height: 42,
+                width: 42,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
@@ -69,7 +69,7 @@ class ProfilePhotoBox extends StatelessWidget {
                     ]),
                 child: Icon(
                   Icons.photo_camera_outlined,
-                  size: 18,
+                  size: 22,
                   color: Colors.grey[800]!,
                 ),
               ),
