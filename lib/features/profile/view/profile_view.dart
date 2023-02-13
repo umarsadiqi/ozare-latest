@@ -31,6 +31,7 @@ class _ProfileViewState extends State<ProfileView> {
       children: [
         AppBarProfileSection(
           page: widget.page,
+          imageUrl: widget.ouser.photoURL,
         ),
 
         // Name
@@ -44,9 +45,9 @@ class _ProfileViewState extends State<ProfileView> {
 
         /// wins and losses
         if (widget.page != PPage.editAccount) ...[
-          const WinOrLosses(
-            wins: 200,
-            losses: 32,
+          WinOrLosses(
+            wins: widget.ouser.wins,
+            losses: widget.ouser.losses,
           ),
           const SizedBox(height: 24),
         ],

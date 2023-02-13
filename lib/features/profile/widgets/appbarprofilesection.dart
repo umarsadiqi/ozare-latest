@@ -11,6 +11,7 @@ class AppBarProfileSection extends StatelessWidget {
   const AppBarProfileSection({
     super.key,
     required this.page,
+    required this.imageUrl,
   })  : title = '',
         singlePage = false,
         appBarAction = null;
@@ -20,10 +21,12 @@ class AppBarProfileSection extends StatelessWidget {
     required this.title,
     this.appBarAction,
   })  : singlePage = true,
-        page = PPage.profile;
+        page = PPage.profile,
+        imageUrl = null;
 
   final PPage page;
   final String title;
+  final String? imageUrl;
   final bool singlePage;
   final Widget? appBarAction;
 
@@ -138,8 +141,9 @@ class AppBarProfileSection extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.white, width: 4),
                   color: Colors.white,
-                  image: const DecorationImage(
-                    image: AssetImage('assets/images/default.jpg'),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        imageUrl!), // const AssetImage('assets/images/default.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),

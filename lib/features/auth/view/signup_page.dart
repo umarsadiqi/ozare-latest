@@ -133,6 +133,7 @@ class _SignupPageState extends State<SignupPage> {
                             email: emailController.text,
                             firstName: firstNameController.text,
                             lastName: lastNameController.text,
+                            photoURL: defaultProfileUrl,
                           ),
                           password: passwordController.text,
                         ));

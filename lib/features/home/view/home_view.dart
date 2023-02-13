@@ -6,6 +6,7 @@ import 'package:ozare/consts.dart';
 import 'package:ozare/features/dash/view/dash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/home/home.dart';
+import 'package:ozare/features/profile/bloc/profile_bloc.dart';
 import 'package:ozare/features/profile/view/view.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -78,13 +79,17 @@ class HomeView extends StatelessWidget {
                       context.read<HomeCubit>().setTab(2);
                     },
                   ),
-                  BottomNavItem(
-                    label: LocaleKeys.profile.tr(),
-                    iconPath: 'assets/images/user.png',
-                    isActive: selectedTab == 3,
-                    isProfile: true,
-                    onTap: () {
-                      context.read<HomeCubit>().setTab(3);
+                  BlocBuilder<ProfileBloc, ProfileState>(
+                    builder: (context, state) {
+                      return BottomNavItem(
+                        label: LocaleKeys.profile.tr(),
+                        iconPath: state.user.photoURL!,
+                        isActive: selectedTab == 3,
+                        isProfile: true,
+                        onTap: () {
+                          context.read<HomeCubit>().setTab(3);
+                        },
+                      );
                     },
                   ),
                 ]),
@@ -136,7 +141,7 @@ class BottomNavItem extends StatelessWidget {
                     color: isActive ? primary1Color : Colors.grey,
                     child: CircleAvatar(
                       radius: 13,
-                      backgroundImage: AssetImage(iconPath),
+                      backgroundImage: NetworkImage(iconPath),
                     ),
                   ),
                   Text(

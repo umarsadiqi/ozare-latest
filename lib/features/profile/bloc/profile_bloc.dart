@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ozare/features/auth/repository/repository.dart';
 import 'package:ozare/features/profile/repository/profile_repository.dart';
 import 'package:ozare/main.dart';
@@ -23,7 +22,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfileChanged>(_onProfileChanged);
     on<ProfileHistoryRequested>(_onProfileHistoryRequested);
     on<ProfileNotificationsRequested>(_onProfileNotificationsRequested);
-    on<ProfileUpdated>(_onProfileUpdated);
+    on<ProfileUpdateRequested>(_onProfileUpdateRequested);
     _ouserSubscription = _profileRepository
         .ouserStream(ouser.uid!)
         .listen((ouser) => add(ProfileChanged(ouser: ouser)));
@@ -82,14 +81,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   /// [ProfileUpdated] event handler
-  Future<void> _onProfileUpdated(
-    ProfileUpdated event,
+  Future<void> _onProfileUpdateRequested(
+    ProfileUpdateRequested event,
     Emitter<ProfileState> emit,
   ) async {
     log('🧱 ProfileUpdated: ${event.ouser}');
-    // emit(state.copyWith(status: ProfileStatus.loading));
-    //  await _profileRepository.updateProfile(event.ouser);
-    emit(state.copyWith(status: ProfileStatus.loaded));
+    emit(state.copyWith(status: ProfileStatus.loading));
+    await _profileRepository.updateProfile(event.ouser);
     add(const ProfilePageChanged(PPage.profile));
   }
 }

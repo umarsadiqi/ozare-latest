@@ -138,8 +138,9 @@ class _EditAccountViewState extends State<EditAccountView> {
                     // Check if the user has changed any data
 
                     // If the user has changed any data, then update the user
-                    context.read<ProfileBloc>().add(ProfileChanged(
-                            ouser: OUser(
+                    context
+                        .read<ProfileBloc>()
+                        .add(ProfileUpdateRequested(OUser(
                           uid: widget.oUser.uid,
                           email: widget.oUser.email,
                           firstName: firstNameController.text,

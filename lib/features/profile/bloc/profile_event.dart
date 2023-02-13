@@ -32,8 +32,8 @@ class ProfileNotificationsRequested extends ProfileEvent {
   List<Object> get props => [];
 }
 
-class ProfileUpdated extends ProfileEvent {
-  const ProfileUpdated(this.ouser);
+class ProfileUpdateRequested extends ProfileEvent {
+  const ProfileUpdateRequested(this.ouser);
   final OUser ouser;
   @override
   List<Object> get props => [ouser];
