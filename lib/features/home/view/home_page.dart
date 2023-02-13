@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ozare/features/dash/bloc/dash_bloc.dart';
 import 'package:ozare/features/home/view/home_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ozare/features/livebet/bloc/livebet_bloc.dart';
 import 'package:ozare/features/profile/bloc/profile_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> {
     context.read<ProfileBloc>()
       ..add(const ProfileHistoryRequested())
       ..add(const ProfileNotificationsRequested());
+    context.read<LivebetBloc>().add(const LiveBetsRequested());
     super.initState();
   }
 

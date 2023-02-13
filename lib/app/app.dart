@@ -9,6 +9,8 @@ import 'package:ozare/features/dash/repository/dash_repository.dart';
 import 'package:ozare/features/event/bloc/event_bloc.dart';
 import 'package:ozare/features/event/repository/event_repository.dart';
 import 'package:ozare/features/home/cubit/home_cubit.dart';
+import 'package:ozare/features/livebet/bloc/livebet_bloc.dart';
+import 'package:ozare/features/livebet/livebet_repo.dart';
 import 'package:ozare/features/profile/bloc/profile_bloc.dart';
 import 'package:ozare/features/profile/repository/profile_repository.dart';
 import 'package:ozare/features/search/bloc/search_bloc.dart';
@@ -56,6 +58,11 @@ class App extends StatelessWidget {
         // Search Bloc
         BlocProvider<SearchBloc>(
           create: (context) => SearchBloc(repo: getIt<SearchRepo>()),
+        ),
+
+        // Live Bet Bloc
+        BlocProvider<LivebetBloc>(
+          create: (context) => LivebetBloc(repo: getIt<LiveBetRepo>()),
         ),
       ],
       child: MaterialApp(

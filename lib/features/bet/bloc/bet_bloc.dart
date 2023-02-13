@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ozare/features/bet/models/bet.dart';
-import 'package:ozare/features/bet/models/userbet.dart';
 import 'package:ozare/features/bet/repository/bet_repository.dart';
 import 'package:collection/collection.dart';
 import 'package:ozare/models/history.dart';
+import 'package:ozare/models/livebet.dart';
 import 'package:ozare/models/models.dart';
 import 'package:ozare/models/notification.dart';
 import 'package:uuid/uuid.dart';
@@ -61,10 +61,18 @@ class BetBloc extends Bloc<BetEvent, BetState> {
           type: 'Bet',
           date: DateTime.now().toIso8601String(),
         ),
-        userbet: Userbet(
+        liveBet: LiveBet(
           id: const Uuid().v4(),
-          bet: event.bet,
-          event: event.event,
+          tokens: event.bet.tokens,
+          status: event.bet.status,
+          team1: event.event.team1,
+          team2: event.event.team2,
+          score1: event.event.score1,
+          score2: event.event.score2,
+          logo1: event.event.logo1,
+          logo2: event.event.logo2,
+          eventId: eventId,
+          time: event.event.time,
         ),
       );
       emit(state.copyWith(

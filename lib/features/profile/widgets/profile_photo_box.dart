@@ -140,8 +140,8 @@ class _ProfilePhotoDialogState extends State<ProfilePhotoDialog> {
                 child: GestureDetector(
                   onTap: _pickImage,
                   child: Container(
-                    height: 38,
-                    width: 38,
+                    height: 42,
+                    width: 42,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,

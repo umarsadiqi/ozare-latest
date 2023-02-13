@@ -9,6 +9,7 @@ import 'package:ozare/app/app.dart';
 import 'package:ozare/features/chat/repository/chat_repository.dart';
 import 'package:ozare/features/dash/repository/dash_repository.dart';
 import 'package:ozare/features/event/repository/event_repository.dart';
+import 'package:ozare/features/livebet/livebet_repo.dart';
 import 'package:ozare/features/profile/repository/profile_repository.dart';
 import 'package:ozare/features/search/repo/search_repo.dart';
 import 'package:ozare/firebase_options.dart';
@@ -66,7 +67,9 @@ Future<void> setupDependencies() async {
     ),
   );
 
-  getIt.registerSingleton<DashRepository>(DashRepository());
+  getIt.registerSingleton<DashRepository>(DashRepository(
+    firestore: getIt<FirebaseFirestore>(),
+  ));
 
   getIt.registerSingleton<EventRepository>(
       EventRepository(firestore: getIt<FirebaseFirestore>()));
@@ -78,4 +81,8 @@ Future<void> setupDependencies() async {
       BetRepository(firestore: getIt<FirebaseFirestore>()));
 
   getIt.registerSingleton<SearchRepo>(SearchRepo());
+
+  getIt.registerSingleton<LiveBetRepo>(
+    LiveBetRepo(firestore: getIt<FirebaseFirestore>()),
+  );
 }

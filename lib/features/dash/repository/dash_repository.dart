@@ -1,9 +1,17 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
+import 'package:ozare/models/livebet.dart';
 import 'dart:convert';
 import 'package:ozare/models/models.dart';
 
 class DashRepository {
+  DashRepository({
+    required FirebaseFirestore firestore,
+  }) : _firestore = firestore;
+
+  final FirebaseFirestore _firestore;
+
   final String apiURl =
       'https://livescore6.p.rapidapi.com/matches/v2/list-live?Category=';
   final String liveGamesEndPoint = 'list-live';
@@ -75,5 +83,18 @@ class DashRepository {
       } catch (e) {}
     }
     return matches;
+  }
+
+  /// Get Stream of User's LiveBets
+  Stream<List<LiveBet>> liveBetStream(String userId) {
+    log('DashRepository: liveBetStream: $userId');
+    return _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('bets')
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) => LiveBet.fromJson(doc.data())).toList();
+    });
   }
 }

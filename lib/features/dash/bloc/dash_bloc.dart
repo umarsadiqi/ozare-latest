@@ -3,8 +3,10 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ozare/features/auth/repository/repository.dart';
 import 'package:ozare/features/dash/repository/dash_repository.dart';
-import 'package:ozare/models/league.dart';
+import 'package:ozare/main.dart';
+import 'package:ozare/models/models.dart';
 
 part 'dash_event.dart';
 part 'dash_state.dart';
@@ -42,7 +44,9 @@ class DashBloc extends Bloc<DashEvent, DashState> {
           await _dashRepository.getLeagues(categoryToStr(event.category));
       if (leagues != null) {
         if (event.category == DashCategory.soccer) {
-          emit(DashSoccerState(leagues: leagues));
+          emit(DashSoccerState(
+            leagues: leagues,
+          ));
         } else if (event.category == DashCategory.basketball) {
           emit(DashSoccerState(leagues: leagues));
         }

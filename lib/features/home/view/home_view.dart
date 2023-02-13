@@ -6,6 +6,7 @@ import 'package:ozare/consts.dart';
 import 'package:ozare/features/dash/view/dash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/home/home.dart';
+import 'package:ozare/features/livebet/livebet_view.dart';
 import 'package:ozare/features/profile/bloc/profile_bloc.dart';
 import 'package:ozare/features/profile/view/view.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
@@ -27,25 +28,33 @@ class HomeView extends StatelessWidget {
     // log('hideStatus: ${hideStatus.toString()}');
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      floatingActionButton:
-          // showBetButton
-          //     ?
-          Container(
-        height: 60,
-        width: 60,
-        decoration: const BoxDecoration(
-          gradient: gradient,
-          shape: BoxShape.circle,
-        ),
-        child: const Center(
-          child: Icon(
-            FontAwesome.award,
-            color: Colors.white,
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LiveBetsView(),
+            ),
+          );
+        },
+        child: Container(
+          height: 60,
+          width: 60,
+          decoration: const BoxDecoration(
+            gradient: gradient,
+            shape: BoxShape.circle,
+          ),
+          child: const Center(
+            child: Hero(
+              tag: 'trophy',
+              child: Icon(
+                FontAwesome.award,
+                color: Colors.white,
+              ),
+            ),
           ),
         ),
-      )
-      // : null
-      ,
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: !hideStatus
           ? BottomAppBar(
