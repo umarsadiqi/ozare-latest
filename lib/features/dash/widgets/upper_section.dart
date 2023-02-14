@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:ozare/common/widgets/oval_clipper.dart';
 import 'package:ozare/consts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,8 +73,12 @@ class _UpperSectionState extends State<UpperSection> {
                 CircleAvatar(
                   radius: 20,
                   backgroundColor: Colors.white30,
-                  child: Icon(Icons.menu, color: Colors.white),
+                  child: Icon(
+                    FontAwesome.award,
+                    color: Colors.white,
+                  ),
                 ),
+
                 Text(
                   'Ozare',
                   style: TextStyle(
@@ -82,17 +87,19 @@ class _UpperSectionState extends State<UpperSection> {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white30,
-                  child: Icon(Icons.more_vert, color: Colors.white),
-                ),
+                SizedBox(width: 32),
+
+                // CircleAvatar(
+                //   radius: 20,
+                //   backgroundColor: Colors.white30,
+                //   child: Icon(Icons.more_vert, color: Colors.white),
+                // ),
               ],
             )),
 
         // SearchBar
         Positioned(
-          top: size.height * 0.1225,
+          top: size.height * 0.125,
           child: Container(
             height: 40,
             width: size.width,

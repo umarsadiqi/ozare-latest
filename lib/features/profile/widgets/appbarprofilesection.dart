@@ -1,8 +1,6 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:ozare/common/widgets/widgets.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/profile/bloc/profile_bloc.dart';
@@ -76,12 +74,12 @@ class AppBarProfileSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (page == PPage.profile || singlePage)
-                  GestureDetector(
-                    onTap: () {},
-                    child: const CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.white30,
-                      child: Icon(Icons.menu, color: Colors.white),
+                  const CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.white30,
+                    child: Icon(
+                      FontAwesome.award,
+                      color: Colors.white,
                     ),
                   ),
                 if (page != PPage.profile)
