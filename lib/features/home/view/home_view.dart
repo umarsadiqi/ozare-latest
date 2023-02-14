@@ -40,17 +40,15 @@ class HomeView extends StatelessWidget {
         child: Container(
           height: 60,
           width: 60,
+          padding: const EdgeInsets.all(10),
           decoration: const BoxDecoration(
             gradient: gradient,
             shape: BoxShape.circle,
           ),
-          child: const Center(
+          child: Center(
             child: Hero(
               tag: 'trophy',
-              child: Icon(
-                FontAwesome.award,
-                color: Colors.white,
-              ),
+              child: Image.asset('assets/images/logo.png'),
             ),
           ),
         ),
