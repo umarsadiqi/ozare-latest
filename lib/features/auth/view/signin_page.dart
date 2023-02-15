@@ -144,7 +144,12 @@ class _SigninPageState extends State<SigninPage> {
                   children: [
                     Expanded(
                         child: OButton.icon(
-                            onTap: () {}, iconPath: 'assets/icons/google.svg')),
+                            onTap: () {
+                              context.read<AuthBloc>().add(
+                                    const AuthGoogleLoginRequested(),
+                                  );
+                            },
+                            iconPath: 'assets/icons/google.svg')),
                     const SizedBox(width: 16),
                     Expanded(
                         child: OButton.icon(

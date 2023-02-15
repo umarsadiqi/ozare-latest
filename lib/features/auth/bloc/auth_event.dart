@@ -53,3 +53,7 @@ class AuthOnboardingCompleted extends AuthEvent {
 class AuthLoginPageRequested extends AuthEvent {
   const AuthLoginPageRequested();
 }
+
+class AuthGoogleLoginRequested extends AuthEvent {
+  const AuthGoogleLoginRequested();
+}

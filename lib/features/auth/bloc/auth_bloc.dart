@@ -26,6 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthSignupPageRequested>(_onAuthSignupPageRequestedToState);
     on<AuthLoginPageRequested>(_onAuthLoginPageRequestedToState);
     on<AuthLogoutRequested>(_onAuthLogoutRequested);
+    on<AuthGoogleLoginRequested>(_onAuthGoogleLoginRequested);
   }
 
   final AuthRepository _authRepository;
@@ -153,5 +154,33 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     log("🧱 AuthLoginPageRequested event handler called ...");
     emit(const AuthInitial());
+  }
+
+  /// [AuthGoogleLoginRequested] event handler
+  Future<void> _onAuthGoogleLoginRequested(
+    AuthGoogleLoginRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    log("🧱 AuthGoogleLoginRequested event handler called ...");
+    emit(const AuthLoading(message: 'Logging in ...'));
+    try {
+      final OUser ouser = await _authRepository.signInWithGoogle();
+      await _localDBRepository.saveOwner(ouser);
+
+      emit(AuthLogedIn(ouser: ouser));
+    } on FirebaseAuthException catch (e) {
+      switch (e.toString()) {
+        case "user-not-found":
+          emit(const AuthFailure(message: "No user found for that email."));
+          break;
+        case "wrong-password":
+          emit(const AuthFailure(
+              message: "Wrong password provided for that user."));
+          break;
+        default:
+          emit(AuthFailure(message: e.toString()));
+      }
+      emit(const AuthInitial());
+    }
   }
 }

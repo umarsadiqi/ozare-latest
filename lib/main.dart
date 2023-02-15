@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ozare/app/app.dart';
 import 'package:ozare/features/chat/repository/chat_repository.dart';
 import 'package:ozare/features/dash/repository/dash_repository.dart';
@@ -54,8 +55,10 @@ Future<void> setupDependencies() async {
       await SharedPreferences.getInstance());
 
   getIt.registerSingleton<AuthRepository>(AuthRepository(
-      firebaseAuth: FirebaseAuth.instance,
-      firestore: FirebaseFirestore.instance));
+    firebaseAuth: FirebaseAuth.instance,
+    firestore: FirebaseFirestore.instance,
+    googleSignIn: GoogleSignIn(),
+  ));
 
   getIt.registerSingleton<LocalDBRepository>(
       LocalDBRepository(sharedPreferences: getIt<SharedPreferences>()));
