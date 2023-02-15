@@ -31,10 +31,10 @@ class _DashViewState extends State<DashView> {
         const UpperSection(),
 
         /// Match Categories
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
+        Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MatchCategoryTabItem(
                 isActive: selectedTab == 0,
@@ -65,16 +65,16 @@ class _DashViewState extends State<DashView> {
                 },
                 icon: FontAwesome5.basketball_ball,
               ),
-              MatchCategoryTabItem(
-                isActive: selectedTab == 2,
-                label: LocaleKeys.cricket.tr(),
-                onTap: () {
-                  // setState(() {
-                  //   selectedTab = 2;
-                  // });
-                },
-                icon: Maki.cricket,
-              ),
+              // MatchCategoryTabItem(
+              //   isActive: selectedTab == 2,
+              //   label: LocaleKeys.cricket.tr(),
+              //   onTap: () {
+              //     // setState(() {
+              //     //   selectedTab = 2;
+              //     // });
+              //   },
+              //   icon: Maki.cricket,
+              // ),
             ],
           ),
         ),

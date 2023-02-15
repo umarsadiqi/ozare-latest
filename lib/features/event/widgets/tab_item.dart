@@ -19,7 +19,7 @@ class TabItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 34,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: isActive
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(32),

@@ -36,7 +36,6 @@ class _MatchViewState extends State<EventView> {
   @override
   void initState() {
     _tabs = [
-      const Center(child: Text('Info')),
       BlocProvider(
         create: (context) => ChatBloc(
           chatRepository: getIt<ChatRepository>(),
@@ -51,7 +50,6 @@ class _MatchViewState extends State<EventView> {
         )..add(const BetSubscriptionRequested()),
         child: BetView(event: widget.event),
       ),
-      const Center(child: Text('Line-Up')),
     ];
     super.initState();
   }
@@ -70,11 +68,11 @@ class _MatchViewState extends State<EventView> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TabItem(
                   isActive: selectedTab == 0,
-                  label: 'Info',
+                  label: 'Chat',
                   onTap: () {
                     setState(() {
                       selectedTab = 0;
@@ -83,28 +81,10 @@ class _MatchViewState extends State<EventView> {
                 ),
                 TabItem(
                   isActive: selectedTab == 1,
-                  label: 'Chat',
+                  label: 'Bets',
                   onTap: () {
                     setState(() {
                       selectedTab = 1;
-                    });
-                  },
-                ),
-                TabItem(
-                  isActive: selectedTab == 2,
-                  label: 'Place a Bet',
-                  onTap: () {
-                    setState(() {
-                      selectedTab = 2;
-                    });
-                  },
-                ),
-                TabItem(
-                  isActive: selectedTab == 3,
-                  label: 'Line-Up',
-                  onTap: () {
-                    setState(() {
-                      selectedTab = 3;
                     });
                   },
                 ),
