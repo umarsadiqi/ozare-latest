@@ -17,8 +17,6 @@ class DashBloc extends Bloc<DashEvent, DashState> {
   })  : _dashRepository = dashRepository,
         super(const DashLoading()) {
     on<DashLeaguesRequested>(_onDashLeaguesRequested);
-    on<DashLeaguesUpdated>(_onDashLeaguesUpdated);
-    on<DashLeaguesUpdateRequested>(_onDashLeaguesUpdateRequested);
     on<DashCategoryChanged>(_onDashCategoryChanged);
   }
 
@@ -40,9 +38,9 @@ class DashBloc extends Bloc<DashEvent, DashState> {
   ) async {
     log('DashLeaguesRequested event called!');
     try {
-      final leagues =
-          await _dashRepository.getLeagues(categoryToStr(event.category));
-      if (leagues != null) {
+      while (true) {
+        final leagues =
+            await _dashRepository.getLeagues(categoryToStr(event.category));
         if (event.category == DashCategory.soccer) {
           emit(DashSoccerState(
             leagues: leagues,
@@ -51,42 +49,8 @@ class DashBloc extends Bloc<DashEvent, DashState> {
           emit(DashSoccerState(leagues: leagues));
         }
 
-        /// TODO: call the DashLeaguesUpdated event to update the leagues
-        // add(DashLeaguesUpdated(leagues, event.category));
+        await Future<void>.delayed(const Duration(seconds: 60));
       }
-      //emit(state.copyWith(matches: matches, status: DashStatus.success));
-    } catch (error) {
-      emit(DashFailure(error.toString()));
-    }
-  }
-
-  /// This method is called when the DashLeaguesUpdated event is added.
-  void _onDashLeaguesUpdated(
-    DashLeaguesUpdated event,
-    Emitter<DashState> emit,
-  ) async {
-    // if (event.leagues.isEmpty) {
-    //   // add delay 10 minutes
-    //   await Future.delayed(const Duration(minutes: 10));
-    // } else if (event.leagues.isNotEmpty) {
-    //   // add delay 30 seconds
-    //   await Future.delayed(const Duration(seconds: 30));
-    // }
-    add(DashLeaguesUpdateRequested(event.leagues, event.category));
-  }
-
-  /// ]
-  /// This method is called when the DashLeaguesUpdateRequested event is added.
-  void _onDashLeaguesUpdateRequested(
-    DashLeaguesUpdateRequested event,
-    Emitter<DashState> emit,
-  ) async {
-    try {
-      final leagues =
-          await _dashRepository.getLeagues(categoryToStr(event.category));
-      if (leagues != null) {
-        add(DashLeaguesUpdated(leagues, event.category));
-      } else {}
     } catch (error) {
       emit(DashFailure(error.toString()));
     }

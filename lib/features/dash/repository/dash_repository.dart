@@ -22,20 +22,20 @@ class DashRepository {
     'X-RapidAPI-Host': 'livescore6.p.rapidapi.com',
   };
 
-  Future<List<League>?> getLeagues(String category) async {
+  Future<List<League>> getLeagues(String category) async {
     log("************* getLeagues() *************");
     final leagues = await _getLeagues(apiURl + category);
     return leagues;
   }
 
-  Future<List<League>?> _getLeagues(String url) async {
+  Future<List<League>> _getLeagues(String url) async {
+    List<League> parsedLeagues = [];
+
     try {
       final response = await http.get(
         Uri.parse(url),
         headers: header,
       );
-
-      List<League> parsedLeagues = [];
 
       log('Response Code: ${response.statusCode}');
 
@@ -59,7 +59,8 @@ class DashRepository {
       }
       return parsedLeagues;
     } catch (event) {
-      return null;
+      log('Error: $event');
+      return parsedLeagues;
     }
   }
 
