@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ozare/features/dash/bloc/dash_bloc.dart';
+import 'package:ozare/features/dash/bloc/soccer_bloc.dart';
 import 'package:ozare/features/home/view/home_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/livebet/bloc/livebet_bloc.dart';
@@ -15,9 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    context
-        .read<DashBloc>()
-        .add(const DashLeaguesRequested(DashCategory.soccer));
+    context.read<SoccerBloc>().add(const SoccerLeaguesRequested());
     context.read<ProfileBloc>()
       ..add(const ProfileHistoryRequested())
       ..add(const ProfileNotificationsRequested());

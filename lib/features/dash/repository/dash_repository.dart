@@ -23,7 +23,7 @@ class DashRepository {
   };
 
   Future<List<League>> getLeagues(String category) async {
-    log("************* getLeagues() *************");
+    log("************* getLeagues($category) *************");
     final leagues = await _getLeagues(apiURl + category);
     return leagues;
   }

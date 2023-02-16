@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:ozare/features/auth/bloc/auth_bloc.dart';
 import 'package:ozare/features/auth/repository/auth_repository.dart';
 import 'package:ozare/features/auth/repository/local_db_repository.dart';
-import 'package:ozare/features/dash/bloc/dash_bloc.dart';
+import 'package:ozare/features/dash/bloc/basket_bloc.dart';
+import 'package:ozare/features/dash/bloc/soccer_bloc.dart';
 import 'package:ozare/features/dash/repository/dash_repository.dart';
 import 'package:ozare/features/event/bloc/event_bloc.dart';
 import 'package:ozare/features/event/repository/event_repository.dart';
@@ -37,9 +37,15 @@ class App extends StatelessWidget {
         /// Home Cubit
         BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
 
-        /// Dash Bloc
-        BlocProvider<DashBloc>(
-            create: (context) => DashBloc(
+        /// Soccer Bloc
+        BlocProvider<SoccerBloc>(
+            create: (context) => SoccerBloc(
+                  dashRepository: getIt<DashRepository>(),
+                )),
+
+        /// Basketball Bloc
+        BlocProvider<BasketBloc>(
+            create: (context) => BasketBloc(
                   dashRepository: getIt<DashRepository>(),
                 )),
 

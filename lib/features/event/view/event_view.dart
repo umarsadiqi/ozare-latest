@@ -7,7 +7,6 @@ import 'package:ozare/features/bet/bloc/bet_bloc.dart';
 import 'package:ozare/features/bet/repository/bet_repository.dart';
 import 'package:ozare/features/chat/bloc/chat_bloc.dart';
 import 'package:ozare/features/chat/repository/chat_repository.dart';
-import 'package:ozare/features/dash/bloc/dash_bloc.dart';
 import 'package:ozare/features/dash/widgets/event_tile.dart';
 import 'package:ozare/main.dart';
 import 'package:ozare/models/event.dart';
@@ -186,25 +185,29 @@ class UpperSection extends StatelessWidget {
           left: 0,
           right: 0,
           child: Container(
-            height: size.height * 0.155,
-            width: size.width,
-            padding: const EdgeInsets.symmetric(horizontal: 18),
-            child: leagueId == null
-                ? EventTile(event: event)
-                : BlocBuilder<DashBloc, DashState>(
-                    builder: (context, state) {
-                      final updatedEvent = state.leagues
-                          .firstWhere(
-                            (league) => league.id == leagueId!,
-                          )
-                          .events
-                          .firstWhere((e) => e.id == event.id);
-                      return EventTile(
-                        event: updatedEvent,
-                      );
-                    },
-                  ),
-          ),
+              height: size.height * 0.155,
+              width: size.width,
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child:
+
+                  /// TODO: Remove commented code
+                  // leagueId == null
+                  //     ?
+                  EventTile(event: event)
+              // : BlocBuilder<DashBloc, DashState>(
+              //     builder: (context, state) {
+              //       final updatedEvent = state.leagues
+              //           .firstWhere(
+              //             (league) => league.id == leagueId!,
+              //           )
+              //           .events
+              //           .firstWhere((e) => e.id == event.id);
+              //       return EventTile(
+              //         event: updatedEvent,
+              //       );
+              //     },
+              //   ),
+              ),
         ),
       ]),
     );
