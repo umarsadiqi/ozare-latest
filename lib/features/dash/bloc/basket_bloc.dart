@@ -25,13 +25,17 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     try {
       emit(state.copyWith(status: BasketStatus.loading, message: 'Loading...'));
       while (true) {
-        final leagues = await _dashRepository.getLeagues('basket');
+        final leagues = await _dashRepository.getLeagues('basketball');
         emit(BasketState(
             leagues: leagues,
             status: BasketStatus.success,
             message: 'success'));
 
-        await Future<void>.delayed(const Duration(seconds: 5));
+        if (leagues.isEmpty) {
+          await Future<void>.delayed(const Duration(minutes: 5));
+        } else {
+          await Future<void>.delayed(const Duration(seconds: 60));
+        }
       }
     } catch (error) {
       log(error.toString());

@@ -64,14 +64,19 @@ class _SplashPageState extends State<SplashPage> {
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                    child: Animate(effects: const [
-                      ShakeEffect(
-                        duration: Duration(
-                          milliseconds: 500,
-                        ),
-                        delay: Duration(milliseconds: 500),
-                      )
-                    ], child: Image.asset('assets/images/logo.png')),
+                    child: Animate(
+                        effects: const [
+                          ShakeEffect(
+                            duration: Duration(
+                              milliseconds: 500,
+                            ),
+                            delay: Duration(milliseconds: 500),
+                          )
+                        ],
+                        child: Image.asset(
+                          'assets/images/logo.png',
+                          height: size.width * 0.4,
+                        )),
                   ),
                 ),
                 const SizedBox(height: 32),

@@ -33,7 +33,11 @@ class SoccerBloc extends Bloc<SoccerEvent, SoccerState> {
             status: SoccerStatus.success,
             message: 'success'));
 
-        await Future<void>.delayed(const Duration(seconds: 5));
+        if (leagues.isEmpty) {
+          await Future<void>.delayed(const Duration(minutes: 5));
+        } else {
+          await Future<void>.delayed(const Duration(seconds: 60));
+        }
       }
     } catch (error) {
       log(error.toString());
