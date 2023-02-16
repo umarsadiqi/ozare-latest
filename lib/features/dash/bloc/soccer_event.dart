@@ -13,3 +13,10 @@ class SoccerLeaguesRequested extends SoccerEvent {
   @override
   List<Object> get props => [];
 }
+
+class SoccerToggleLive extends SoccerEvent {
+  const SoccerToggleLive();
+
+  @override
+  List<Object> get props => [];
+}

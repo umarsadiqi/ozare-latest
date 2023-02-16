@@ -12,9 +12,11 @@ class LeagueSection extends StatelessWidget {
   const LeagueSection({
     super.key,
     required this.league,
+    required this.category,
   });
 
   final League league;
+  final String category;
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +65,10 @@ class LeagueSection extends StatelessWidget {
 
                 return GestureDetector(
                     onTap: () {
-                      context
-                          .read<EventBloc>()
-                          .add(EventInitializedRequested(event: event));
+                      context.read<EventBloc>()
+                        ..add(EventInitializedRequested(event: event))
+                        ..add(EventLiveRequested(
+                            event: event, category: category));
                       Navigator.push(
                         context,
                         MaterialPageRoute(

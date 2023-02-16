@@ -12,6 +12,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
   })  : _dashRepository = dashRepository,
         super(const BasketState(leagues: [])) {
     on<BasketLeaguesRequested>(_onBasketLeaguesRequested);
+    on<BasketToggleLive>(_onBasketToggleLive);
   }
 
   final DashRepository _dashRepository;
@@ -27,10 +28,13 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
       while (true) {
         final leagues = await _dashRepository.getLeagues('basketball');
         emit(BasketState(
-            leagues: leagues,
-            status: BasketStatus.success,
-            message: 'success'));
+          leagues: leagues,
+          status: BasketStatus.success,
+          message: 'success',
+          isLive: true,
+        ));
 
+        if (!state.isLive) break;
         if (leagues.isEmpty) {
           await Future<void>.delayed(const Duration(minutes: 5));
         } else {
@@ -42,5 +46,14 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
       emit(state.copyWith(
           status: BasketStatus.failure, message: error.toString()));
     }
+  }
+
+  /// Event handler for BasketToggleLive
+  void _onBasketToggleLive(
+    BasketToggleLive event,
+    Emitter<BasketState> emit,
+  ) {
+    log('DashBasketToggleLive event called!');
+    emit(state.copyWith(isLive: !state.isLive));
   }
 }

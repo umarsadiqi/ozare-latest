@@ -13,3 +13,10 @@ class BasketLeaguesRequested extends BasketEvent {
   @override
   List<Object> get props => [];
 }
+
+class BasketToggleLive extends BasketEvent {
+  const BasketToggleLive();
+
+  @override
+  List<Object> get props => [];
+}

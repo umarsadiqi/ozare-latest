@@ -47,6 +47,8 @@ class _DashViewState extends State<DashView> {
                 label: LocaleKeys.soccer.tr(),
                 onTap: () {
                   if (selectedTab == 0) return;
+                  context.read<BasketBloc>().add(const BasketToggleLive());
+
                   context
                       .read<SoccerBloc>()
                       .add(const SoccerLeaguesRequested());
@@ -61,6 +63,7 @@ class _DashViewState extends State<DashView> {
                 label: LocaleKeys.basketball.tr(),
                 onTap: () {
                   if (selectedTab == 1) return;
+                  context.read<SoccerBloc>().add(const SoccerToggleLive());
                   context
                       .read<BasketBloc>()
                       .add(const BasketLeaguesRequested());

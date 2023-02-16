@@ -14,6 +14,7 @@ class SoccerBloc extends Bloc<SoccerEvent, SoccerState> {
   })  : _dashRepository = dashRepository,
         super(const SoccerState(leagues: [])) {
     on<SoccerLeaguesRequested>(_onSoccerLeaguesRequested);
+    on<SoccerToggleLive>(_onSoccerToggleLive);
   }
 
   final DashRepository _dashRepository;
@@ -28,15 +29,23 @@ class SoccerBloc extends Bloc<SoccerEvent, SoccerState> {
       emit(state.copyWith(status: SoccerStatus.loading, message: 'Loading...'));
       while (true) {
         final leagues = await _dashRepository.getLeagues('soccer');
-        emit(SoccerState(
+        emit(
+          SoccerState(
             leagues: leagues,
             status: SoccerStatus.success,
-            message: 'success'));
+            message: 'success',
+            isLive: true,
+          ),
+        );
 
-        if (leagues.isEmpty) {
-          await Future<void>.delayed(const Duration(minutes: 5));
+        if (state.isLive) {
+          if (leagues.isEmpty) {
+            await Future<void>.delayed(const Duration(minutes: 5));
+          } else {
+            await Future<void>.delayed(const Duration(seconds: 60));
+          }
         } else {
-          await Future<void>.delayed(const Duration(seconds: 60));
+          break;
         }
       }
     } catch (error) {
@@ -44,5 +53,14 @@ class SoccerBloc extends Bloc<SoccerEvent, SoccerState> {
       emit(state.copyWith(
           status: SoccerStatus.failure, message: error.toString()));
     }
+  }
+
+  /// Event handler for SoccerToggleLive
+  void _onSoccerToggleLive(
+    SoccerToggleLive event,
+    Emitter<SoccerState> emit,
+  ) async {
+    log('DashSoccerToggleLive event called!');
+    emit(state.copyWith(isLive: !state.isLive));
   }
 }

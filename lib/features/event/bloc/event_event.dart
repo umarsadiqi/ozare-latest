@@ -24,3 +24,23 @@ class EventBetRequested extends EventEvent {
   @override
   List<Object> get props => [event];
 }
+
+class EventLiveRequested extends EventEvent {
+  final Event event;
+  final String category;
+
+  const EventLiveRequested({
+    required this.event,
+    required this.category,
+  });
+
+  @override
+  List<Object> get props => [event, category];
+}
+
+class EventToggleLive extends EventEvent {
+  const EventToggleLive();
+
+  @override
+  List<Object> get props => [];
+}

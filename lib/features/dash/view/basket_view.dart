@@ -37,7 +37,10 @@ class BasketView extends StatelessWidget {
                     final League league = leagues[index];
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12),
-                      child: LeagueSection(league: league),
+                      child: LeagueSection(
+                        league: league,
+                        category: 'basketball',
+                      ),
                     );
                   },
                 ),
