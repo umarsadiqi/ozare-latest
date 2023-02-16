@@ -17,6 +17,7 @@ class Event with _$Event {
     required String time,
     required String logo1,
     required String logo2,
+    required String category,
   }) = _Event;
 
   factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);

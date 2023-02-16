@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ozare/features/auth/repository/repository.dart';
 import 'package:ozare/features/profile/repository/profile_repository.dart';
 import 'package:ozare/main.dart';
-import 'package:ozare/models/history.dart';
 import 'package:ozare/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/models/notification.dart';

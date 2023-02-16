@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
-import 'package:ozare/models/livebet.dart';
 import 'dart:convert';
 import 'package:ozare/models/models.dart';
 
@@ -24,11 +23,11 @@ class DashRepository {
 
   Future<List<League>> getLeagues(String category) async {
     log("************* getLeagues($category) *************");
-    final leagues = await _getLeagues(apiURl + category);
+    final leagues = await _getLeagues(apiURl + category, category);
     return leagues;
   }
 
-  Future<List<League>> _getLeagues(String url) async {
+  Future<List<League>> _getLeagues(String url, String category) async {
     List<League> parsedLeagues = [];
 
     try {
@@ -46,7 +45,7 @@ class DashRepository {
         // extract leagues
         for (final l in leagues) {
           final events = l['Events'];
-          final List<Event> parsedEvents = await _parseEvents(events);
+          final List<Event> parsedEvents = await _parseEvents(events, category);
           if (parsedEvents.isEmpty) continue;
           var league = League(
             id: l['Sid'] ?? '',
@@ -64,12 +63,13 @@ class DashRepository {
     }
   }
 
-  _parseEvents(List<dynamic> events) {
+  _parseEvents(List<dynamic> events, String category) {
     final List<Event> matches = [];
     for (final event in events) {
       try {
         final match = Event(
           id: event['Eid'] as String,
+          category: category,
           team1: event['T1'][0]['Nm'] as String,
           team2: event['T2'][0]['Nm'] as String,
           id1: event['T1'][0]['ID'] as String,
@@ -86,8 +86,8 @@ class DashRepository {
     return matches;
   }
 
-  /// Get Stream of User's LiveBets
-  Stream<List<LiveBet>> liveBetStream(String userId) {
+  /// Get Stream of User's Bets
+  Stream<List<Bet>> liveBetStream(String userId) {
     log('DashRepository: liveBetStream: $userId');
     return _firestore
         .collection('users')
@@ -95,7 +95,7 @@ class DashRepository {
         .collection('bets')
         .snapshots()
         .map((snapshot) {
-      return snapshot.docs.map((doc) => LiveBet.fromJson(doc.data())).toList();
+      return snapshot.docs.map((doc) => Bet.fromJson(doc.data())).toList();
     });
   }
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/bet/bloc/bet_bloc.dart';
-import 'package:ozare/features/bet/models/bet.dart';
 import 'package:ozare/features/profile/bloc/profile_bloc.dart';
 import 'package:ozare/models/models.dart';
 import 'package:uuid/uuid.dart';
@@ -142,17 +141,21 @@ class _BetDialogState extends State<BetDialog> {
                 context.read<BetBloc>().add(
                       BetCreated(
                         Bet(
+                          yourTeam: selectedTeam,
                           id: const Uuid().v4(),
-                          userId: user!.uid!,
+                          userId: user.uid!,
                           userName: user.firstName,
-                          status: 'Pending',
                           tokens: betController.text,
-                          result: 'Pending',
                           createdAt: DateTime.now().toUtc(),
-                          betTeamId: selectedTeam == 0
-                              ? widget.event.id1
-                              : widget.event.id2,
                           eventId: widget.event.id,
+                          team1: widget.event.team1,
+                          team2: widget.event.team2,
+                          logo1: widget.event.logo1,
+                          logo2: widget.event.logo2,
+                          score1: widget.event.score1,
+                          score2: widget.event.score2,
+                          category: widget.event.category,
+                          time: widget.event.time,
                         ),
                         widget.event,
                       ),

@@ -17,6 +17,7 @@ _$_Event _$$_EventFromJson(Map<String, dynamic> json) => _$_Event(
       time: json['time'] as String,
       logo1: json['logo1'] as String,
       logo2: json['logo2'] as String,
+      category: json['category'] as String,
     );
 
 Map<String, dynamic> _$$_EventToJson(_$_Event instance) => <String, dynamic>{
@@ -30,4 +31,5 @@ Map<String, dynamic> _$$_EventToJson(_$_Event instance) => <String, dynamic>{
       'time': instance.time,
       'logo1': instance.logo1,
       'logo2': instance.logo2,
+      'category': instance.category,
     };

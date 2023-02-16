@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/livebet/bloc/livebet_bloc.dart';
-import 'package:ozare/models/livebet.dart';
+import 'package:ozare/models/bet.dart';
 
 class LiveBetsView extends StatelessWidget {
   const LiveBetsView({super.key});
@@ -55,7 +55,7 @@ class LiveBetsView extends StatelessWidget {
       ),
       body: BlocBuilder<LivebetBloc, LiveBetState>(
         builder: (context, state) {
-          final List<LiveBet> bets = state.liveBets;
+          final List<Bet> bets = state.liveBets;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: bets.isEmpty
@@ -90,7 +90,7 @@ class LivebetTile extends StatelessWidget {
     required this.bet,
   });
 
-  final LiveBet bet;
+  final Bet bet;
 
   @override
   Widget build(BuildContext context) {

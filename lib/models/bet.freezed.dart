@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'livebet.dart';
+part of 'bet.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,16 +14,21 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-LiveBet _$LiveBetFromJson(Map<String, dynamic> json) {
-  return _LiveBet.fromJson(json);
+Bet _$BetFromJson(Map<String, dynamic> json) {
+  return _Bet.fromJson(json);
 }
 
 /// @nodoc
-mixin _$LiveBet {
+mixin _$Bet {
   String get id => throw _privateConstructorUsedError;
   String get eventId => throw _privateConstructorUsedError;
+
+  /// userId to show bets in specific event
+  String get userId => throw _privateConstructorUsedError;
+
+  /// userName to show bets in specific event
+  String get userName => throw _privateConstructorUsedError;
   String get tokens => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
   String get score1 => throw _privateConstructorUsedError;
   String get score2 => throw _privateConstructorUsedError;
   String get team1 => throw _privateConstructorUsedError;
@@ -31,35 +36,49 @@ mixin _$LiveBet {
   String get time => throw _privateConstructorUsedError;
   String get logo1 => throw _privateConstructorUsedError;
   String get logo2 => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+
+  /// 0 for team1, 1 for team2
+  int get yourTeam => throw _privateConstructorUsedError;
+
+  /// 0 for team1, 1 for team2, -1 for pending
+  int get won => throw _privateConstructorUsedError;
+
+  /// Sport category: soccer, basketball
+  String get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LiveBetCopyWith<LiveBet> get copyWith => throw _privateConstructorUsedError;
+  $BetCopyWith<Bet> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LiveBetCopyWith<$Res> {
-  factory $LiveBetCopyWith(LiveBet value, $Res Function(LiveBet) then) =
-      _$LiveBetCopyWithImpl<$Res, LiveBet>;
+abstract class $BetCopyWith<$Res> {
+  factory $BetCopyWith(Bet value, $Res Function(Bet) then) =
+      _$BetCopyWithImpl<$Res, Bet>;
   @useResult
   $Res call(
       {String id,
       String eventId,
+      String userId,
+      String userName,
       String tokens,
-      String status,
       String score1,
       String score2,
       String team1,
       String team2,
       String time,
       String logo1,
-      String logo2});
+      String logo2,
+      DateTime createdAt,
+      int yourTeam,
+      int won,
+      String category});
 }
 
 /// @nodoc
-class _$LiveBetCopyWithImpl<$Res, $Val extends LiveBet>
-    implements $LiveBetCopyWith<$Res> {
-  _$LiveBetCopyWithImpl(this._value, this._then);
+class _$BetCopyWithImpl<$Res, $Val extends Bet> implements $BetCopyWith<$Res> {
+  _$BetCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -71,8 +90,9 @@ class _$LiveBetCopyWithImpl<$Res, $Val extends LiveBet>
   $Res call({
     Object? id = null,
     Object? eventId = null,
+    Object? userId = null,
+    Object? userName = null,
     Object? tokens = null,
-    Object? status = null,
     Object? score1 = null,
     Object? score2 = null,
     Object? team1 = null,
@@ -80,6 +100,10 @@ class _$LiveBetCopyWithImpl<$Res, $Val extends LiveBet>
     Object? time = null,
     Object? logo1 = null,
     Object? logo2 = null,
+    Object? createdAt = null,
+    Object? yourTeam = null,
+    Object? won = null,
+    Object? category = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -90,13 +114,17 @@ class _$LiveBetCopyWithImpl<$Res, $Val extends LiveBet>
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
               as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
       tokens: null == tokens
           ? _value.tokens
           : tokens // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
               as String,
       score1: null == score1
           ? _value.score1
@@ -126,36 +154,55 @@ class _$LiveBetCopyWithImpl<$Res, $Val extends LiveBet>
           ? _value.logo2
           : logo2 // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      yourTeam: null == yourTeam
+          ? _value.yourTeam
+          : yourTeam // ignore: cast_nullable_to_non_nullable
+              as int,
+      won: null == won
+          ? _value.won
+          : won // ignore: cast_nullable_to_non_nullable
+              as int,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_LiveBetCopyWith<$Res> implements $LiveBetCopyWith<$Res> {
-  factory _$$_LiveBetCopyWith(
-          _$_LiveBet value, $Res Function(_$_LiveBet) then) =
-      __$$_LiveBetCopyWithImpl<$Res>;
+abstract class _$$_BetCopyWith<$Res> implements $BetCopyWith<$Res> {
+  factory _$$_BetCopyWith(_$_Bet value, $Res Function(_$_Bet) then) =
+      __$$_BetCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
       String eventId,
+      String userId,
+      String userName,
       String tokens,
-      String status,
       String score1,
       String score2,
       String team1,
       String team2,
       String time,
       String logo1,
-      String logo2});
+      String logo2,
+      DateTime createdAt,
+      int yourTeam,
+      int won,
+      String category});
 }
 
 /// @nodoc
-class __$$_LiveBetCopyWithImpl<$Res>
-    extends _$LiveBetCopyWithImpl<$Res, _$_LiveBet>
-    implements _$$_LiveBetCopyWith<$Res> {
-  __$$_LiveBetCopyWithImpl(_$_LiveBet _value, $Res Function(_$_LiveBet) _then)
+class __$$_BetCopyWithImpl<$Res> extends _$BetCopyWithImpl<$Res, _$_Bet>
+    implements _$$_BetCopyWith<$Res> {
+  __$$_BetCopyWithImpl(_$_Bet _value, $Res Function(_$_Bet) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -163,8 +210,9 @@ class __$$_LiveBetCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? eventId = null,
+    Object? userId = null,
+    Object? userName = null,
     Object? tokens = null,
-    Object? status = null,
     Object? score1 = null,
     Object? score2 = null,
     Object? team1 = null,
@@ -172,8 +220,12 @@ class __$$_LiveBetCopyWithImpl<$Res>
     Object? time = null,
     Object? logo1 = null,
     Object? logo2 = null,
+    Object? createdAt = null,
+    Object? yourTeam = null,
+    Object? won = null,
+    Object? category = null,
   }) {
-    return _then(_$_LiveBet(
+    return _then(_$_Bet(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -182,13 +234,17 @@ class __$$_LiveBetCopyWithImpl<$Res>
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
               as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
       tokens: null == tokens
           ? _value.tokens
           : tokens // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
               as String,
       score1: null == score1
           ? _value.score1
@@ -218,37 +274,63 @@ class __$$_LiveBetCopyWithImpl<$Res>
           ? _value.logo2
           : logo2 // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      yourTeam: null == yourTeam
+          ? _value.yourTeam
+          : yourTeam // ignore: cast_nullable_to_non_nullable
+              as int,
+      won: null == won
+          ? _value.won
+          : won // ignore: cast_nullable_to_non_nullable
+              as int,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_LiveBet with DiagnosticableTreeMixin implements _LiveBet {
-  const _$_LiveBet(
+class _$_Bet with DiagnosticableTreeMixin implements _Bet {
+  const _$_Bet(
       {required this.id,
       required this.eventId,
+      required this.userId,
+      required this.userName,
       required this.tokens,
-      required this.status,
       required this.score1,
       required this.score2,
       required this.team1,
       required this.team2,
       required this.time,
       required this.logo1,
-      required this.logo2});
+      required this.logo2,
+      required this.createdAt,
+      required this.yourTeam,
+      this.won = -1,
+      required this.category});
 
-  factory _$_LiveBet.fromJson(Map<String, dynamic> json) =>
-      _$$_LiveBetFromJson(json);
+  factory _$_Bet.fromJson(Map<String, dynamic> json) => _$$_BetFromJson(json);
 
   @override
   final String id;
   @override
   final String eventId;
+
+  /// userId to show bets in specific event
+  @override
+  final String userId;
+
+  /// userName to show bets in specific event
+  @override
+  final String userName;
   @override
   final String tokens;
-  @override
-  final String status;
   @override
   final String score1;
   @override
@@ -263,91 +345,147 @@ class _$_LiveBet with DiagnosticableTreeMixin implements _LiveBet {
   final String logo1;
   @override
   final String logo2;
+  @override
+  final DateTime createdAt;
+
+  /// 0 for team1, 1 for team2
+  @override
+  final int yourTeam;
+
+  /// 0 for team1, 1 for team2, -1 for pending
+  @override
+  @JsonKey()
+  final int won;
+
+  /// Sport category: soccer, basketball
+  @override
+  final String category;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'LiveBet(id: $id, eventId: $eventId, tokens: $tokens, status: $status, score1: $score1, score2: $score2, team1: $team1, team2: $team2, time: $time, logo1: $logo1, logo2: $logo2)';
+    return 'Bet(id: $id, eventId: $eventId, userId: $userId, userName: $userName, tokens: $tokens, score1: $score1, score2: $score2, team1: $team1, team2: $team2, time: $time, logo1: $logo1, logo2: $logo2, createdAt: $createdAt, yourTeam: $yourTeam, won: $won, category: $category)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'LiveBet'))
+      ..add(DiagnosticsProperty('type', 'Bet'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('eventId', eventId))
+      ..add(DiagnosticsProperty('userId', userId))
+      ..add(DiagnosticsProperty('userName', userName))
       ..add(DiagnosticsProperty('tokens', tokens))
-      ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('score1', score1))
       ..add(DiagnosticsProperty('score2', score2))
       ..add(DiagnosticsProperty('team1', team1))
       ..add(DiagnosticsProperty('team2', team2))
       ..add(DiagnosticsProperty('time', time))
       ..add(DiagnosticsProperty('logo1', logo1))
-      ..add(DiagnosticsProperty('logo2', logo2));
+      ..add(DiagnosticsProperty('logo2', logo2))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('yourTeam', yourTeam))
+      ..add(DiagnosticsProperty('won', won))
+      ..add(DiagnosticsProperty('category', category));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LiveBet &&
+            other is _$_Bet &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.eventId, eventId) || other.eventId == eventId) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.tokens, tokens) || other.tokens == tokens) &&
-            (identical(other.status, status) || other.status == status) &&
             (identical(other.score1, score1) || other.score1 == score1) &&
             (identical(other.score2, score2) || other.score2 == score2) &&
             (identical(other.team1, team1) || other.team1 == team1) &&
             (identical(other.team2, team2) || other.team2 == team2) &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.logo1, logo1) || other.logo1 == logo1) &&
-            (identical(other.logo2, logo2) || other.logo2 == logo2));
+            (identical(other.logo2, logo2) || other.logo2 == logo2) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.yourTeam, yourTeam) ||
+                other.yourTeam == yourTeam) &&
+            (identical(other.won, won) || other.won == won) &&
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, eventId, tokens, status,
-      score1, score2, team1, team2, time, logo1, logo2);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      eventId,
+      userId,
+      userName,
+      tokens,
+      score1,
+      score2,
+      team1,
+      team2,
+      time,
+      logo1,
+      logo2,
+      createdAt,
+      yourTeam,
+      won,
+      category);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LiveBetCopyWith<_$_LiveBet> get copyWith =>
-      __$$_LiveBetCopyWithImpl<_$_LiveBet>(this, _$identity);
+  _$$_BetCopyWith<_$_Bet> get copyWith =>
+      __$$_BetCopyWithImpl<_$_Bet>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LiveBetToJson(
+    return _$$_BetToJson(
       this,
     );
   }
 }
 
-abstract class _LiveBet implements LiveBet {
-  const factory _LiveBet(
+abstract class _Bet implements Bet {
+  const factory _Bet(
       {required final String id,
       required final String eventId,
+      required final String userId,
+      required final String userName,
       required final String tokens,
-      required final String status,
       required final String score1,
       required final String score2,
       required final String team1,
       required final String team2,
       required final String time,
       required final String logo1,
-      required final String logo2}) = _$_LiveBet;
+      required final String logo2,
+      required final DateTime createdAt,
+      required final int yourTeam,
+      final int won,
+      required final String category}) = _$_Bet;
 
-  factory _LiveBet.fromJson(Map<String, dynamic> json) = _$_LiveBet.fromJson;
+  factory _Bet.fromJson(Map<String, dynamic> json) = _$_Bet.fromJson;
 
   @override
   String get id;
   @override
   String get eventId;
   @override
-  String get tokens;
+
+  /// userId to show bets in specific event
+  String get userId;
   @override
-  String get status;
+
+  /// userName to show bets in specific event
+  String get userName;
+  @override
+  String get tokens;
   @override
   String get score1;
   @override
@@ -363,7 +501,20 @@ abstract class _LiveBet implements LiveBet {
   @override
   String get logo2;
   @override
+  DateTime get createdAt;
+  @override
+
+  /// 0 for team1, 1 for team2
+  int get yourTeam;
+  @override
+
+  /// 0 for team1, 1 for team2, -1 for pending
+  int get won;
+  @override
+
+  /// Sport category: soccer, basketball
+  String get category;
+  @override
   @JsonKey(ignore: true)
-  _$$_LiveBetCopyWith<_$_LiveBet> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_BetCopyWith<_$_Bet> get copyWith => throw _privateConstructorUsedError;
 }

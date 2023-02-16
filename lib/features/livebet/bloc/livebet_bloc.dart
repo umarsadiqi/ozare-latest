@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:ozare/features/auth/repository/repository.dart';
 import 'package:ozare/features/livebet/livebet_repo.dart';
 import 'package:ozare/main.dart';
-import 'package:ozare/models/livebet.dart';
+import 'package:ozare/models/bet.dart';
 import 'package:ozare/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +15,7 @@ class LivebetBloc extends Bloc<LiveBetEvent, LiveBetState> {
   })  : _repo = repo,
         super(const LiveBetState()) {
     on<LiveBetsRequested>(_onLiveBetsRequested);
+    on<LiveBetsUpdated>(_onLiveBetsUpdated);
   }
 
   final LiveBetRepo _repo;
@@ -30,4 +31,10 @@ class LivebetBloc extends Bloc<LiveBetEvent, LiveBetState> {
       onData: (bets) => state.copyWith(liveBets: bets),
     );
   }
+
+  /// This method is called when the LiveBetsUpdated event is added.
+  Future<void> _onLiveBetsUpdated(
+    LiveBetsUpdated event,
+    Emitter<LiveBetState> emit,
+  ) async {}
 }

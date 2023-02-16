@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ozare/models/history.dart';
 import 'package:ozare/models/models.dart';
 import 'package:ozare/models/notification.dart';
 
@@ -29,7 +28,7 @@ class ProfileRepository {
   }
 
   /// User's history stream
-  Stream<List<History>> historyStream(String uid) {
+  Stream<List<Bet>> historyStream(String uid) {
     log('Getting user history ...');
     return _firestore
         .collection('users')
@@ -37,7 +36,7 @@ class ProfileRepository {
         .collection('history')
         .snapshots()
         .map((snapshot) =>
-            snapshot.docs.map((doc) => History.fromJson(doc.data())).toList());
+            snapshot.docs.map((doc) => Bet.fromJson(doc.data())).toList());
   }
 
   /// User's notifications stream

@@ -10,3 +10,10 @@ abstract class LiveBetEvent extends Equatable {
 class LiveBetsRequested extends LiveBetEvent {
   const LiveBetsRequested();
 }
+
+class LiveBetsUpdated extends LiveBetEvent {
+  const LiveBetsUpdated();
+
+  @override
+  List<Object> get props => [];
+}

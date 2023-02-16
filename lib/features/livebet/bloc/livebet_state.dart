@@ -5,15 +5,15 @@ enum LiveBetStatus { loading, success, failure }
 class LiveBetState extends Equatable {
   const LiveBetState({
     this.status = LiveBetStatus.loading,
-    this.liveBets = const <LiveBet>[],
+    this.liveBets = const <Bet>[],
   });
 
   final LiveBetStatus status;
-  final List<LiveBet> liveBets;
+  final List<Bet> liveBets;
 
   LiveBetState copyWith({
     LiveBetStatus? status,
-    List<LiveBet>? liveBets,
+    List<Bet>? liveBets,
   }) {
     return LiveBetState(
       status: status ?? this.status,

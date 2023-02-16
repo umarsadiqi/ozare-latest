@@ -2,11 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ozare/features/bet/models/bet.dart';
+import 'package:ozare/features/auth/repository/local_db_repository.dart';
 import 'package:ozare/features/bet/repository/bet_repository.dart';
 import 'package:collection/collection.dart';
-import 'package:ozare/models/history.dart';
-import 'package:ozare/models/livebet.dart';
+import 'package:ozare/main.dart';
 import 'package:ozare/models/models.dart';
 import 'package:ozare/models/notification.dart';
 import 'package:uuid/uuid.dart';
@@ -28,6 +27,8 @@ class BetBloc extends Bloc<BetEvent, BetState> {
   final BetRepository _betRepository;
   final String eventId;
 
+  final OUser ouser = getIt<LocalDBRepository>().getOwner()!;
+
   /// EVENT HANDLERS
   /// [BetCreated] event handler
   void _onBetCreated(
@@ -41,18 +42,7 @@ class BetBloc extends Bloc<BetEvent, BetState> {
       emit(state.copyWith(betStatus: CreateBetStatus.exists));
     } else {
       await _betRepository.createBet(
-        eventId: eventId,
         bet: event.bet,
-        history: History(
-          id: const Uuid().v4(),
-          team1: event.event.team1,
-          team2: event.event.team2,
-          score1: event.event.score1,
-          score2: event.event.score2,
-          logo1: event.event.logo1,
-          logo2: event.event.logo2,
-          won: 0,
-        ),
         notification: Notification(
           id: const Uuid().v4(),
           title: 'Bet created',
@@ -60,19 +50,6 @@ class BetBloc extends Bloc<BetEvent, BetState> {
               'You have created a bet for ${event.event.team1} vs ${event.event.team2}',
           type: 'Bet',
           date: DateTime.now().toIso8601String(),
-        ),
-        liveBet: LiveBet(
-          id: const Uuid().v4(),
-          tokens: event.bet.tokens,
-          status: event.bet.status,
-          team1: event.event.team1,
-          team2: event.event.team2,
-          score1: event.event.score1,
-          score2: event.event.score2,
-          logo1: event.event.logo1,
-          logo2: event.event.logo2,
-          eventId: eventId,
-          time: event.event.time,
         ),
       );
       emit(state.copyWith(

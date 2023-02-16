@@ -1,14 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:ozare/models/history.dart';
+import 'package:ozare/models/bet.dart';
 
 class HistoryItem extends StatelessWidget {
   const HistoryItem({
     super.key,
-    required this.history,
+    required this.bet,
   });
 
-  final History history;
+  final Bet bet;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class HistoryItem extends StatelessWidget {
             SizedBox(
               width: size.width * 0.245,
               child: AutoSizeText(
-                history.team1,
+                bet.team1,
                 maxFontSize: 12,
                 minFontSize: 8,
                 maxLines: 3,
@@ -35,7 +35,7 @@ class HistoryItem extends StatelessWidget {
             SizedBox(
               width: 24,
               height: 24,
-              child: Image.network(history.logo1),
+              child: Image.network(bet.logo1),
             ),
             const SizedBox(width: 8),
             const Text(
@@ -46,13 +46,13 @@ class HistoryItem extends StatelessWidget {
             SizedBox(
               width: 24,
               height: 24,
-              child: Image.network(history.logo2),
+              child: Image.network(bet.logo2),
             ),
             const SizedBox(width: 6),
             SizedBox(
               width: size.width * 0.245,
               child: AutoSizeText(
-                history.team2,
+                bet.team2,
                 maxFontSize: 12,
                 minFontSize: 8,
                 maxLines: 3,
@@ -67,14 +67,14 @@ class HistoryItem extends StatelessWidget {
               height: 32,
               width: 52,
               decoration: BoxDecoration(
-                color: getColor(history.won).withOpacity(0.1),
+                color: getColor(bet.won).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(32),
               ),
               child: Center(
                 child: Text(
-                  getStatus(history.won),
+                  getStatus(bet.won),
                   style: TextStyle(
-                    color: getColor(history.won),
+                    color: getColor(bet.won),
                     fontWeight: FontWeight.w600,
                     fontSize: 8,
                   ),
@@ -90,11 +90,11 @@ class HistoryItem extends StatelessWidget {
 
   Color getColor(int status) {
     switch (status) {
-      case 0:
+      case -1:
         return Colors.grey;
-      case 1:
+      case 0:
         return const Color(0xFF00BA88);
-      case 2:
+      case 1:
         return Colors.red;
       default:
         return Colors.grey;
@@ -103,11 +103,11 @@ class HistoryItem extends StatelessWidget {
 
   String getStatus(int status) {
     switch (status) {
-      case 0:
+      case -1:
         return 'Pending';
-      case 1:
+      case 0:
         return 'Won';
-      case 2:
+      case 1:
         return 'Lost';
       default:
         return 'Pending';

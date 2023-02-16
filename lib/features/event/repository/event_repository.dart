@@ -44,6 +44,7 @@ class EventRepository {
       if (response.statusCode == 200) {
         final event = jsonDecode(response.body) as Map<String, dynamic>;
         final match = Event(
+          category: category,
           id: event['Eid'] as String,
           team1: event['T1'][0]['Nm'] as String,
           team2: event['T2'][0]['Nm'] as String,

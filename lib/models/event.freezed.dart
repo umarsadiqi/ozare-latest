@@ -30,6 +30,7 @@ mixin _$Event {
   String get time => throw _privateConstructorUsedError;
   String get logo1 => throw _privateConstructorUsedError;
   String get logo2 => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +52,8 @@ abstract class $EventCopyWith<$Res> {
       String team2,
       String time,
       String logo1,
-      String logo2});
+      String logo2,
+      String category});
 }
 
 /// @nodoc
@@ -77,6 +79,7 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
     Object? time = null,
     Object? logo1 = null,
     Object? logo2 = null,
+    Object? category = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -119,6 +122,10 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
           ? _value.logo2
           : logo2 // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -139,7 +146,8 @@ abstract class _$$_EventCopyWith<$Res> implements $EventCopyWith<$Res> {
       String team2,
       String time,
       String logo1,
-      String logo2});
+      String logo2,
+      String category});
 }
 
 /// @nodoc
@@ -161,6 +169,7 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
     Object? time = null,
     Object? logo1 = null,
     Object? logo2 = null,
+    Object? category = null,
   }) {
     return _then(_$_Event(
       id: null == id
@@ -203,6 +212,10 @@ class __$$_EventCopyWithImpl<$Res> extends _$EventCopyWithImpl<$Res, _$_Event>
           ? _value.logo2
           : logo2 // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -220,7 +233,8 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
       required this.team2,
       required this.time,
       required this.logo1,
-      required this.logo2});
+      required this.logo2,
+      required this.category});
 
   factory _$_Event.fromJson(Map<String, dynamic> json) =>
       _$$_EventFromJson(json);
@@ -245,10 +259,12 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
   final String logo1;
   @override
   final String logo2;
+  @override
+  final String category;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Event(id: $id, id1: $id1, id2: $id2, score1: $score1, score2: $score2, team1: $team1, team2: $team2, time: $time, logo1: $logo1, logo2: $logo2)';
+    return 'Event(id: $id, id1: $id1, id2: $id2, score1: $score1, score2: $score2, team1: $team1, team2: $team2, time: $time, logo1: $logo1, logo2: $logo2, category: $category)';
   }
 
   @override
@@ -265,7 +281,8 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
       ..add(DiagnosticsProperty('team2', team2))
       ..add(DiagnosticsProperty('time', time))
       ..add(DiagnosticsProperty('logo1', logo1))
-      ..add(DiagnosticsProperty('logo2', logo2));
+      ..add(DiagnosticsProperty('logo2', logo2))
+      ..add(DiagnosticsProperty('category', category));
   }
 
   @override
@@ -282,13 +299,15 @@ class _$_Event with DiagnosticableTreeMixin implements _Event {
             (identical(other.team2, team2) || other.team2 == team2) &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.logo1, logo1) || other.logo1 == logo1) &&
-            (identical(other.logo2, logo2) || other.logo2 == logo2));
+            (identical(other.logo2, logo2) || other.logo2 == logo2) &&
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, id1, id2, score1, score2,
-      team1, team2, time, logo1, logo2);
+      team1, team2, time, logo1, logo2, category);
 
   @JsonKey(ignore: true)
   @override
@@ -315,7 +334,8 @@ abstract class _Event implements Event {
       required final String team2,
       required final String time,
       required final String logo1,
-      required final String logo2}) = _$_Event;
+      required final String logo2,
+      required final String category}) = _$_Event;
 
   factory _Event.fromJson(Map<String, dynamic> json) = _$_Event.fromJson;
 
@@ -339,6 +359,8 @@ abstract class _Event implements Event {
   String get logo1;
   @override
   String get logo2;
+  @override
+  String get category;
   @override
   @JsonKey(ignore: true)
   _$$_EventCopyWith<_$_Event> get copyWith =>

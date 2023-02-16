@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ozare/features/bet/models/bet.dart';
+import 'package:ozare/models/bet.dart';
 
 class BetTile extends StatelessWidget {
   const BetTile({

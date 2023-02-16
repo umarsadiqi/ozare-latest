@@ -1,9 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ozare/features/bet/models/bet.dart';
-import 'package:ozare/models/history.dart';
-import 'package:ozare/models/livebet.dart';
+import 'package:ozare/models/bet.dart';
 import 'package:ozare/models/notification.dart';
 
 class BetRepository {
@@ -15,26 +13,21 @@ class BetRepository {
 
   // Create new Bet in current event
   Future<void> createBet({
-    required String eventId,
     required Bet bet,
-    required History history,
     required Notification notification,
-    required LiveBet liveBet,
   }) async {
-    log('BetRepository: createBet: $eventId');
+    // Add bet to event collection in firestore
+    await _firestore
+        .collection('events')
+        .doc(bet.eventId)
+        .collection('bets')
+        .doc(bet.id)
+        .set(bet.toJson());
 
-    // Add history to user
+    // Add bet to user collection in firestore
     await _firestore
         .collection('users')
         .doc(bet.userId)
-        .collection('history')
-        .doc(history.id)
-        .set(history.toJson());
-
-    // Add bet to event
-    await _firestore
-        .collection('events')
-        .doc(eventId)
         .collection('bets')
         .doc(bet.id)
         .set(bet.toJson());
@@ -46,14 +39,6 @@ class BetRepository {
         .collection('notification')
         .doc()
         .set(notification.toJson());
-
-    // add livebet to user
-    await _firestore
-        .collection('users')
-        .doc(bet.userId)
-        .collection('bets')
-        .doc(liveBet.id)
-        .set(liveBet.toJson());
   }
 
   // Get all bets in current event

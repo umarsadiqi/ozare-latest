@@ -25,7 +25,7 @@ class ProfileState extends Equatable {
   final PPage page;
   final OUser user;
   final String message;
-  final List<History> history;
+  final List<Bet> history;
   final List<Notification> notifications;
 
   ProfileState copyWith({
@@ -33,7 +33,7 @@ class ProfileState extends Equatable {
     PPage? page,
     OUser? user,
     String? message,
-    List<History>? history,
+    List<Bet>? history,
     List<Notification>? notifications,
   }) {
     return ProfileState(

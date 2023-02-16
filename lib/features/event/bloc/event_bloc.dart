@@ -12,6 +12,7 @@ class EventBloc extends Bloc<EventEvent, EventState> {
   })  : _eventRepository = eventRepository,
         super(const EventState(
             event: Event(
+          category: 'soccer',
           id: '',
           id1: '',
           id2: '',

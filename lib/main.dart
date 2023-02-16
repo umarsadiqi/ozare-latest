@@ -81,11 +81,17 @@ Future<void> setupDependencies() async {
       ChatRepository(firestore: getIt<FirebaseFirestore>()));
 
   getIt.registerSingleton<BetRepository>(
-      BetRepository(firestore: getIt<FirebaseFirestore>()));
+    BetRepository(
+      firestore: getIt<FirebaseFirestore>(),
+    ),
+  );
 
   getIt.registerSingleton<SearchRepo>(SearchRepo());
 
   getIt.registerSingleton<LiveBetRepo>(
-    LiveBetRepo(firestore: getIt<FirebaseFirestore>()),
+    LiveBetRepo(
+      firestore: getIt<FirebaseFirestore>(),
+      eventRepo: getIt<EventRepository>(),
+    ),
   );
 }
