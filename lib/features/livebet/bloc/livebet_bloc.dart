@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:ozare/features/auth/repository/repository.dart';
 import 'package:ozare/features/livebet/livebet_repo.dart';
 import 'package:ozare/main.dart';
-import 'package:ozare/models/bet.dart';
 import 'package:ozare/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,5 +37,8 @@ class LivebetBloc extends Bloc<LiveBetEvent, LiveBetState> {
   Future<void> _onLiveBetsUpdated(
     LiveBetsUpdated event,
     Emitter<LiveBetState> emit,
-  ) async {}
+  ) async {
+    log('🧱 LiveBetsUpdated event handler called ...');
+    await _repo.updatesBet(ouser.uid!);
+  }
 }

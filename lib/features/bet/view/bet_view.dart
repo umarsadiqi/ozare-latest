@@ -6,6 +6,7 @@ import 'package:ozare/common/widgets/widgets.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/bet/bloc/bet_bloc.dart';
 import 'package:ozare/features/bet/widgets/widgets.dart';
+import 'package:ozare/models/bet.dart';
 import 'package:ozare/models/event.dart';
 
 class BetView extends StatelessWidget {

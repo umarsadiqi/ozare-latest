@@ -6,10 +6,10 @@ import 'package:ozare/consts.dart';
 import 'package:ozare/features/dash/view/dash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/features/home/home.dart';
+import 'package:ozare/features/livebet/bloc/livebet_bloc.dart';
 import 'package:ozare/features/livebet/livebet_view.dart';
 import 'package:ozare/features/profile/bloc/profile_bloc.dart';
 import 'package:ozare/features/profile/view/view.dart';
-import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ozare/translations/locale_keys.g.dart';
 
@@ -30,6 +30,10 @@ class HomeView extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       floatingActionButton: GestureDetector(
         onTap: () {
+          /// check for bet updates
+          context.read<LivebetBloc>().add(const LiveBetsUpdated());
+
+          ///
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -66,6 +70,8 @@ class HomeView extends StatelessWidget {
                     iconPath: 'assets/icons/home.svg',
                     isActive: selectedTab == 0,
                     onTap: () {
+                      /// check for bet updates
+                      context.read<LivebetBloc>().add(const LiveBetsUpdated());
                       context.read<HomeCubit>().setTab(0);
                     },
                   ),
@@ -74,6 +80,8 @@ class HomeView extends StatelessWidget {
                     iconPath: 'assets/icons/wallet.svg',
                     isActive: selectedTab == 1,
                     onTap: () {
+                      /// check for bet updates
+                      context.read<LivebetBloc>().add(const LiveBetsUpdated());
                       context.read<HomeCubit>().setTab(1);
                     },
                   ),
@@ -83,6 +91,8 @@ class HomeView extends StatelessWidget {
                     iconPath: 'assets/icons/bell.svg',
                     isActive: selectedTab == 2,
                     onTap: () {
+                      /// check for bet updates
+                      context.read<LivebetBloc>().add(const LiveBetsUpdated());
                       context.read<HomeCubit>().setTab(2);
                     },
                   ),
@@ -94,6 +104,10 @@ class HomeView extends StatelessWidget {
                         isActive: selectedTab == 3,
                         isProfile: true,
                         onTap: () {
+                          /// check for bet updates
+                          context
+                              .read<LivebetBloc>()
+                              .add(const LiveBetsUpdated());
                           context.read<HomeCubit>().setTab(3);
                         },
                       );

@@ -24,10 +24,10 @@ class LiveBetRepo {
     });
   }
 
-  // get all bets for current user
-  // check for live score of each bet
-  // if match's time is FT then update won/lost in profile
-  // make current bet as history and remove from bets in firestore
+  /// get all bets for current user
+  /// check for live score of each bet
+  /// if match's time is FT then update won/lost in profile
+  /// make current bet as history and remove from bets in firestore
   Future<void> updatesBet(String uid) async {
     // 1
     // get all bets for current user as List<LiveBet>

@@ -93,7 +93,7 @@ class _ProfileViewState extends State<ProfileView> {
                       itemCount: widget.state.history.length,
                       itemBuilder: (context, index) {
                         return HistoryItem(
-                          history: widget.state.history[index],
+                          bet: widget.state.history[index],
                         );
                       })),
         ]
