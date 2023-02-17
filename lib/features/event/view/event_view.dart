@@ -193,7 +193,7 @@ class UpperSection extends StatelessWidget {
               builder: (context, state) {
                 final event = state.event;
                 return EventTile(
-                  event: event!,
+                  event: event,
                 );
               },
             ),

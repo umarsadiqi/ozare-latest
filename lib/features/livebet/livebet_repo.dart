@@ -71,7 +71,11 @@ class LiveBetRepo {
               .doc(uid)
               .collection('history')
               .doc(bet.id)
-              .set(bet.toJson());
+              .set(bet
+                  .copyWith(
+                    won: won ? 1 : 0,
+                  )
+                  .toJson());
 
           //remove from bets in firestore
           await _firestore
