@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/chat/models/chat.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,32 +60,32 @@ class ChatBubble extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 2),
-            // Align(
-            //   alignment: Alignment.centerRight,
-            //   child: Row(
-            //     mainAxisSize: MainAxisSize.min,
-            //     mainAxisAlignment: MainAxisAlignment.end,
-            //     children: [
-            //       Text(
-            //         // extract time from timestamp
+            Align(
+              alignment: Alignment.centerRight,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    // extract time from timestamp
 
-            //         DateFormat.Hm().format(chat.timestamp),
-            //         style: TextStyle(
-            //           color: isMe ? Colors.white : Colors.grey,
-            //           fontSize: 12,
-            //         ),
-            //       ),
-            //       // if (isMe) ...[
-            //       //   const SizedBox(width: 8),
-            //       //   const Icon(
-            //       //     Icons.done_all,
-            //       //     color: primary1Color,
-            //       //     size: 16,
-            //       //   ),
-            //       // ]
-            //     ],
-            //   ),
-            // ),
+                    DateFormat.Hm().format(chat.timestamp),
+                    style: TextStyle(
+                      color: isMe ? Colors.white : Colors.grey,
+                      fontSize: 12,
+                    ),
+                  ),
+                  // if (isMe) ...[
+                  //   const SizedBox(width: 8),
+                  //   const Icon(
+                  //     Icons.done_all,
+                  //     color: primary1Color,
+                  //     size: 16,
+                  //   ),
+                  // ]
+                ],
+              ),
+            ),
           ],
         ),
       ),
