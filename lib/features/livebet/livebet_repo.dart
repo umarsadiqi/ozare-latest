@@ -84,6 +84,9 @@ class LiveBetRepo {
               .collection('bets')
               .doc(bet.id)
               .delete();
+
+          // remove event from events collection
+          await _firestore.collection('events').doc(bet.eventId).delete();
         }
       }
     }
