@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ozare/models/bet.dart';
-import 'package:ozare/models/notification.dart';
 
 class BetRepository {
   BetRepository({
@@ -14,7 +11,6 @@ class BetRepository {
   // Create new Bet in current event
   Future<void> createBet({
     required Bet bet,
-    required Notification notification,
   }) async {
     // Add bet to event collection in firestore
     await _firestore
@@ -38,7 +34,7 @@ class BetRepository {
         .doc(bet.userId)
         .collection('notification')
         .doc()
-        .set(notification.toJson());
+        .set(bet.toJson());
   }
 
   // Get all bets in current event

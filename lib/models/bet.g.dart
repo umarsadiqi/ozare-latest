@@ -21,7 +21,8 @@ _$_Bet _$$_BetFromJson(Map<String, dynamic> json) => _$_Bet(
       logo2: json['logo2'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       yourTeam: json['yourTeam'] as int,
-      won: json['won'] as int? ?? -1,
+      won: json['won'] as bool? ?? false,
+      finished: json['finished'] as bool? ?? false,
       category: json['category'] as String,
     );
 
@@ -41,5 +42,6 @@ Map<String, dynamic> _$$_BetToJson(_$_Bet instance) => <String, dynamic>{
       'createdAt': instance.createdAt.toIso8601String(),
       'yourTeam': instance.yourTeam,
       'won': instance.won,
+      'finished': instance.finished,
       'category': instance.category,
     };

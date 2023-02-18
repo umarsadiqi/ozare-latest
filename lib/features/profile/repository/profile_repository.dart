@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ozare/models/models.dart';
-import 'package:ozare/models/notification.dart';
 
 class ProfileRepository {
   final FirebaseFirestore _firestore;
@@ -40,16 +39,15 @@ class ProfileRepository {
   }
 
   /// User's notifications stream
-  Stream<List<Notification>> notificationStream(String uid) {
+  Stream<List<Bet>> notificationStream(String uid) {
     log('Getting user notifications ...');
     return _firestore
         .collection('users')
         .doc(uid)
         .collection('notification')
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => Notification.fromJson(doc.data()))
-            .toList());
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => Bet.fromJson(doc.data())).toList());
   }
 
   /// Update the user's profile

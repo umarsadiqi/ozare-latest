@@ -8,7 +8,6 @@ import 'package:ozare/features/profile/repository/profile_repository.dart';
 import 'package:ozare/main.dart';
 import 'package:ozare/models/models.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ozare/models/notification.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

@@ -22,7 +22,6 @@ class HomeView extends StatelessWidget {
         context.select((HomeCubit cubit) => cubit.state.tabIndex);
     final hideStatus = context.select((HomeCubit cubit) => cubit.state.hide);
     final size = MediaQuery.of(context).size;
-    final showBetButton = selectedTab == 0 && !hideStatus;
     // log('showBetButton: ${showBetButton.toString()}');
     // log('selected Tab: ${selectedTab.toString()}');
     // log('hideStatus: ${hideStatus.toString()}');
@@ -31,7 +30,7 @@ class HomeView extends StatelessWidget {
       floatingActionButton: GestureDetector(
         onTap: () {
           /// check for bet updates
-          context.read<LivebetBloc>().add(const LiveBetsUpdated());
+          // context.read<LivebetBloc>().add(const LiveBetsUpdated());
 
           ///
           Navigator.push(
@@ -71,7 +70,6 @@ class HomeView extends StatelessWidget {
                     isActive: selectedTab == 0,
                     onTap: () {
                       /// check for bet updates
-                      context.read<LivebetBloc>().add(const LiveBetsUpdated());
                       context.read<HomeCubit>().setTab(0);
                     },
                   ),
@@ -81,7 +79,6 @@ class HomeView extends StatelessWidget {
                     isActive: selectedTab == 1,
                     onTap: () {
                       /// check for bet updates
-                      context.read<LivebetBloc>().add(const LiveBetsUpdated());
                       context.read<HomeCubit>().setTab(1);
                     },
                   ),
@@ -92,7 +89,6 @@ class HomeView extends StatelessWidget {
                     isActive: selectedTab == 2,
                     onTap: () {
                       /// check for bet updates
-                      context.read<LivebetBloc>().add(const LiveBetsUpdated());
                       context.read<HomeCubit>().setTab(2);
                     },
                   ),
@@ -105,9 +101,7 @@ class HomeView extends StatelessWidget {
                         isProfile: true,
                         onTap: () {
                           /// check for bet updates
-                          context
-                              .read<LivebetBloc>()
-                              .add(const LiveBetsUpdated());
+
                           context.read<HomeCubit>().setTab(3);
                         },
                       );

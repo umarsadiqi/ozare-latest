@@ -78,14 +78,16 @@ class HistoryItem extends StatelessWidget {
               height: 32,
               width: 52,
               decoration: BoxDecoration(
-                color: getColor(bet.won).withOpacity(0.1),
+                color: !bet.finished
+                    ? Colors.grey.withOpacity(0.1)
+                    : getColor(bet.won).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(32),
               ),
               child: Center(
                 child: Text(
-                  getStatus(bet.won),
+                  bet.finished ? getStatus(bet.won) : 'Pending',
                   style: TextStyle(
-                    color: getColor(bet.won),
+                    color: !bet.finished ? Colors.grey : getColor(bet.won),
                     fontWeight: FontWeight.w600,
                     fontSize: 8,
                   ),
@@ -99,26 +101,22 @@ class HistoryItem extends StatelessWidget {
     );
   }
 
-  Color getColor(int status) {
-    switch (status) {
-      case -1:
-        return Colors.grey;
-      case 0:
+  Color getColor(bool won) {
+    switch (won) {
+      case true:
         return const Color(0xFF00BA88);
-      case 1:
+      case false:
         return Colors.red;
       default:
         return Colors.grey;
     }
   }
 
-  String getStatus(int status) {
-    switch (status) {
-      case -1:
-        return 'Pending';
-      case 0:
+  String getStatus(bool won) {
+    switch (won) {
+      case true:
         return 'Won';
-      case 1:
+      case false:
         return 'Lost';
       default:
         return 'Pending';

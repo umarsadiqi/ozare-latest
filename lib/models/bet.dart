@@ -27,9 +27,8 @@ class Bet with _$Bet {
 
     /// 0 for team1, 1 for team2
     required int yourTeam,
-
-    /// 0 for team1, 1 for team2, -1 for pending
-    @Default(-1) int won,
+    @Default(false) bool won,
+    @Default(false) bool finished,
 
     /// Sport category: soccer, basketball
     required String category,

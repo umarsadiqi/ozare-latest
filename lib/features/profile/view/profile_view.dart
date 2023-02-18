@@ -64,9 +64,8 @@ class _ProfileViewState extends State<ProfileView> {
                       padding: const EdgeInsets.only(bottom: 64),
                       itemCount: widget.state.notifications.length,
                       itemBuilder: (context, index) {
-                        return NotificationTile(
-                          notification: widget.state.notifications[index],
-                        );
+                        return HistoryItem(
+                            bet: widget.state.notifications[index]);
                       })),
         ],
 

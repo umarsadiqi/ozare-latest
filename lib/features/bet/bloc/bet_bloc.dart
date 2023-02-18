@@ -7,7 +7,6 @@ import 'package:ozare/features/bet/repository/bet_repository.dart';
 import 'package:collection/collection.dart';
 import 'package:ozare/main.dart';
 import 'package:ozare/models/models.dart';
-import 'package:ozare/models/notification.dart';
 import 'package:uuid/uuid.dart';
 
 part 'bet_event.dart';
@@ -43,14 +42,6 @@ class BetBloc extends Bloc<BetEvent, BetState> {
     } else {
       await _betRepository.createBet(
         bet: event.bet,
-        notification: Notification(
-          id: const Uuid().v4(),
-          title: 'Bet created',
-          body:
-              'You have created a bet for ${event.event.team1} vs ${event.event.team2}',
-          type: 'Bet',
-          dateTime: DateTime.now().toUtc(),
-        ),
       );
       emit(state.copyWith(
           status: BetStatus.success, betStatus: CreateBetStatus.created));

@@ -40,9 +40,8 @@ mixin _$Bet {
 
   /// 0 for team1, 1 for team2
   int get yourTeam => throw _privateConstructorUsedError;
-
-  /// 0 for team1, 1 for team2, -1 for pending
-  int get won => throw _privateConstructorUsedError;
+  bool get won => throw _privateConstructorUsedError;
+  bool get finished => throw _privateConstructorUsedError;
 
   /// Sport category: soccer, basketball
   String get category => throw _privateConstructorUsedError;
@@ -72,7 +71,8 @@ abstract class $BetCopyWith<$Res> {
       String logo2,
       DateTime createdAt,
       int yourTeam,
-      int won,
+      bool won,
+      bool finished,
       String category});
 }
 
@@ -103,6 +103,7 @@ class _$BetCopyWithImpl<$Res, $Val extends Bet> implements $BetCopyWith<$Res> {
     Object? createdAt = null,
     Object? yourTeam = null,
     Object? won = null,
+    Object? finished = null,
     Object? category = null,
   }) {
     return _then(_value.copyWith(
@@ -165,7 +166,11 @@ class _$BetCopyWithImpl<$Res, $Val extends Bet> implements $BetCopyWith<$Res> {
       won: null == won
           ? _value.won
           : won // ignore: cast_nullable_to_non_nullable
-              as int,
+              as bool,
+      finished: null == finished
+          ? _value.finished
+          : finished // ignore: cast_nullable_to_non_nullable
+              as bool,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -195,7 +200,8 @@ abstract class _$$_BetCopyWith<$Res> implements $BetCopyWith<$Res> {
       String logo2,
       DateTime createdAt,
       int yourTeam,
-      int won,
+      bool won,
+      bool finished,
       String category});
 }
 
@@ -223,6 +229,7 @@ class __$$_BetCopyWithImpl<$Res> extends _$BetCopyWithImpl<$Res, _$_Bet>
     Object? createdAt = null,
     Object? yourTeam = null,
     Object? won = null,
+    Object? finished = null,
     Object? category = null,
   }) {
     return _then(_$_Bet(
@@ -285,7 +292,11 @@ class __$$_BetCopyWithImpl<$Res> extends _$BetCopyWithImpl<$Res, _$_Bet>
       won: null == won
           ? _value.won
           : won // ignore: cast_nullable_to_non_nullable
-              as int,
+              as bool,
+      finished: null == finished
+          ? _value.finished
+          : finished // ignore: cast_nullable_to_non_nullable
+              as bool,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -312,7 +323,8 @@ class _$_Bet with DiagnosticableTreeMixin implements _Bet {
       required this.logo2,
       required this.createdAt,
       required this.yourTeam,
-      this.won = -1,
+      this.won = false,
+      this.finished = false,
       required this.category});
 
   factory _$_Bet.fromJson(Map<String, dynamic> json) => _$$_BetFromJson(json);
@@ -351,11 +363,12 @@ class _$_Bet with DiagnosticableTreeMixin implements _Bet {
   /// 0 for team1, 1 for team2
   @override
   final int yourTeam;
-
-  /// 0 for team1, 1 for team2, -1 for pending
   @override
   @JsonKey()
-  final int won;
+  final bool won;
+  @override
+  @JsonKey()
+  final bool finished;
 
   /// Sport category: soccer, basketball
   @override
@@ -363,7 +376,7 @@ class _$_Bet with DiagnosticableTreeMixin implements _Bet {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Bet(id: $id, eventId: $eventId, userId: $userId, userName: $userName, tokens: $tokens, score1: $score1, score2: $score2, team1: $team1, team2: $team2, time: $time, logo1: $logo1, logo2: $logo2, createdAt: $createdAt, yourTeam: $yourTeam, won: $won, category: $category)';
+    return 'Bet(id: $id, eventId: $eventId, userId: $userId, userName: $userName, tokens: $tokens, score1: $score1, score2: $score2, team1: $team1, team2: $team2, time: $time, logo1: $logo1, logo2: $logo2, createdAt: $createdAt, yourTeam: $yourTeam, won: $won, finished: $finished, category: $category)';
   }
 
   @override
@@ -386,6 +399,7 @@ class _$_Bet with DiagnosticableTreeMixin implements _Bet {
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('yourTeam', yourTeam))
       ..add(DiagnosticsProperty('won', won))
+      ..add(DiagnosticsProperty('finished', finished))
       ..add(DiagnosticsProperty('category', category));
   }
 
@@ -412,6 +426,8 @@ class _$_Bet with DiagnosticableTreeMixin implements _Bet {
             (identical(other.yourTeam, yourTeam) ||
                 other.yourTeam == yourTeam) &&
             (identical(other.won, won) || other.won == won) &&
+            (identical(other.finished, finished) ||
+                other.finished == finished) &&
             (identical(other.category, category) ||
                 other.category == category));
   }
@@ -435,6 +451,7 @@ class _$_Bet with DiagnosticableTreeMixin implements _Bet {
       createdAt,
       yourTeam,
       won,
+      finished,
       category);
 
   @JsonKey(ignore: true)
@@ -467,7 +484,8 @@ abstract class _Bet implements Bet {
       required final String logo2,
       required final DateTime createdAt,
       required final int yourTeam,
-      final int won,
+      final bool won,
+      final bool finished,
       required final String category}) = _$_Bet;
 
   factory _Bet.fromJson(Map<String, dynamic> json) = _$_Bet.fromJson;
@@ -507,9 +525,9 @@ abstract class _Bet implements Bet {
   /// 0 for team1, 1 for team2
   int get yourTeam;
   @override
-
-  /// 0 for team1, 1 for team2, -1 for pending
-  int get won;
+  bool get won;
+  @override
+  bool get finished;
   @override
 
   /// Sport category: soccer, basketball

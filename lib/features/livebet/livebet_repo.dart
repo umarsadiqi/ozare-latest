@@ -31,14 +31,10 @@ class LiveBetRepo {
   Future<void> updatesBet(String uid) async {
     // 1
     // get all bets for current user as List<LiveBet>
-    final liveBets = await _firestore
-        .collection('users')
-        .doc(uid)
-        .collection('bets')
-        .get()
-        .then((value) => value.docs
-            .map((e) => Bet.fromJson(e.data()))
-            .toList(growable: false));
+    final liveBetSnapshots =
+        await _firestore.collection('users').doc(uid).collection('bets').get();
+    final liveBets =
+        liveBetSnapshots.docs.map((doc) => Bet.fromJson(doc.data())).toList();
 
     // 2
     // check for live score of each bet with _eventRepo's getScore method
@@ -73,7 +69,7 @@ class LiveBetRepo {
               .doc(bet.id)
               .set(bet
                   .copyWith(
-                    won: won ? 1 : 0,
+                    won: won,
                   )
                   .toJson());
 

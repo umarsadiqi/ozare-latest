@@ -26,7 +26,7 @@ class ProfileState extends Equatable {
   final OUser user;
   final String message;
   final List<Bet> history;
-  final List<Notification> notifications;
+  final List<Bet> notifications;
 
   ProfileState copyWith({
     ProfileStatus? status,
@@ -34,7 +34,7 @@ class ProfileState extends Equatable {
     OUser? user,
     String? message,
     List<Bet>? history,
-    List<Notification>? notifications,
+    List<Bet>? notifications,
   }) {
     return ProfileState(
       status: status ?? this.status,

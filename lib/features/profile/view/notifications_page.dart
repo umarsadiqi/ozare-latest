@@ -27,8 +27,10 @@ class NotificationsPage extends StatelessWidget {
                   : ListView.builder(
                       itemCount: state.notifications.length,
                       itemBuilder: (context, index) {
-                        return NotificationTile(
-                            notification: state.notifications[index]);
+                        return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child:
+                                HistoryItem(bet: state.notifications[index]));
                       },
                     ),
             );

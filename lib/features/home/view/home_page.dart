@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
       ..add(const ProfileHistoryRequested())
       ..add(const ProfileNotificationsRequested());
     context.read<LivebetBloc>().add(const LiveBetsRequested());
+    context.read<LivebetBloc>().add(const LiveBetsUpdated());
     super.initState();
   }
 
