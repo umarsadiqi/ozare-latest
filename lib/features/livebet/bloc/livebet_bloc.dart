@@ -39,6 +39,9 @@ class LivebetBloc extends Bloc<LiveBetEvent, LiveBetState> {
     Emitter<LiveBetState> emit,
   ) async {
     log('🧱 LiveBetsUpdated event handler called ...');
-    await _repo.updatesBet(ouser.uid!);
+    while (true) {
+      await _repo.updatesBet(ouser.uid!);
+      Future.delayed(const Duration(minutes: 10));
+    }
   }
 }
