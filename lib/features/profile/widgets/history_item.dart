@@ -17,10 +17,31 @@ class HistoryItem extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        Container(
+          height: 22,
+          width: 52,
+          decoration: BoxDecoration(
+            color: !bet.finished
+                ? Colors.grey.withOpacity(0.1)
+                : getColor(bet.won).withOpacity(0.1),
+            borderRadius: BorderRadius.circular(32),
+          ),
+          child: Center(
+            child: Text(
+              bet.finished ? getStatus(bet.won) : 'Pending',
+              style: TextStyle(
+                color: !bet.finished ? Colors.grey : getColor(bet.won),
+                fontWeight: FontWeight.w600,
+                fontSize: 8,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 4),
         Text(
           "${DateFormat.Hm().format(bet.createdAt.toLocal())} - ${DateFormat.yMMMd().format(bet.createdAt.toLocal())}",
           style: const TextStyle(
-            fontSize: 12,
+            fontSize: 10,
             fontWeight: FontWeight.w500,
             color: Colors.grey,
           ),
@@ -28,6 +49,7 @@ class HistoryItem extends StatelessWidget {
         const SizedBox(height: 4),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               width: size.width * 0.245,
@@ -49,9 +71,9 @@ class HistoryItem extends StatelessWidget {
               child: Image.network(bet.logo1),
             ),
             const SizedBox(width: 8),
-            const Text(
-              "VS",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 11),
+            Text(
+              "${bet.score1} : ${bet.score2}",
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 11),
             ),
             const SizedBox(width: 8),
             SizedBox(
@@ -73,30 +95,19 @@ class HistoryItem extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 6),
-            Container(
-              height: 32,
-              width: 52,
-              decoration: BoxDecoration(
-                color: !bet.finished
-                    ? Colors.grey.withOpacity(0.1)
-                    : getColor(bet.won).withOpacity(0.1),
-                borderRadius: BorderRadius.circular(32),
-              ),
-              child: Center(
-                child: Text(
-                  bet.finished ? getStatus(bet.won) : 'Pending',
-                  style: TextStyle(
-                    color: !bet.finished ? Colors.grey : getColor(bet.won),
-                    fontWeight: FontWeight.w600,
-                    fontSize: 8,
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
-        const Divider(),
+        const SizedBox(height: 4),
+        Text(
+          'You betted ${bet.tokens} Tokens on ${bet.yourTeam == 0 ? bet.team1 : bet.team2} to win',
+          style: TextStyle(
+            color: Colors.grey[800],
+            fontSize: 10,
+          ),
+        ),
+        Divider(
+          color: Colors.grey[500],
+        ),
       ],
     );
   }

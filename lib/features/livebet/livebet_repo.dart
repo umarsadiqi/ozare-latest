@@ -61,17 +61,29 @@ class LiveBetRepo {
             'losses': won ? FieldValue.increment(0) : FieldValue.increment(1),
           });
 
+          // remove previous notification
+          await _firestore
+              .collection('users')
+              .doc(uid)
+              .collection('notification')
+              .doc(bet.id)
+              .delete();
+
+          // add new notification
+          await _firestore
+              .collection('users')
+              .doc(uid)
+              .collection('notification')
+              .doc()
+              .set(bet.copyWith(won: won, finished: true).toJson());
+
           // make current bet as history
           await _firestore
               .collection('users')
               .doc(uid)
               .collection('history')
               .doc(bet.id)
-              .set(bet
-                  .copyWith(
-                    won: won,
-                  )
-                  .toJson());
+              .set(bet.copyWith(won: won, finished: true).toJson());
 
           //remove from bets in firestore
           await _firestore
