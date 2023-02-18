@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:ozare/consts.dart';
 import 'package:ozare/features/livebet/bloc/livebet_bloc.dart';
+import 'package:ozare/features/profile/widgets/widgets.dart';
 import 'package:ozare/models/bet.dart';
 
 class LiveBetsView extends StatelessWidget {
@@ -72,9 +73,9 @@ class LiveBetsView extends StatelessWidget {
                 : SizedBox.expand(
                     child: ListView.builder(
                       itemCount: bets.length,
-                      itemBuilder: (context, index) => LivebetTile(
-                        bet: bets[index],
-                      ),
+                      itemBuilder: (context, index) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: HistoryItem(bet: bets[index])),
                     ),
                   ),
           );

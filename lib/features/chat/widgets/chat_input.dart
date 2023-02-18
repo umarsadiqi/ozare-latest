@@ -70,7 +70,7 @@ class _ChatInputState extends State<ChatInput> {
                                     chat: Chat(
                                       id: const Uuid().v4(),
                                       senderName:
-                                          '${sender!.firstName} ${sender.lastName}',
+                                          '${sender.firstName} ${sender.lastName}',
                                       message: messageController.text,
                                       senderId: sender.uid!,
                                       timestamp: DateTime.now().toUtc(),

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart' hide Notification;
+import 'package:intl/intl.dart';
 import 'package:ozare/models/notification.dart';
 
 class NotificationTile extends StatelessWidget {
@@ -28,6 +29,7 @@ class NotificationTile extends StatelessWidget {
             ),
           ]),
       child: Row(
+        mainAxisSize: MainAxisSize.max,
         children: [
           const SizedBox(width: 8),
           Image.asset(
@@ -39,12 +41,24 @@ class NotificationTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                notification.title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
-                ),
+              Row(
+                children: [
+                  Text(
+                    notification.title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                    ),
+                  ),
+                  SizedBox(width: size.width * 0.2),
+                  Text(
+                    "${DateFormat.Hm().format(notification.dateTime.toLocal())} - ${DateFormat.yMMMd().format(notification.dateTime.toLocal())}",
+                    style: TextStyle(
+                      fontSize: 9,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 32,

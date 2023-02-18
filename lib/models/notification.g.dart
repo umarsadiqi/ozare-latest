@@ -12,7 +12,7 @@ _$_Notification _$$_NotificationFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
       body: json['body'] as String,
       type: json['type'] as String,
-      date: json['date'] as String,
+      dateTime: DateTime.parse(json['dateTime'] as String),
     );
 
 Map<String, dynamic> _$$_NotificationToJson(_$_Notification instance) =>
@@ -21,5 +21,5 @@ Map<String, dynamic> _$$_NotificationToJson(_$_Notification instance) =>
       'title': instance.title,
       'body': instance.body,
       'type': instance.type,
-      'date': instance.date,
+      'dateTime': instance.dateTime.toIso8601String(),
     };

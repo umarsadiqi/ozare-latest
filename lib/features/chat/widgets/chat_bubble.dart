@@ -69,9 +69,9 @@ class ChatBubble extends StatelessWidget {
                   Text(
                     // extract time from timestamp
 
-                    DateFormat.Hm().format(chat.timestamp),
+                    DateFormat.Hm().format(chat.timestamp.toLocal()),
                     style: TextStyle(
-                      color: isMe ? Colors.white : Colors.grey,
+                      color: isMe ? Colors.white : Colors.black,
                       fontSize: 12,
                     ),
                   ),

@@ -49,7 +49,7 @@ class BetBloc extends Bloc<BetEvent, BetState> {
           body:
               'You have created a bet for ${event.event.team1} vs ${event.event.team2}',
           type: 'Bet',
-          date: DateTime.now().toIso8601String(),
+          dateTime: DateTime.now().toUtc(),
         ),
       );
       emit(state.copyWith(

@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ozare/models/bet.dart';
+import 'package:intl/intl.dart';
 
 class HistoryItem extends StatelessWidget {
   const HistoryItem({
@@ -14,7 +15,17 @@ class HistoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        Text(
+          "${DateFormat.Hm().format(bet.createdAt.toLocal())} - ${DateFormat.yMMMd().format(bet.createdAt.toLocal())}",
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey,
+          ),
+        ),
+        const SizedBox(height: 4),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
