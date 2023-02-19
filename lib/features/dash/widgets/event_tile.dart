@@ -17,7 +17,7 @@ class EventTile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: const AssetImage(
@@ -66,9 +66,29 @@ class EventTile extends StatelessWidget {
             ),
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 12),
+              Container(
+                height: 22,
+                width: 52,
+                decoration: const BoxDecoration(
+                  color: Colors.green,
+                  // add border circle only to bottom
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(12),
+                    bottomRight: Radius.circular(12),
+                  ),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Live',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+              const Spacer(),
               if (event.score1 != '')
                 Text(
                   "${event.score1} : ${event.score2}",
@@ -86,6 +106,7 @@ class EventTile extends StatelessWidget {
                   fontSize: 14,
                 ),
               ),
+              const Spacer(),
             ],
           ),
           SizedBox(
