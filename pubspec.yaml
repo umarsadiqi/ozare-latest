@@ -35,6 +35,7 @@ dependencies:
   auto_size_text: ^3.0.0
   fluttericon: ^2.0.0
   image_picker: ^0.8.6+1
+  sized_context: ^1.0.0+1
 
   # State Management
   flutter_bloc: ^8.1.1

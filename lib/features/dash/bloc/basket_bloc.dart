@@ -34,12 +34,13 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
           isLive: true,
         ));
 
-        if (!state.isLive) break;
-        if (leagues.isEmpty) {
-          await Future<void>.delayed(const Duration(minutes: 5));
-        } else {
-          await Future<void>.delayed(const Duration(seconds: 60));
-        }
+        /// TODO: Remove this comments
+        // if (!state.isLive) break;
+        // if (leagues.isEmpty) {
+        //   await Future<void>.delayed(const Duration(minutes: 5));
+        // } else {
+        //   await Future<void>.delayed(const Duration(seconds: 60));
+        // }
       }
     } catch (error) {
       log(error.toString());

@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -49,6 +43,15 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyC7o5IcqvP1IV0z_vHXDFOdAKGAtIB5rCs',
+    appId: '1:577898555257:web:d178a286c66fcce7b371a8',
+    messagingSenderId: '577898555257',
+    projectId: 'ozare-e8ed6',
+    authDomain: 'ozare-e8ed6.firebaseapp.com',
+    storageBucket: 'ozare-e8ed6.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyD4X2QxkGacd5Bhah9_eLBf2D-Mfur7Jlo',
     appId: '1:577898555257:android:2adc18c12738e832b371a8',
@@ -63,6 +66,18 @@ class DefaultFirebaseOptions {
     messagingSenderId: '577898555257',
     projectId: 'ozare-e8ed6',
     storageBucket: 'ozare-e8ed6.appspot.com',
+    androidClientId: '577898555257-6obmfg1j38cqpit7lo9h9jptklqmfr94.apps.googleusercontent.com',
+    iosClientId: '577898555257-ipgmi763op249uoi9a8uu46dhfci2b19.apps.googleusercontent.com',
+    iosBundleId: 'com.example.ozare',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyA2IE7ejIkmwEopOkMz97ie3oEJt1JKDVc',
+    appId: '1:577898555257:ios:e37e3108d2d944c6b371a8',
+    messagingSenderId: '577898555257',
+    projectId: 'ozare-e8ed6',
+    storageBucket: 'ozare-e8ed6.appspot.com',
+    androidClientId: '577898555257-6obmfg1j38cqpit7lo9h9jptklqmfr94.apps.googleusercontent.com',
     iosClientId: '577898555257-ipgmi763op249uoi9a8uu46dhfci2b19.apps.googleusercontent.com',
     iosBundleId: 'com.example.ozare',
   );
