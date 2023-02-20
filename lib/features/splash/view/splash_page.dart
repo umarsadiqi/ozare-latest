@@ -49,8 +49,8 @@ class _SplashPageState extends State<SplashPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: size.width * 0.4,
-                  width: size.width * 0.4,
+                  height: size.width < 500 ? size.width * 0.4 : 76,
+                  width: size.width < 500 ? size.width * 0.4 : 76,
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
                     gradient: gradient,
@@ -75,7 +75,7 @@ class _SplashPageState extends State<SplashPage> {
                         ],
                         child: Image.asset(
                           'assets/images/logo.png',
-                          height: size.width * 0.4,
+                          height: size.width < 500 ? size.width * 0.4 : 72,
                         )),
                   ),
                 ),

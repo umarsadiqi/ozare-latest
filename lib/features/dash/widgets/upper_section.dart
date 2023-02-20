@@ -70,23 +70,9 @@ class _UpperSectionState extends State<UpperSection> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white30,
-                  child: Icon(
-                    FontAwesome.award,
-                    color: Colors.white,
-                  ),
-                ),
+                _TrophyIcon(),
 
-                Text(
-                  'Ozare',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                _Title(),
                 SizedBox(width: 32),
 
                 // CircleAvatar(
@@ -104,63 +90,114 @@ class _UpperSectionState extends State<UpperSection> {
             height: 40,
             width: size.width,
             padding: const EdgeInsets.symmetric(horizontal: 28),
-            child: BlocBuilder<SearchBloc, SearchState>(
-              builder: (context, state) {
-                return TextField(
-                  scrollPadding: const EdgeInsets.only(left: 22),
-                  textInputAction: TextInputAction.search,
-                  cursorColor: Colors.grey[600],
-                  controller: searchController,
-                  style: TextStyle(
-                    color: Colors.grey[800],
-                    fontSize: 12,
-                  ),
-                  onSubmitted: (value) {
-                    if (searchController.text.isNotEmpty) {
-                      context
-                          .read<SearchBloc>()
-                          .add(SearchRequested(searchController.text));
-                    }
-                  },
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.only(left: 22),
-                    hintText: LocaleKeys.search_teams.tr(),
-                    hintStyle: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[600],
-                    ),
-                    fillColor: Colors.white.withOpacity(0.9),
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(32),
-                        borderSide: const BorderSide(
-                          color: primary2Color,
-                        )),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(32),
-                        borderSide: const BorderSide(
-                          color: primary2Color,
-                        )),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      size: 20,
-                      color: Colors.grey[800]!,
-                    ),
-                    suffixIcon: state.status == SearchStatus.succeed
-                        ? IconButton(
-                            onPressed: () {
-                              context.read<SearchBloc>().add(
-                                  const SearchStatusChanged(SearchStatus.none));
-                            },
-                            icon: const Icon(Icons.close, color: Colors.grey))
-                        : null,
-                  ),
-                );
-              },
-            ),
+            child: _SearchBox(searchController: searchController),
           ),
         ),
       ]),
+    );
+  }
+}
+
+class _SearchBox extends StatelessWidget {
+  const _SearchBox({
+    super.key,
+    required this.searchController,
+  });
+
+  final TextEditingController searchController;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SearchBloc, SearchState>(
+      builder: (context, state) {
+        return TextField(
+          scrollPadding: const EdgeInsets.only(left: 22),
+          textInputAction: TextInputAction.search,
+          cursorColor: Colors.grey[600],
+          controller: searchController,
+          style: TextStyle(
+            color: Colors.grey[800],
+            fontSize: 12,
+          ),
+          onSubmitted: (value) {
+            if (searchController.text.isNotEmpty) {
+              context
+                  .read<SearchBloc>()
+                  .add(SearchRequested(searchController.text));
+            }
+          },
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.only(left: 22),
+            hintText: LocaleKeys.search_teams.tr(),
+            hintStyle: TextStyle(
+              fontSize: 12,
+              color: Colors.grey[600],
+            ),
+            fillColor: Colors.white.withOpacity(0.9),
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(32),
+                borderSide: const BorderSide(
+                  color: primary2Color,
+                )),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(32),
+                borderSide: const BorderSide(
+                  color: primary2Color,
+                )),
+            prefixIcon: Icon(
+              Icons.search,
+              size: 20,
+              color: Colors.grey[800]!,
+            ),
+            suffixIcon: state.status == SearchStatus.succeed
+                ? IconButton(
+                    onPressed: () {
+                      context
+                          .read<SearchBloc>()
+                          .add(const SearchStatusChanged(SearchStatus.none));
+                    },
+                    icon: const Icon(Icons.close, color: Colors.grey))
+                : null,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _Title extends StatelessWidget {
+  const _Title({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Ozare',
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 22,
+        fontWeight: FontWeight.w600,
+      ),
+    );
+  }
+}
+
+class _TrophyIcon extends StatelessWidget {
+  const _TrophyIcon({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: 20,
+      backgroundColor: Colors.white30,
+      child: Icon(
+        FontAwesome.award,
+        color: Colors.white,
+      ),
     );
   }
 }
