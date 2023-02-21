@@ -39,7 +39,7 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
             Image.asset(
-              'assets/images/splash.png',
+              'assets/images/pattern.png',
               height: size.height * 1.1,
               width: size.width * 1.1,
               fit: BoxFit.cover,

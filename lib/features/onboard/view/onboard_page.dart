@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -109,26 +110,35 @@ class _OnboardPageState extends State<OnboardPage> {
                   //       List.generate(3, (index) => buildDot(index: index)),
                   // ),
                   const Spacer(),
-                  Animate(
-                    onComplete: (controller) {
-                      controller.repeat();
-                    },
-                    effects: const [
-                      // repeat this effect
+                  if (!kIsWeb)
+                    Animate(
+                      onComplete: (controller) {
+                        controller.repeat();
+                      },
+                      effects: const [
+                        // repeat this effect
 
-                      ShimmerEffect(
-                        duration: Duration(milliseconds: 1000),
-                        delay: Duration(milliseconds: 900),
-                      )
-                    ],
-                    child: CButton(
+                        ShimmerEffect(
+                          duration: Duration(milliseconds: 1000),
+                          delay: Duration(milliseconds: 900),
+                        )
+                      ],
+                      child: CButton(
+                          onTap: () {
+                            context
+                                .read<AuthBloc>()
+                                .add(const AuthOnboardingCompleted());
+                          },
+                          label: LocaleKeys.get_started.tr()),
+                    ),
+                  if (kIsWeb)
+                    CButton(
                         onTap: () {
                           context
                               .read<AuthBloc>()
                               .add(const AuthOnboardingCompleted());
                         },
                         label: LocaleKeys.get_started.tr()),
-                  ),
                   const Spacer(),
                 ]),
               ),
