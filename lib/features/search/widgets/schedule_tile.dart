@@ -9,9 +9,11 @@ class ScheduleTile extends StatelessWidget {
   const ScheduleTile({
     super.key,
     required this.fixture,
+    required this.fromEvent,
   });
 
   final Fixture fixture;
+  final bool fromEvent;
 
   @override
   Widget build(BuildContext context) {
@@ -20,29 +22,33 @@ class ScheduleTile extends StatelessWidget {
     final dt =
         '${d.hour}:${d.minute.toString().padRight(2, '0')}\n${d.day}-${d.month}-${d.year}';
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EventPage(
-              event: Event(
-                category: 'soccer',
-                id: fixture.id.toString(),
-                id1: fixture.team1ID.toString(),
-                id2: fixture.team2ID.toString(),
-                team1: fixture.team1Name,
-                team2: fixture.team2Name,
-                logo1: fixture.team1Logo,
-                logo2: fixture.team2Logo,
-                score1: '',
-                score2: '',
-                time: dt,
-              ),
-              leagueId: null,
-            ),
-          ),
-        );
-      },
+      onTap: fromEvent
+          ? () {}
+          : () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EventPage(
+                    event: Event(
+                      category: 'soccer',
+                      id: fixture.id.toString(),
+                      id1: fixture.team1ID.toString(),
+                      id2: fixture.team2ID.toString(),
+                      team1: fixture.team1Name,
+                      team2: fixture.team2Name,
+                      logo1: fixture.team1Logo,
+                      logo2: fixture.team2Logo,
+                      score1: '',
+                      score2: '',
+                      time: dt,
+                    ),
+                    leagueId: null,
+                    fixture: fixture,
+                    isLive: false,
+                  ),
+                ),
+              );
+            },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 4),
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

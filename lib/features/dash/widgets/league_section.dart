@@ -75,6 +75,8 @@ class LeagueSection extends StatelessWidget {
                           builder: (context) => EventPage(
                             leagueId: league.id,
                             event: event,
+                            isLive: true,
+                            fixture: null,
                           ),
                         ),
                       );

@@ -45,8 +45,10 @@ class ScheduleView extends StatelessWidget {
           : ListView.builder(
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 66),
               itemCount: fixtures.length,
-              itemBuilder: (context, index) =>
-                  ScheduleTile(fixture: fixtures[index]),
+              itemBuilder: (context, index) => ScheduleTile(
+                fixture: fixtures[index],
+                fromEvent: false,
+              ),
             ),
     );
   }

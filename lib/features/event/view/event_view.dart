@@ -9,8 +9,10 @@ import 'package:ozare/features/chat/bloc/chat_bloc.dart';
 import 'package:ozare/features/chat/repository/chat_repository.dart';
 import 'package:ozare/features/dash/widgets/event_tile.dart';
 import 'package:ozare/features/event/bloc/event_bloc.dart';
+import 'package:ozare/features/search/widgets/schedule_tile.dart';
 import 'package:ozare/main.dart';
 import 'package:ozare/models/event.dart';
+import 'package:ozare/models/fixture.dart';
 
 import '../widgets/widgets.dart';
 
@@ -19,10 +21,14 @@ class EventView extends StatefulWidget {
     super.key,
     required this.leagueId,
     required this.event,
+    required this.isLive,
+    required this.fixture,
   });
 
   final String? leagueId;
   final Event event;
+  final bool isLive;
+  final Fixture? fixture;
 
   @override
   State<EventView> createState() => _MatchViewState();
@@ -62,6 +68,8 @@ class _MatchViewState extends State<EventView> {
           UpperSection(
             event: widget.event,
             leagueId: widget.leagueId,
+            isLive: widget.isLive,
+            fixture: widget.fixture,
           ),
           const SizedBox(height: 12),
           // Tab Bar Section
@@ -108,10 +116,14 @@ class UpperSection extends StatelessWidget {
     super.key,
     required this.leagueId,
     required this.event,
+    required this.isLive,
+    required this.fixture,
   });
 
   final String? leagueId;
   final Event event;
+  final bool isLive;
+  final Fixture? fixture;
 
   @override
   Widget build(BuildContext context) {
@@ -192,9 +204,14 @@ class UpperSection extends StatelessWidget {
             child: BlocBuilder<EventBloc, EventState>(
               builder: (context, state) {
                 final event = state.event;
-                return EventTile(
-                  event: event,
-                );
+                return isLive
+                    ? EventTile(
+                        event: event,
+                      )
+                    : ScheduleTile(
+                        fixture: fixture!,
+                        fromEvent: true,
+                      );
               },
             ),
           ),

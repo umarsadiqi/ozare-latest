@@ -9,10 +9,14 @@ class EventPage extends StatelessWidget {
     super.key,
     required this.leagueId,
     required this.event,
+    required this.isLive,
+    required this.fixture,
   });
 
   final String? leagueId;
   final Event event;
+  final bool isLive;
+  final Fixture? fixture;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,8 @@ class EventPage extends StatelessWidget {
         return EventView(
           event: event,
           leagueId: leagueId,
+          isLive: isLive,
+          fixture: fixture,
         );
       },
     );
