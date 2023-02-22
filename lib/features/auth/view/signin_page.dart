@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ozare/common/dialogs/show_snackbar.dart';
@@ -143,23 +144,34 @@ class _SigninPageState extends State<SigninPage> {
 
                     /// Social Buttons
 
-                    Row(
-                      children: [
-                        Expanded(
-                            child: OButton.icon(
-                                onTap: () {
-                                  context.read<AuthBloc>().add(
-                                        const AuthGoogleLoginRequested(),
-                                      );
-                                },
-                                iconPath: 'assets/icons/google.svg')),
-                        const SizedBox(width: 16),
-                        Expanded(
-                            child: OButton.icon(
-                                onTap: () {},
-                                iconPath: 'assets/icons/apple.svg')),
-                      ],
-                    ),
+                    /// TODO: Remove this button when apple login is ready
+                    if (!kIsWeb)
+                      OButton.icon(
+                          onTap: () {
+                            context.read<AuthBloc>().add(
+                                  const AuthGoogleLoginRequested(),
+                                );
+                          },
+                          iconPath: 'assets/icons/google.svg'),
+
+                    /// TODO: Remove this comment when apple login is ready
+                    // Row(
+                    //   children: [
+                    //     Expanded(
+                    //         child: OButton.icon(
+                    //             onTap: () {
+                    //               context.read<AuthBloc>().add(
+                    //                     const AuthGoogleLoginRequested(),
+                    //                   );
+                    //             },
+                    //             iconPath: 'assets/icons/google.svg')),
+                    //     const SizedBox(width: 16),
+                    //     Expanded(
+                    //         child: OButton.icon(
+                    //             onTap: () {},
+                    //             iconPath: 'assets/icons/apple.svg')),
+                    //   ],
+                    // ),
 
                     ///
                     SizedBox(height: size.height * 0.08),
