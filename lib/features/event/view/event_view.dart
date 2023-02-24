@@ -202,6 +202,8 @@ class UpperSection extends StatelessWidget {
             width: size.width,
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child: BlocBuilder<EventBloc, EventState>(
+              buildWhen: (previous, current) =>
+                  previous.event.id == current.event.id,
               builder: (context, state) {
                 final event = state.event;
                 return isLive

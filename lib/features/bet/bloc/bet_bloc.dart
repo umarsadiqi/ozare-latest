@@ -7,7 +7,6 @@ import 'package:ozare/features/bet/repository/bet_repository.dart';
 import 'package:collection/collection.dart';
 import 'package:ozare/main.dart';
 import 'package:ozare/models/models.dart';
-import 'package:uuid/uuid.dart';
 
 part 'bet_event.dart';
 part 'bet_state.dart';
