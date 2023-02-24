@@ -38,16 +38,15 @@ class SoccerBloc extends Bloc<SoccerEvent, SoccerState> {
           ),
         );
 
-        /// TODO: Remove this comments
-        // if (state.isLive) {
-        //   if (leagues.isEmpty) {
-        //     await Future<void>.delayed(const Duration(minutes: 5));
-        //   } else {
-        //     await Future<void>.delayed(const Duration(seconds: 60));
-        //   }
-        // } else {
-        //   break;
-        // }
+        if (state.isLive) {
+          if (leagues.isEmpty) {
+            await Future<void>.delayed(const Duration(minutes: 5));
+          } else {
+            await Future<void>.delayed(const Duration(seconds: 60));
+          }
+        } else {
+          break;
+        }
       }
     } catch (error) {
       log(error.toString());

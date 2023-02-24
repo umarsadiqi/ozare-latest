@@ -117,7 +117,7 @@ class ScheduleTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 2),
                 const Text(
                   "VS",
                   style: TextStyle(

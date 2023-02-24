@@ -42,8 +42,7 @@ class LivebetBloc extends Bloc<LiveBetEvent, LiveBetState> {
     while (true) {
       await _repo.updatesBet(ouser.uid!);
 
-      /// TODO: Remove this comment
-      // Future.delayed(const Duration(minutes: 10));
+      await Future.delayed(const Duration(minutes: 10));
     }
   }
 }
