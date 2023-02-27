@@ -36,11 +36,13 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
 
         
         if (!state.isLive) break;
-        if (leagues.isEmpty) {
-          await Future<void>.delayed(const Duration(minutes: 5));
-        } else {
-          await Future<void>.delayed(const Duration(seconds: 60));
-        }
+        await Future.delayed(const Duration(seconds: 8));
+        add(event);
+        // if (leagues.isEmpty) {
+        //   await Future<void>.delayed(const Duration(minutes: 5));
+        // } else {
+        //   await Future<void>.delayed(const Duration(seconds: 60));
+        // }
       }
     } catch (error) {
       log(error.toString());

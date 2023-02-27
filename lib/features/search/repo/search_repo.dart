@@ -13,6 +13,7 @@ final Map<String, String> header = {
 class SearchRepo {
   Future<List<Team>> getTeams(String query) async {
     try {
+      print('calling rapidapi');
       final response = await http.get(
         Uri.parse(
             'https://api-football-v1.p.rapidapi.com/v3/teams?search=$query'),
@@ -55,6 +56,7 @@ class SearchRepo {
     final currentDate = DateTime.now();
 
     try {
+      print('calling rapidapi');
       final response = await http.get(
           Uri.parse(
               'https://api-football-v1.p.rapidapi.com/v3/fixtures?season=2022&team=$teamId'),

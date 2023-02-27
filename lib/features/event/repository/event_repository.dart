@@ -36,6 +36,7 @@ class EventRepository {
   }) async {
     log('************* getEventScoreboard($eid, $category) *************');
     try {
+      print('calling rapidapi');
       final response = await http.get(
         Uri.parse('$apiURl?Category=$category&Eid=$eid'),
         headers: header,

@@ -1,4 +1,10 @@
+import 'dart:async';
+
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import 'package:ozare/common/dialogs/alert_dialog.dart';
+import 'package:ozare/features/profile/repository/tonkeeper_repository.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final List<Map<String, dynamic>> wallets = [
   {
@@ -19,8 +25,25 @@ final List<Map<String, dynamic>> wallets = [
   },
 ];
 
-class AddWallet extends StatelessWidget {
+class AddWallet extends StatefulWidget {
   const AddWallet({super.key});
+
+  @override
+  State<AddWallet> createState() => _AddWalletState();
+}
+
+class _AddWalletState extends State<AddWallet> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // _sub.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +87,10 @@ class AddWallet extends StatelessWidget {
               children: wallets
                   .map(
                     (wallet) => WalletSelector(
-                      name: wallet['name'],
-                      iconPath: wallet['iconPath'],
-                    ),
-                  )
+                  name: wallet['name'],
+                  iconPath: wallet['iconPath'],
+                ),
+              )
                   .toList(),
             ),
           ),
@@ -90,40 +113,59 @@ class WalletSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Positioned(
-          bottom: 0,
-          child: Container(
-            width: size.width * 0.4,
-            height: size.width * 0.28,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.grey[200],
-            ),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                name,
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
+    return InkWell(
+      onTap: () async {
+        if (name.toLowerCase() == 'TON Wallet'.toLowerCase() ||
+            name.toLowerCase() == 'Tonkeeper'.toLowerCase()) {
+          var url = Uri.parse(
+              'https://tonapi.io/login?return_url=https://ozare.page.link/?link=https://ozare-e8ed6.firebaseapp.com&apn=com.example.ozare');
+          // var url = Uri.parse(
+          //     'https://tonapi.io/login?return_url=https://ozare.page.link/walletAuth');
+          if (await canLaunchUrl(url)) {
+            launchUrl(url, mode: LaunchMode.externalApplication);
+            FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
+              showAlertDialog(context: context, title: 'Success', content: 'Wallet connected successfully');
+              print(dynamicLinkData.link.toString());
+            }).onError((error) {
+            });
+          }
+        }
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            bottom: 0,
+            child: Container(
+              width: size.width * 0.4,
+              height: size.width * 0.28,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.grey[200],
+              ),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Text(
+                  name,
+                  style: TextStyle(
+                    color: Colors.grey[700],
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        Positioned(
-          top: 12,
-          child: Image.asset(
-            iconPath,
-            height: size.width * 0.24,
+          Positioned(
+            top: 12,
+            child: Image.asset(
+              iconPath,
+              height: size.width * 0.24,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

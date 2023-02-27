@@ -31,10 +31,13 @@ class DashRepository {
     List<League> parsedLeagues = [];
 
     try {
+      print('calling rapidapi');
       final response = await http.get(
         Uri.parse(url),
         headers: header,
       );
+
+
 
       log('Response Code: ${response.statusCode}');
 
